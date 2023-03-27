@@ -1,0 +1,121 @@
+@import './colors.scss';
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap');
+
+// Base styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --grey-1: #384853;
+    --grey-2: #6b7b8a;
+    --grey-3: #e3e6ea;
+    --grey-5: #f1f2f4;
+    --teal: #077f7f;
+    --black: #131313;
+    --grad-2: linear-gradient(102.73deg, #f1087e -1.51%, #fc945f 131.82%);
+    --grad-3: linear-gradient(99.87deg, #0b0d60 -10.92%, #115962 107.49%);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+    font-family: $font-family;
+    font-size: $normal-font-size;
+}
+
+body {
+    background-color: $body-background-color;
+    color: $body-text-color;
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-family;
+    font-size: $body-font-size;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.button-tag {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+// Main styles and reusable classes
+.header-wrapper{
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 24px;
+    height: 88px;
+    background-color: $body-background-color;
+    width: 100%;
+}
+.new{
+    margin-top: 88px;
+}
+.header-content{
+    width: 100%;
+    max-width: 1370px;
+    display: flex;
+    justify-content: space-between;
+}
+.primary-button{
+
+}
+
+// screens
+
+@media screen and (max-width: 992px) {
+    .menu {
+        display: none;
+    }
+
+    .menu-dropdown {
+        display: block;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .login-page {
+        .login-wrapper {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {}

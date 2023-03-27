@@ -25,6 +25,10 @@ module.exports = {
             '@assets': path.resolve(__dirname, 'assets/'),
         },
     },
+    // optimization: {
+    //     runtimeChunk: 'single'
+    // },
+    // watch: true,
     module: {
         rules: [
             {

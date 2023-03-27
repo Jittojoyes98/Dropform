@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-// import '@/_styles/theme.scss'
+import '@/_styles/theme.scss'
 import { Layout } from '../_layout'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from '../LoginPage'
