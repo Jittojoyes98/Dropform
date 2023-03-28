@@ -15,9 +15,9 @@ const Header = ({ layout }) => {
                     Dropform
                 </div>
                 {/* <div></div> */}
-                <div>
-                    <Button variant="outlined" className='primary-button' onClick={()=>handlePath('login')}>Login</Button>
-                    <Button onClick={() => handlePath('signup')}>Sign Up</Button>
+                <div className='auth-content'>
+                    <Button variant="outlined" className='primary-button' onClick={()=>handlePath('login')}>Log in</Button>
+                    <Button variant='contained' className='secondary-button' onClick={() => handlePath('signup')}>Sign Up</Button>
                 </div>
             </div>
         </div>

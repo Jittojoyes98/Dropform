@@ -5,13 +5,13 @@ import { Header } from './Header'
 
 const Layout = ({ layout }) => {
     return (
-        <>
+        <div className='main'>
             <Header layout={layout} />
-            <div className="new">
+            <div className="content">
                 <Outlet />
             </div>
             <Footer layout={layout} />
-        </>
+        </div>
     )
 }
 

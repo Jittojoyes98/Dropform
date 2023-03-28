@@ -73,29 +73,84 @@ img {
 }
 
 // Main styles and reusable classes
-.header-wrapper{
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 24px;
-    height: 88px;
-    background-color: $body-background-color;
-    width: 100%;
-}
-.new{
-    margin-top: 88px;
-}
-.header-content{
-    width: 100%;
-    max-width: 1370px;
-    display: flex;
-    justify-content: space-between;
-}
-.primary-button{
+.main{
+    .header-wrapper {
+        position: fixed;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 24px;
+        height: 88px;
+        background-color: $body-background-color;
+        width: 100%;
+    }
+    
+    .content {
+        margin-top: 88px;
+    }
+    
+    .header-content {
+        width: 100%;
+        max-width: 1370px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .primary-button {
+        color: $body-text-color;
+        text-transform: none;
+        font-family: $font-family;
+        font-size: 14px;
+        border: 1px solid $body-text-color;
+        transition: background-color 0.2s ease-out 0s,
+            border-color,
+            color,
+            opacity;
+        line-height: 22px;
+        letter-spacing: 0.1px;
+        padding: 8px 16px;
+        
+    }
 
+    .primary-button:hover {
+        opacity: 0.8;
+        border: 1px solid $body-text-color;
+        background-color: transparent;
+    }
+
+    .secondary-button{
+        color: $body-background-color;
+        text-transform: none;
+        font-family: $font-family;
+        font-size: 14px;
+        // border: 1px solid $body-text-color;
+        transition: background-color 0.2s ease-out 0s,
+        border-color,
+        color,
+        opacity;
+        line-height: 22px;
+        letter-spacing: 0.1px;
+        padding: 8px 16px;
+        background-color: $body-text-color;
+        box-shadow: none;
+    }
+
+    .secondary-button:hover{
+        background-color: $body-text-color;
+        box-shadow: none;
+        opacity: 0.8;
+    }
+
+    .auth-content{
+        display: flex;
+    }
+    .auth-content button:first-child{
+        margin-right: 16px;
+    }
+    
 }
+
 
 // screens
 
