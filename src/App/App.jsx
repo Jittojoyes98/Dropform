@@ -4,6 +4,8 @@ import { Layout } from '../_layout'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from '../LoginPage'
 import HomePage from '../HomePage'
+import SignupPage from '../SignupPage'
+
 
 const App = () => {
     return (
@@ -17,6 +19,9 @@ const App = () => {
 
                     <Route path="/login" element={<Layout layout="login" />}>
                         <Route index element={<LoginPage />} />
+                    </Route>
+                    <Route path="/signup" element={<Layout layout="signup" />}>
+                        <Route index element={<SignupPage />} />
                     </Route>
                 </Routes>
             </Suspense>
