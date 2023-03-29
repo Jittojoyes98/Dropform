@@ -2,16 +2,19 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { Authorize } from '../auth'
 
 const Layout = ({ layout }) => {
     return (
-        <div className='main'>
-            <Header layout={layout} />
-            <div className="content">
-                <Outlet />
+        <Authorize>
+            <div className='main'>
+                <Header layout={layout} />
+                <div className="content">
+                    <Outlet />
+                </div>
+                <Footer layout={layout} />
             </div>
-            <Footer layout={layout} />
-        </div>
+        </Authorize>
     )
 }
 

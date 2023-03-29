@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app"
+import { getAuth } from "firebase/auth"
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig={
@@ -12,7 +13,8 @@ const firebaseConfig={
 }
 
 const app = initializeApp(firebaseConfig)
-const analytics = getAnalytics(app); // check if this is required or not
 
-export const auth=app.auth()
+// const analytics = getAnalytics(app); // check if this is required or not
+
+export const auth=getAuth(app)
 export default app;

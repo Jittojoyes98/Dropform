@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useAuth } from "../auth"
 const SignupPage = () => {
+  
   const handleForm=(e)=>{
     e.preventDefault()
     console.log(e.target.uname.value);

@@ -6,7 +6,6 @@ import LoginPage from '../LoginPage'
 import HomePage from '../HomePage'
 import SignupPage from '../SignupPage'
 
-
 const App = () => {
     return (
         <BrowserRouter>
