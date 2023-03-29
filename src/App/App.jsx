@@ -5,15 +5,23 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from '../LoginPage'
 import HomePage from '../HomePage'
 import SignupPage from '../SignupPage'
+import { Authorize } from '../auth'
+import { Dashboard } from '../Dashboard'
+
 
 const App = () => {
     return (
         <BrowserRouter>
             <Suspense>
+                <Authorize>
                 <Routes>
                     {/* add routes here */}
                     <Route path="/" element={<Layout layout="home" />}>
                         <Route index element={<HomePage />} />
+                    </Route>
+
+                    <Route path="/dashboard" element={<Layout layout="home" />}>
+                        <Route index element={<Dashboard />} />
                     </Route>
 
                     <Route path="/login" element={<Layout layout="login" />}>
@@ -23,6 +31,7 @@ const App = () => {
                         <Route index element={<SignupPage />} />
                     </Route>
                 </Routes>
+                </Authorize>
             </Suspense>
         </BrowserRouter>
     )
