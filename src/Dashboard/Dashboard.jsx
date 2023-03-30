@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../auth";
-import { Navigate, Redirect } from "react-router-dom";
-import { async } from "@firebase/util";
+import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
     const [redirectPath, setRedirectPath] = useState(null);
@@ -24,8 +23,10 @@ const Dashboard = () => {
             console.log("There was an error");
         }
     }
-  return (
+
+    return (
       <>
+        <h1>Hii {currentUser && currentUser.email}</h1>
         <button type="submit" onClick={handleLogout}>Log out</button>
         <div>Dashboard</div>
       </>

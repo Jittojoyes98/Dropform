@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth"
-import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth"
 
 const firebaseConfig={
     apiKey: process.env.REACT_APP_API_KEY,
@@ -17,4 +16,5 @@ const app = initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app); // check if this is required or not
 
 export const auth=getAuth(app)
+export const provider = new GoogleAuthProvider()
 export default app;

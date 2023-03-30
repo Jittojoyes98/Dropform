@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
 
 const LoginPage = () => {
@@ -24,17 +24,23 @@ const LoginPage = () => {
       <form onSubmit={handleForm}>
         <div>
           {currentUser && currentUser.email}
-          <label for="uname"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="uname" required />
+          <label for="uname"><b>Email</b></label>
+          <input type="email" placeholder="Enter Email" name="uname" required />
         </div>
 
         <div>
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required />
         </div>
+        <div>
+          <Link to="password/request">Forgot Password</Link>
+        </div>
+        
 
         <button disabled={loading} type="submit">Login</button>
       </form>
+      <div>OR</div>
+      <button>Sign in with google</button>
     </div>
   )
 };

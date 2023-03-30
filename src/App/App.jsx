@@ -7,6 +7,7 @@ import HomePage from '../HomePage'
 import SignupPage from '../SignupPage'
 import { Authorize } from '../auth'
 import { Dashboard } from '../Dashboard'
+import { ForgotPassword } from '../ForgotPassword'
 
 
 const App = () => {
@@ -26,10 +27,12 @@ const App = () => {
 
                     <Route path="/login" element={<Layout layout="login" />}>
                         <Route index element={<LoginPage />} />
+                        <Route path='/login/password/request' element={<ForgotPassword />} />
                     </Route>
                     <Route path="/signup" element={<Layout layout="signup" />}>
-                        <Route index element={<SignupPage />} />
+                            <Route index element={<SignupPage />} />
                     </Route>
+                    
                 </Routes>
                 </Authorize>
             </Suspense>
