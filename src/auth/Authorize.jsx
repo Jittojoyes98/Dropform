@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth,provider } from "../_firebase/firebaseInitialize";
-import { signInWithPopup,sendPasswordResetEmail,signInWithEmailAndPassword,createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInAnonymously,signInWithPopup,sendPasswordResetEmail,signInWithEmailAndPassword,createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+
 
 const AuthContext=createContext()
 
@@ -10,8 +11,10 @@ export function useAuth(){
 
 const Authorize = ({ children}) => {
     const [currentUser,setCurrentUser]=useState()
+    const [signUpMethod,setSignUpMethod]=useState(true)
     
     const signup=(email,password)=>{
+        setSignUpMethod(true)
         return createUserWithEmailAndPassword(auth,email,password)
         // switch (error.code) {
         //     case 'auth/email-already-in-use':
@@ -32,24 +35,41 @@ const Authorize = ({ children}) => {
         // }
     }
     const login=(email,password)=>{
+        setSignUpMethod(false)
         return signInWithEmailAndPassword(auth,email,password)
     }
     const resetPassword=(email)=>{
         return sendPasswordResetEmail(auth,email)
     }
     const signUpWithGoogle=()=>{
+        setSignUpMethod(true)
         return signInWithPopup(auth,provider)
     }
+    
     const logout=()=>{
         return signOut(auth)
+    }
+    const signInOutsider=()=>{
+        return signInAnonymously(auth)
     }
 
     useEffect(() => {
         const unsubscribe=onAuthStateChanged(auth,(user)=>{
-            setCurrentUser(user)
+            // const { isNewUser } = getAdditionalUserInfo(user) 
+            if (user?.isAnonymous){
+                user.displayName="Anonymous"
+            }
+            if(user){
+                setCurrentUser(prevState => {
+                    return { ...prevState, user }
+                })
+            }else{
+                console.log("No user logged in");
+            }
         })
         return unsubscribe
     }, []);
+    
 
     const value={
         currentUser,
@@ -59,6 +79,8 @@ const Authorize = ({ children}) => {
         login,
         resetPassword,
         signUpWithGoogle,
+        setSignUpMethod,
+        signInOutsider
     }
   return (
       <AuthContext.Provider value={value}>

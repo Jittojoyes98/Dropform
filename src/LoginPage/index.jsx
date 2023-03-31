@@ -5,7 +5,7 @@ import { useAuth } from "../auth";
 const LoginPage = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const { login, currentUser } = useAuth()
+  const { login, currentUser, signUpWithGoogle, signInOutsider} = useAuth()
   const navigate = useNavigate()
   const handleForm = async (e) => {
     e.preventDefault()
@@ -18,6 +18,22 @@ const LoginPage = () => {
       setError("Cannot create user")
     }
     setLoading(false)
+  }
+  const handleGoogle = async () => {
+    try {
+      await signUpWithGoogle()
+      navigate("/dashboard")
+    } catch (error) {
+      console.log("Error occured");
+    }
+  }
+  const handleAnonymous=async()=>{
+    try {
+      await signInOutsider()
+      navigate("/dashboard")
+    } catch (error) {
+      console.log("Error occured");
+    }
   }
   return (
     <div>
@@ -37,10 +53,13 @@ const LoginPage = () => {
         </div>
         
 
-        <button disabled={loading} type="submit">Login</button>
+        <button disabled={loading}  type="submit">Login</button>
       </form>
       <div>OR</div>
-      <button>Sign in with google</button>
+      <button onClick={handleGoogle}>Sign in with google</button>
+      <div>
+        <button onClick={handleAnonymous}>Sign in Anonymously</button>
+      </div>
     </div>
   )
 };

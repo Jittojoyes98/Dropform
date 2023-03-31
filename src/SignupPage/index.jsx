@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth"
 import { auth } from "../_firebase/firebaseInitialize";
 
 const SignupPage = () => {
   const [error,setError]=useState("")
   const [loading,setLoading]=useState(false)
-  const { signup, currentUser, signUpWithGoogle } = useAuth()
+  const { signup, currentUser,setCurrentUser, signUpWithGoogle } = useAuth()
   const navigate=useNavigate()
+  
   const handleForm=async(e)=>{
     e.preventDefault()
     try {
       setError("")
       setLoading(true)
       await signup(e.target.uname.value, e.target.psw.value)
-      navigate("/dashboard")
     } catch (error) {
       setError("Cannot create user")
     }
@@ -23,12 +23,30 @@ const SignupPage = () => {
   const handleGoogle=async(e)=>{
     try {
       await signUpWithGoogle()
-      // console.log(user);
-      navigate("/dashboard")
     } catch (error) {
       console.log("Error occured");
     }
   }
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+    }
+    else {
+      console.log(currentUser);
+      if (currentUser) {
+        if (currentUser.user.metadata.creationTime !== currentUser.user.metadata.lastSignInTime) {
+          console.log("WE ARE GOING TO LOGIN");
+          setCurrentUser()
+          navigate("/login")
+        } else {
+          console.log("WE ARE GOING TO DASHBOARD");
+          navigate("/dashboard")
+        }
+      }
+    }
+  }, [currentUser,setCurrentUser]);
+  // check if setCurrentUser is needed or not 
   return (
     <div>
       <form onSubmit={handleForm}>
@@ -48,6 +66,10 @@ const SignupPage = () => {
       </form>
       <div>OR</div>
       <button onClick={handleGoogle}>Sign up with google</button>
+      <div>
+        <Link to="/login">Would yo like to sign in Anonymously</Link>
+      </div>
+      
     </div>
   )
 };
