@@ -30,6 +30,7 @@ const LoginPage = () => {
   const handleAnonymous=async()=>{
     try {
       await signInOutsider()
+      console.log("WE ARE MOVING TO DASHBOARD");
       navigate("/dashboard")
     } catch (error) {
       console.log("Error occured");
