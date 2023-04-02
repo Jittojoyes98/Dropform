@@ -27,7 +27,7 @@ export const PrivateRoute = () => {
     if(!currentUser){
       readSession()
     }
-  }, [])
+  }, [currentUser])
   
   return (
       <Outlet/>
