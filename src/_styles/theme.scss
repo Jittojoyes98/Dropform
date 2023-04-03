@@ -74,6 +74,15 @@ img {
 
 // Main styles and reusable classes
 .main{
+    .centre-div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .align-center{
+        text-align: center;
+        width: 100%;
+    }
     .header-wrapper {
         position: fixed;
         top: 0;
@@ -84,6 +93,10 @@ img {
         height: 88px;
         background-color: $body-background-color;
         width: 100%;
+    }
+    .header-wrapper-credentials{
+        height: auto;
+        padding: 8px 24px;
     }
     
     .content {
@@ -144,9 +157,92 @@ img {
 
     .auth-content{
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .auth-content button:first-child{
         margin-right: 16px;
+    }
+    .common-text-light{
+        font-size: 14px;
+        color: $body-text-light-color;
+    }
+    .tertiary-button{
+        color: $body-text-light-color;
+        text-transform: none;
+        font-family: $font-family;
+        font-size: 12px;
+        padding: 8px 12px 6px;
+        border: 1px solid $body-text-color;
+        // transition: background-color 0.2s ease-out 0s,
+        // border-color,
+        // color,
+        // opacity;
+        line-height: 14px;
+        letter-spacing: 0.1px;
+        background-color: $body-background-color;
+        box-shadow: none;
+    }
+    .tertiary-button:hover{
+        background-color: $body-background-color;
+        border: 1px solid $body-text-color;
+        padding: 8px 12px 6px;
+        box-shadow: none;
+    }
+    .login-form-wrapper{
+        padding-left: 72px;
+        padding-right: 72px;
+        padding-top: 20px;
+    }
+    .login-title{
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 400;
+        color: $body-text-light-color;
+    }
+    .label-wrapper{
+        padding: 7px 10px 7px 0;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+    .credential-field{
+        width: 256px;
+        background: transparent;
+        line-height: 16px;
+        font-size: 16px;
+        font-weight: 400;
+        color: $field-text-color;
+        input{
+            padding: 6px 14px;
+            border: 1px solid $common-color;
+            border-radius: 4px;
+        }
+        input[type="text"]:focus{
+            box-shadow: 0 0 8px $border-color-focus;  
+        }
+        .Mui-focused .MuiOutlinedInput-notchedOutline {
+            border: 1px solid $common-color;
+        }
+    }
+    .credential-field:hover{
+        
+        background: transparent;
+        line-height: 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        font-weight: 400;
+        input {
+            padding: 6px 14px;
+        }
+        fieldset{
+            border:1px solid $common-color;
+        }
+    }
+    .credential-field:focus{
+        fieldset {
+            border: 1px solid $common-color;
+        }
     }
     
 }
