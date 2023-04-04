@@ -37,7 +37,7 @@ body {
     color: $body-text-color;
     -webkit-font-smoothing: antialiased;
     font-family: $font-family;
-    font-size: $body-font-size;
+    font-size: $normal-font-size;
 }
 
 h1,
@@ -82,6 +82,9 @@ img {
     .align-center{
         text-align: center;
         width: 100%;
+    }
+    .margin-fix{
+        margin: 25px 0px;
     }
     .header-wrapper {
         position: fixed;
@@ -160,6 +163,53 @@ img {
         justify-content: center;
         align-items: center;
     }
+    .auth-button{
+        width: 100%;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .auth-button:hover{
+        opacity: 1;
+    }
+    
+    .or-wrapper{
+        text-align: center;
+        margin-bottom: 20px;
+        width: 256px;
+        background-color: $liner-color;
+        height: 1px;
+    }
+    .fix-width{
+        max-width: 256px;
+    }
+    .or-text{
+        position: relative;
+        top: -0.9em;
+        padding: 0 15px;
+        background-color: white;
+        color: $liner-color;
+        font-size: 14px;
+    }
+    .small-text-light{
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .small-text-dark{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .large-text-light{
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .large-text-light{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .forgot-link{
+        color: $common-color;
+        text-decoration: underline;
+    }
     .auth-content button:first-child{
         margin-right: 16px;
     }
@@ -189,15 +239,35 @@ img {
         padding: 8px 12px 6px;
         box-shadow: none;
     }
+    .social-button{
+        margin-top: 15px;
+        border-radius: 3px;
+        width: 100%;
+        color: $field-text-color;
+        height: 40px;
+        line-height: 2.4;
+        font-size: 16px;
+        font-weight: 400;
+        border: 1px solid $border-light;
+    }
+    .social-button:hover{
+        border: 1px solid $border-light;
+    }
     .login-form-wrapper{
         padding-left: 72px;
         padding-right: 72px;
         padding-top: 20px;
+        .Mui-disabled{
+            color: white;
+            background-color: $border-light;
+        }
     }
     .login-title{
         font-size: 20px;
         line-height: 24px;
         font-weight: 400;
+        margin-top: 10px;
+        margin-bottom: 15px;
         color: $body-text-light-color;
     }
     .label-wrapper{
@@ -222,11 +292,10 @@ img {
             box-shadow: 0 0 8px $border-color-focus;  
         }
         .Mui-focused .MuiOutlinedInput-notchedOutline {
-            border: 1px solid $common-color;
+            border: 1px solid $field-text-color;
         }
     }
     .credential-field:hover{
-        
         background: transparent;
         line-height: 16px;
         font-size: 16px;
@@ -235,16 +304,31 @@ img {
         input {
             padding: 6px 14px;
         }
-        fieldset{
-            border:1px solid $common-color;
-        }
     }
-    .credential-field:focus{
-        fieldset {
-            border: 1px solid $common-color;
-        }
+    .validation-error{
+        color: $error-text-validation;
+        padding: 8px 0 6px 18px;
+        line-height: 18px;
+        font-size: 14px;
     }
-    
+    .error-box-wrapper{
+        width: 256px;
+        display: flex;
+        border: 1px solid $border-light;
+        min-height: 18px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+    }
+    .error-span{
+        min-width: 36px;
+        background-color: $error-text-validation;
+    }
+    .error-box{
+        padding: 12px 18px 12px 18px;
+        text-align: left;
+        color: $common-color;
+        font-size: 14px;
+    }
 }
 
 
