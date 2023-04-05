@@ -3,9 +3,8 @@ import { useAuth } from "../auth";
 import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const [redirectPath, setRedirectPath] = useState(null);
-    const { logout, currentUser, setCurrentUser } = useAuth()
-    
+    const { logout, currentUser, setCurrentUser,loading,setLoading } = useAuth()
+
     const handleLogout=async()=>{
         try {
             await logout()
@@ -15,7 +14,14 @@ const Dashboard = () => {
         }
     }
     // if there is no current user put on loading state
-
+    useEffect(()=>{
+      // will be fetching the api here
+    },[])
+    if (loading){
+      return (
+        <div>Loading</div>
+      )
+    }
     return (
       <>
         <h1>Hii {currentUser && currentUser.user?.displayName}</h1>

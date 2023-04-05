@@ -23,7 +23,7 @@ const App = () => {
                         <Route index element={<HomePage />} />
                     </Route>
                     <Route element={<PrivateRoute/>}>
-                        <Route path="/dashboard" element={<Layout layout="home" />}>
+                        <Route path="/dashboard" element={<Layout layout="dashboard" />}>
                             <Route index element={<Dashboard />} />
                         </Route>
                     </Route>

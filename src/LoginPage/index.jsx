@@ -17,8 +17,8 @@ const loginSchema = yup.object({
 
 const LoginPage = () => {
   const [error, setError] = useState()
-  const [loading, setLoading] = useState(false)
-  const { login, currentUser, signUpWithGoogle, signInOutsider} = useAuth()
+  // const [loading, setLoading] = useState(false)
+  const { login, currentUser, signUpWithGoogle, signInOutsider,loading,setLoading} = useAuth()
   const navigate = useNavigate()
   const handleForm = async (email,password) => {
     try {
@@ -185,7 +185,7 @@ const LoginPage = () => {
               Log in with Google</Button>
           </div>
           <div>
-            <Button style={{marginBottom:"5px"}} className="tertiary-button social-button" variant="outlined" onClick={handleAnonymous}>
+            <Button disabled={loading} style={{marginBottom:"5px"}} className="tertiary-button social-button" variant="outlined" onClick={handleAnonymous}>
               <svg height="32" width="32" viewBox="0 0 32 32" fit="" className="centre-div" focusable="false">
                 {/* <rect width="32" height="32" rx="6" fill="white"></rect> */}
                 <path transform="translate(2, 4)" d="M10 11c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m0-9C7.79 2 6 3.79 6 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10.9c2.97 0 6.1 1.46 6.1 2.1v1.1H3.9V15c0-.64 3.13-2.1 6.1-2.1m0-9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2" fill-opacity=".54" fill-rule="evenodd">

@@ -12,6 +12,7 @@ export function useAuth(){
 const Authorize = ({ children}) => {
     const [currentUser,setCurrentUser]=useState()
     const [signUpMethod,setSignUpMethod]=useState(true)
+    const [loading,setLoading]=useState(false)
     
     const signup=(email,password)=>{
         setSignUpMethod(true)
@@ -64,7 +65,9 @@ const Authorize = ({ children}) => {
         resetPassword,
         signUpWithGoogle,
         setSignUpMethod,
-        signInOutsider
+        signInOutsider,
+        setLoading,
+        loading,
     }
   return (
       <AuthContext.Provider value={value}>

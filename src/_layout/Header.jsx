@@ -9,13 +9,13 @@ const Header = ({ layout }) => {
     const handlePath=(path)=>{
         navigate(`/${path}`)
     }
-    const renderDashboard=()=>{
-        // different layout for different dashboard pages
-    }
-    if(layout==="dashboard"){
-        return renderDashboard()
-    }
-    const selectPath= layout==="login"?"signup":"login";
+    // const renderDashboard=()=>{
+    //     // different layout for different dashboard pages
+    // }
+    // if(layout==="dashboard"){
+    //     return renderDashboard()
+    // }
+    const selectPath= layout==="login"? "signup":"login";
 
     const LoginSignUp=()=>{
         return (
@@ -26,29 +26,47 @@ const Header = ({ layout }) => {
             </>
         )
     }
+    const LogoChoose=()=>{
+        if(layout==="home"){
+            return ""
+        }else{
+            console.log("YEP");
+            return (
+                <div>Dashboard Logo</div>
+            )
+        }
+    }
 
-    const HomeHeader=()=>{
+    const HeaderChoose=()=>{
+        if(layout==="dashboard"){
+            return (
+                <>
+                <div>Dashboard</div>
+                </>
+            )
+        }
         return (
             <>
             <Button variant="outlined" className='primary-button' onClick={() => handlePath('login')}>Log in</Button>
-                <Button variant='contained' className='secondary-button redirect-button' onClick={() => handlePath('signup')}>Sign Up</Button>
+            <Button variant='contained' className='secondary-button redirect-button' onClick={() => handlePath('signup')}>Sign Up</Button>
             </>
         )
     }
 
     const headerType = layout === "login" || layout === "signup" 
+    console.log(layout);
     return (
         <div className={classNames('header-wrapper',{ 'header-wrapper-credentials':headerType})}>
             <div className='header-content'>
                 <div className='logo'>
                 {
-                    (headerType) ? "":"Dropform"
+                    (headerType) ? "Dropform" : LogoChoose()
                 }
                 </div>
                 {/* <div></div> */}
                 <div className='auth-content'>
                 {
-                    headerType ? <LoginSignUp /> : <HomeHeader/>
+                    headerType ? <LoginSignUp /> : HeaderChoose()
                 }
                 </div>
             </div>
