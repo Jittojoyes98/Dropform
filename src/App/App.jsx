@@ -9,6 +9,7 @@ import { Authorize } from '../auth'
 import { Dashboard } from '../Dashboard'
 import { ForgotPassword } from '../ForgotPassword'
 import { PrivateRoute } from '../_components/PrivateRoute'
+import SignUpEmail from '../SignupPage/SignUpEmail'
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
                     </Route>
                     <Route path="/signup" element={<Layout layout="signup" />}>
                             <Route index element={<SignupPage />} />
+                            <Route path='/signup/email' element={<SignUpEmail/>}/>
                     </Route>
                     
                 </Routes>

@@ -14,6 +14,7 @@ const Dashboard = () => {
             console.log("There was an error");
         }
     }
+    // if there is no current user put on loading state
 
     return (
       <>

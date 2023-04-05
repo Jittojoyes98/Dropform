@@ -10,17 +10,7 @@ const SignupPage = () => {
   const { signup, currentUser,setCurrentUser, signUpWithGoogle } = useAuth()
   const navigate=useNavigate()
   
-  const handleForm=async(e)=>{
-    e.preventDefault()
-    try {
-      setError("")
-      setLoading(true)
-      await signup(e.target.uname.value, e.target.psw.value)
-    } catch (error) {
-      setError("Cannot create user")
-    }
-    setLoading(false)
-  }
+  
   const handleGoogle=async(e)=>{
     try {
       await signUpWithGoogle()
@@ -58,7 +48,7 @@ const SignupPage = () => {
           </a>
         </span>
         <div className="login-form-wrapper">
-          <div>
+          <div className="signup-email-wrapper">
             <h2 className="login-title align-center">Get better data with conversational forms, surveys, quizzes & more.</h2>
             <div className="centre-div">
               <div className="fix-width ">
@@ -110,7 +100,7 @@ const SignupPage = () => {
                 <div className="centre-div margin-fix">
                   <span className="or-text" >OR</span>
                 </div>
-                <Button variant="outlined" className='secondary-button' onClick={handleGoogle}>Sign up with email</Button>
+                <Button variant="outlined" className='secondary-button auth-button redirect-button' onClick={() => navigate("email")}>Sign up with email</Button>
               </div>
               
             </div>

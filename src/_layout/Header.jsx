@@ -31,7 +31,7 @@ const Header = ({ layout }) => {
         return (
             <>
             <Button variant="outlined" className='primary-button' onClick={() => handlePath('login')}>Log in</Button>
-            <Button variant='contained' className='secondary-button' onClick={() => handlePath('signup')}>Sign Up</Button>
+                <Button variant='contained' className='secondary-button redirect-button' onClick={() => handlePath('signup')}>Sign Up</Button>
             </>
         )
     }

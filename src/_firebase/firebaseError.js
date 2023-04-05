@@ -1,6 +1,7 @@
 import React from "react";
 
 const firebaseError = (error) => {
+    // add this too auth/popup-closed-by-user
     switch (error.code) {
         case 'auth/email-already-in-use':
             return(`Email address already in use.`);

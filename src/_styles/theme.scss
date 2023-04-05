@@ -150,12 +150,16 @@ img {
         padding: 8px 16px;
         background-color: $body-text-color;
         box-shadow: none;
+        border: 1px solid $body-text-color;
     }
 
     .secondary-button:hover{
         background-color: $body-text-color;
         box-shadow: none;
-        opacity: 0.8;
+        
+        line-height: 22px;
+        padding: 8px 16px;
+        border: 1px solid $body-text-color;
     }
 
     .auth-content{
@@ -168,8 +172,8 @@ img {
         font-size: 16px;
         font-weight: 400;
     }
-    .auth-button:hover{
-        opacity: 1;
+    .redirect-button:hover{
+        opacity: 0.8;
     }
     
     .or-wrapper{
@@ -180,7 +184,12 @@ img {
         height: 1px;
     }
     .fix-width{
-        max-width: 256px;
+        // for flex items the width does not work only min-width works 
+        // else use these below commented styles 
+        // flex-basis: 256px;
+        // flex-grow: 0;
+        // flex-shrink: 0;
+        min-width: 256px;
     }
     .or-text{
         position: relative;
@@ -270,6 +279,9 @@ img {
         margin-bottom: 15px;
         color: $body-text-light-color;
     }
+    .signup-email-wrapper{
+        max-width: 542px;
+    }
     .label-wrapper{
         padding: 7px 10px 7px 0;
         font-size: 16px;
@@ -305,11 +317,51 @@ img {
             padding: 6px 14px;
         }
     }
+    .credential-field-inactive{
+        width: 256px;
+        background: transparent;
+        line-height: 16px;
+        font-size: 16px;
+        font-weight: 400;
+        color: $field-text-color;
+        border-radius: 4px;
+        
+        // input {
+        //     padding: 6px 14px;
+        //     border: 1px solid $common-color;
+        //     border-radius: 4px;
+        // }
+        
+        // input[type="text"]:focus {
+        //     box-shadow: 0 0 8px $border-color-focus;
+        // }
+        
+        .MuiInputBase-adornedEnd {
+            padding: 0px 4px;
+        }
+        
+        .Mui-focused .MuiOutlinedInput-notchedOutline {
+            border: 1px solid $field-text-color;
+        }
+    }
+    .credential-field-inactive:hover {
+        background: transparent;
+        line-height: 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        font-weight: 400;
+        border-radius: 4px;
+    
+        .MuiInputBase-adornedEnd {
+            padding: 0px 4px;
+        }
+    }
     .validation-error{
         color: $error-text-validation;
         padding: 8px 0 6px 18px;
         line-height: 18px;
         font-size: 14px;
+        width: 256px;
     }
     .error-box-wrapper{
         width: 256px;
@@ -328,6 +380,13 @@ img {
         text-align: left;
         color: $common-color;
         font-size: 14px;
+    }
+    .icon-password{
+        height: 32px;
+        width: 32px;
+        color: rgb(241, 236, 227);
+        padding: 0;
+        cursor: pointer;
     }
 }
 

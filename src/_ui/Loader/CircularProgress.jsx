@@ -5,7 +5,7 @@ import CircularProgress, {
     circularProgressClasses,
     CircularProgressProps,
 } from '@mui/material/CircularProgress';
-function FacebookCircularProgress(props) {
+function CircularProgress(props) {
     return (
         <Box sx={{ position: 'relative' }}>
             <CircularProgress
@@ -38,4 +38,4 @@ function FacebookCircularProgress(props) {
         </Box>
     );
 }
-export { FacebookCircularProgress }
+export { CircularProgress }
