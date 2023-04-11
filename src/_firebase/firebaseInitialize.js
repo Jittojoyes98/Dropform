@@ -15,7 +15,7 @@ export const firebaseConfig={
 
 const app = initializeApp(firebaseConfig)
 
-// const analytics = getAnalytics(app); // check if this is required or not
+const analytics = getAnalytics(app); // check if this is required or not
 
 export const auth=getAuth(app)
 export const db=getFirestore(app)
