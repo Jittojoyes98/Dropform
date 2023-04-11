@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth,provider,persistedAuth } from "../_firebase/firebaseInitialize";
 import { signInAnonymously,signInWithPopup,sendPasswordResetEmail,signInWithEmailAndPassword,createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-
+import { supabase } from "../_supabase/supabaseInitialize";
 
 const AuthContext=createContext()
 
@@ -11,63 +11,84 @@ export function useAuth(){
 
 const Authorize = ({ children}) => {
     const [currentUser,setCurrentUser]=useState()
-    const [signUpMethod,setSignUpMethod]=useState(true)
+    const [session, setSession] = useState(null)
     const [loading,setLoading]=useState(false)
     
-    const signup=(email,password)=>{
-        setSignUpMethod(true)
-        return createUserWithEmailAndPassword(auth,email,password)
-        
+    
+    // with supabase
+    async function signUpWithEmail(email,password){
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+        })
+        console.log(data,error,"SIGN UP DATA");
     }
-    const login=(email,password)=>{
-        setSignUpMethod(false)
-        return signInWithEmailAndPassword(auth,email,password)
+    async function signInWithEmail(email,password) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
+        console.log(data,error);
+
     }
-    const resetPassword=(email)=>{
-        return sendPasswordResetEmail(auth,email)
+    // sign in anonymous cannot be implemented as of now.
+
+    async function signInWithGoogle() {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+        })
+        console.log(data,error,"SIGN UP DATA");
     }
-    const signUpWithGoogle=()=>{
-        setSignUpMethod(true)
-        return signInWithPopup(auth,provider)
+    async function forgotPassword(email){ 
+        const { data, error } = await supabase.auth.resetPasswordForEmail(email,{
+            redirectTo:"http://localhost:3030/login/password/update"
+        })
+        if(data){
+            console.log("Success");
+        }else{
+            console.log("Falilure");
+        }
+    }
+    async function signOut() {
+        const { error } = await supabase.auth.signOut()
     }
     
-    const logout=()=>{
-        return signOut(auth)
+
+    // supabase method
+    useEffect(() => {
+        const getCurrentSession=async()=>{
+            const {data: { session }}=await supabase.auth.getSession()
+            setSession(session)
+        }
+        getCurrentSession()
+        // this can be used in protected routes
+  
+        const { data: { subscription },} = supabase.auth.onAuthStateChange((_event, session) => {
+          setSession(session)
+        })
+        return () => subscription.unsubscribe()
+    }, [])
+
+    if (!session) {
+        console.log("No supabase user");
     }
-    const signInOutsider=()=>{
-        return signInAnonymously(auth)
+    else {
+        console.log(session,"SESSION");
+        console.log("Supabase user exist");
     }
 
-    useEffect(() => {
-        const unsubscribe=onAuthStateChanged(auth,(user)=>{
-            // const { isNewUser } = getAdditionalUserInfo(user) 
-            if (user?.isAnonymous){
-                user.displayName="Anonymous"
-            }
-            if(user){
-                setCurrentUser(prevState => {
-                    return { ...prevState, user }
-                })
-            }else{
-                console.log("No user logged in");
-            }
-        })
-        return unsubscribe
-    }, []);
     
 
     const value={
         currentUser,
         setCurrentUser,
-        signup,
-        logout,
-        login,
-        resetPassword,
-        signUpWithGoogle,
-        setSignUpMethod,
-        signInOutsider,
         setLoading,
         loading,
+        signUpWithEmail,
+        signInWithEmail,
+        signOut,
+        signInWithGoogle,
+        forgotPassword
     }
   return (
       <AuthContext.Provider value={value}>

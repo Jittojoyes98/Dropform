@@ -10,6 +10,7 @@ import { Dashboard } from '../Dashboard'
 import { ForgotPassword } from '../ForgotPassword'
 import { PrivateRoute } from '../_components/PrivateRoute'
 import SignUpEmail from '../SignupPage/SignUpEmail'
+import NewPassword from '../ForgotPassword/NewPassword'
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
                     <Route path="/login" element={<Layout layout="login" />}>
                         <Route index element={<LoginPage />} />
                         <Route path='/login/password/request' element={<ForgotPassword />} />
+                        <Route path='/login/password/update' element={<NewPassword />} />
                     </Route>
                     <Route path="/signup" element={<Layout layout="signup" />}>
                             <Route index element={<SignupPage />} />

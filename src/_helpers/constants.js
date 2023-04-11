@@ -5,3 +5,7 @@ export const firebaseStorageBucket = process.env.REACT_APP_STORAGE_BUCKET
 export const firebaseMessagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID
 export const firebaseAppId = process.env.REACT_APP_APP_ID
 export const firebaseMeasurementId = process.env.REACT_APP_MEASUREMENT_ID
+export const supabaseKey = process.env.REACT_APP_SUPABASE_KEY
+export const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
+
+

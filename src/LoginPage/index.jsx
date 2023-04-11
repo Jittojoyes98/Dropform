@@ -18,15 +18,16 @@ const loginSchema = yup.object({
 const LoginPage = () => {
   const [error, setError] = useState()
   // const [loading, setLoading] = useState(false)
-  const { login, currentUser, signUpWithGoogle, signInOutsider,loading,setLoading} = useAuth()
+  const { login, currentUser,signInWithEmail,signInWithGoogle, signInOutsider,loading,setLoading} = useAuth()
   const navigate = useNavigate()
   const handleForm = async (email,password) => {
     try {
       setError("")
       setLoading(true)
-      await login(email, password)
+      await signInWithEmail(email, password)
       navigate("/dashboard")
     } catch (error) {
+      console.log(error);
       if (error.code == "auth/internal-error"){
         setError("There was an unsupported response from server.")
       }else{
@@ -44,7 +45,7 @@ const LoginPage = () => {
   }
   const handleGoogle = async () => {
     try {
-      await signUpWithGoogle()
+      await signInWithGoogle()
       navigate("/dashboard")
     } catch (error) {
       setError("There was an unsupported response from server.")

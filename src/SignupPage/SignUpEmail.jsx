@@ -28,13 +28,13 @@ const SignUpEmail = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [show,setShow]=useState(true)
-  const { signup, currentUser, setCurrentUser, signUpWithGoogle } = useAuth()
+  const { signup, currentUser, setCurrentUser, signUpWithGoogle,signUpWithEmail } = useAuth()
   const navigate = useNavigate()
   const handleForm = async (email, password) => {
     try {
       setError("")
       setLoading(true)
-      await signup(email, password)
+      await signUpWithEmail(email, password)
       navigate("/dashboard")
     } catch (error) {
       setError("Registration denied,Please see if this email already exist")

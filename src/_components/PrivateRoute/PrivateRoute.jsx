@@ -20,7 +20,8 @@ export const PrivateRoute = () => {
       }
       setCurrentUser(user)
     }else{
-        navigate("/login")
+      console.log("No user found");
+      navigate("/login")
     }
   }
   useEffect(() => {

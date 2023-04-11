@@ -2,15 +2,15 @@ import React from "react";
 import { useAuth } from "../auth";
 
 const ForgotPassword = () => {
-    const { resetPassword } = useAuth()
-    const handleForm=async(e)=>{
-        e.preventDefault()
-        try {
-            await resetPassword(e.target.uname.value)
-        } catch (error) {
-            
-        }
-    }
+  const { resetPassword,forgotPassword } = useAuth()
+  const handleForm=async(e)=>{
+      e.preventDefault()
+      try {
+          await forgotPassword(e.target.uname.value)
+      } catch (error) {
+          
+      }
+  }
   return (
     <div>
         <form onSubmit={handleForm}>

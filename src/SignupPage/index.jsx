@@ -7,13 +7,13 @@ import { auth } from "../_firebase/firebaseInitialize";
 const SignupPage = () => {
   const [error,setError]=useState("")
   const [loading,setLoading]=useState(false)
-  const { signup, currentUser,setCurrentUser, signUpWithGoogle } = useAuth()
+  const { signup, currentUser,setCurrentUser, signInWithGoogle } = useAuth()
   const navigate=useNavigate()
   
   
   const handleGoogle=async(e)=>{
     try {
-      await signUpWithGoogle()
+      await signInWithGoogle()
     } catch (error) {
       console.log("Error occured");
     }
