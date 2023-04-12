@@ -32,8 +32,8 @@ const LoginPage = () => {
         if(error.message=="Invalid login credentials"){
           setError(
             <>
-              Your login info is not right. Try again, or
-              <Link to="password/request" className="forgot-link small-text-light">reset your password</Link>reset your password.
+              Your login info is not right. Try again, or&nbsp;
+              <Link to="password/request" className="forgot-link small-text-light">reset your password</Link>&nbsp;reset your password.
               if it slipped your mind.
             </>
           )

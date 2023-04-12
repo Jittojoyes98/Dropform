@@ -29,6 +29,7 @@ const Dashboard = () => {
         <div>Loading</div>
       )
     }
+    console.log(currentUser);
     return (
       <>
         <h1>Hii {currentUser && currentUser.user?.displayName}</h1>

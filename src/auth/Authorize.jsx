@@ -54,6 +54,9 @@ const Authorize = ({ children}) => {
           if(_event==="SIGNED_IN"){
             setCurrentUser(session.user)
           }
+          if(_event==="USER_UPDATED"){
+            setCurrentUser(session.user)
+          }
           setSession(session)
         })
         return () => subscription.unsubscribe()

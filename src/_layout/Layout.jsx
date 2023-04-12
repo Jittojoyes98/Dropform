@@ -4,6 +4,7 @@ import { Footer } from './Footer'
 import { Header } from './Header'
 
 const Layout = ({ layout }) => {
+    // make use of loader, the full loader (mainly for auth loader)
     return (
         <div className='main'>
             <Header layout={layout} />
