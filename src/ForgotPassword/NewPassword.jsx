@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useAuthContext } from "../auth";
 import { supabase } from "../_supabase/supabaseInitialize";
+import { useNavigate } from "react-router-dom";
 
 const NewPassword = () => {
-    const { resetPassword,forgotPassword } = useAuthContext()
+    const { updatePassword } = useAuthContext()
+    const navigate=useNavigate()
     const handleForm=async(e)=>{
         e.preventDefault()
         try {
-            const { data, error } = await supabase.auth
-              .updateUser({ password: e.target.uname.value })
-            alert("Password updated successfully!")
+            const { data, error } = await updatePassword(e.target.uname.value)
+            console.log(data);
+            console.log("Password was updated !!");
+            navigate("/dashboard")
         } catch (error) {
             alert("There was an error updating your password.")
         }

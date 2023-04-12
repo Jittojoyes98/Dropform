@@ -42,6 +42,9 @@ const Authorize = ({ children}) => {
     function signOut() {
         return supabase.auth.signOut()
     }
+    function updatePassword(newPassword){
+        return supabase.auth.updateUser({ password: newPassword })
+    }
     
 
     // supabase method
@@ -72,7 +75,8 @@ const Authorize = ({ children}) => {
         signInWithEmail,
         signOut,
         signInWithGoogle,
-        forgotPassword
+        forgotPassword,
+        updatePassword
     }
     return (
       <AuthContext.Provider value={value}>

@@ -1,14 +1,27 @@
 import React from "react";
 import { useAuthContext } from "../auth";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ForgotPassword = () => {
-  const { resetPassword,forgotPassword } = useAuthContext()
+  const { forgotPassword } = useAuthContext()
+  const navigate=useNavigate()
   const handleForm=async(e)=>{
     e.preventDefault()
     try {
-      await forgotPassword(e.target.uname.value)
+      const { data, error } = await forgotPassword(e.target.uname.value)
+      if(!error && data){
+        console.log("Password reset has been sent to your email");
+        // show toast or something
+        navigate("/login")
+      }
+      if(error){
+      // form error
+      }
     } catch (error) {
-        
+      console.log("there was an unexpected error");
+      // form error
     }
   }
   return (
