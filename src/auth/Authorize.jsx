@@ -5,7 +5,7 @@ import { supabase } from "../_supabase/supabaseInitialize";
 
 const AuthContext=createContext()
 
-export function useAuth(){
+export function useAuthContext(){
     return useContext(AuthContext)
 }
 
@@ -16,54 +16,41 @@ const Authorize = ({ children}) => {
     
     
     // with supabase
-    async function signUpWithEmail(email,password){
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-        })
-        console.log(data,error,"SIGN UP DATA");
+    function signUpWithEmail(email,password){
+        return supabase.auth.signUp({email,password})
     }
-    async function signInWithEmail(email,password) {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        })
-        console.log(data,error);
-
+    function signInWithEmail(email,password) {
+        return  supabase.auth.signInWithPassword({email,password,})
     }
     // sign in anonymous cannot be implemented as of now.
 
-    async function signInWithGoogle() {
-        const { data, error } = await supabase.auth.signInWithOAuth({
+    function signInWithGoogle() {
+        return supabase.auth.signInWithOAuth({
           provider: 'google',
+          options: {
+            queryParams: {
+              redirect_to:"http://localhost:3030/dashboard"
+            },
+          },
         })
-        console.log(data,error,"SIGN UP DATA");
     }
-    async function forgotPassword(email){ 
-        const { data, error } = await supabase.auth.resetPasswordForEmail(email,{
+    function forgotPassword(email){ 
+        return supabase.auth.resetPasswordForEmail(email,{
             redirectTo:"http://localhost:3030/login/password/update"
         })
-        if(data){
-            console.log("Success");
-        }else{
-            console.log("Falilure");
-        }
     }
-    async function signOut() {
-        const { error } = await supabase.auth.signOut()
+    function signOut() {
+        return supabase.auth.signOut()
     }
     
 
     // supabase method
     useEffect(() => {
-        const getCurrentSession=async()=>{
-            const {data: { session }}=await supabase.auth.getSession()
-            setSession(session)
-        }
-        getCurrentSession()
-        // this can be used in protected routes
-  
         const { data: { subscription },} = supabase.auth.onAuthStateChange((_event, session) => {
+          console.log(_event);
+          if(_event==="SIGNED_IN"){
+            setCurrentUser(session.user)
+          }
           setSession(session)
         })
         return () => subscription.unsubscribe()
@@ -76,9 +63,6 @@ const Authorize = ({ children}) => {
         console.log(session,"SESSION");
         console.log("Supabase user exist");
     }
-
-    
-
     const value={
         currentUser,
         setCurrentUser,
@@ -90,7 +74,7 @@ const Authorize = ({ children}) => {
         signInWithGoogle,
         forgotPassword
     }
-  return (
+    return (
       <AuthContext.Provider value={value}>
         {children}
       </AuthContext.Provider>

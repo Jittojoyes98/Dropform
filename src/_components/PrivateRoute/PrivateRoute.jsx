@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth";
+import { useAuthContext } from "../../auth";
 import { firebaseConfig } from "../../_firebase/firebaseInitialize";
+import { supabase } from "../../_supabase/supabaseInitialize";
 
 export const PrivateRoute = () => {
-  const { currentUser,setCurrentUser } = useAuth();
-  let user;
+  const { currentUser,setCurrentUser } = useAuthContext();
   const navigate=useNavigate()
-  // private route setting  and getting user
-  function readSession() {
-    user = JSON.parse(window.sessionStorage.getItem(
-      `firebase:authUser:${firebaseConfig.apiKey}:[DEFAULT]`
-    ));
-    // When receiving data from a web server, the data is always a string. so parse
+  let user;
+
+  async function readSession() {
+    const {data: { session }}=await supabase.auth.getSession()
+    // setSession(session)
+    user=session?.user
     
     if (user){
-      if (user?.isAnonymous) {
-        user.displayName = "Anonymous"
-      }
+      console.log("Private route user here");
       setCurrentUser(user)
     }else{
       console.log("No user found");

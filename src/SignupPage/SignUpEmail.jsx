@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../auth";
+import { useAuthContext } from "../auth";
 import eyeLineCross from "../../assets/download-eye.svg"
 import eyeLine from "../../assets/download-eye-text.svg"
 
@@ -28,17 +28,21 @@ const SignUpEmail = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [show,setShow]=useState(true)
-  const { signup, currentUser, setCurrentUser, signUpWithGoogle,signUpWithEmail } = useAuth()
+  const { signup, currentUser, setCurrentUser, signUpWithGoogle,signUpWithEmail } = useAuthContext()
   const navigate = useNavigate()
   const handleForm = async (email, password) => {
     try {
       setError("")
       setLoading(true)
-      await signUpWithEmail(email, password)
-      navigate("/dashboard")
+      const { data, error } =await signUpWithEmail(email, password)
+      if(!error && data) {
+        console.log("Registration Successful. Check your email to confirm your account");
+        navigate("/dashboard")
+      }else{
+        setError("Registration denied,Please see if this email already exist") 
+      }
     } catch (error) {
       setError("Registration denied,Please see if this email already exist")
-      // use firebase error for more verification
     }
     setLoading(false)
   }

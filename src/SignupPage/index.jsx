@@ -1,43 +1,27 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../auth"
+import { useAuthContext } from "../auth"
 import { auth } from "../_firebase/firebaseInitialize";
 
 const SignupPage = () => {
   const [error,setError]=useState("")
   const [loading,setLoading]=useState(false)
-  const { signup, currentUser,setCurrentUser, signInWithGoogle } = useAuth()
+  const { signup, currentUser,setCurrentUser, signInWithGoogle } = useAuthContext()
   const navigate=useNavigate()
   
   
   const handleGoogle=async(e)=>{
     try {
-      await signInWithGoogle()
+      const {data,error}=await signInWithGoogle()
+      if(!error && data){
+        console.log("Google sign in success");
+      }
     } catch (error) {
       console.log("Error occured");
     }
   }
-  const firstUpdate = useRef(true);
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-    }
-    else {
-      console.log(currentUser);
-      if (currentUser) {
-        if (currentUser.user.metadata.creationTime !== currentUser.user.metadata.lastSignInTime) {
-          console.log("WE ARE GOING TO LOGIN");
-          setCurrentUser()
-          navigate("/login")
-        } else {
-          console.log("WE ARE GOING TO DASHBOARD");
-          navigate("/dashboard")
-        }
-      }
-    }
-  }, [currentUser,setCurrentUser]);
-  // check if setCurrentUser is needed or not 
+  
   return (
     <div className="centre-div">
       <div>

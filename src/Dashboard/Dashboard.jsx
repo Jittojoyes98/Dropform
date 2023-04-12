@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../auth";
+import { useAuthContext } from "../auth";
 import { Navigate } from "react-router-dom";
 import { collection,doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../_firebase/firebaseInitialize";
 
 const Dashboard = () => {
-    const { logout, currentUser, setCurrentUser,loading,setLoading,signOut } = useAuth()
+    const { logout, currentUser, setCurrentUser,loading,setLoading,signOut } = useAuthContext()
     const [pending,setPending]=useState(false)
     const [data,setData]=useState(null)
 
     const handleLogout=async()=>{
-        try {
-            await signOut()
-            setCurrentUser()
-        } catch (error) {
-            console.log("There was an error");
-        }
+      try {
+        await signOut()
+        setCurrentUser()
+      } catch (error) {
+        console.log("There was an error");
+      }
     }
     // if there is no current user put on loading state
     const fetchData=async()=>{

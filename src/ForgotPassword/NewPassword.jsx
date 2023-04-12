@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../auth";
+import { useAuthContext } from "../auth";
 import { supabase } from "../_supabase/supabaseInitialize";
 
 const NewPassword = () => {
-    const { resetPassword,forgotPassword } = useAuth()
+    const { resetPassword,forgotPassword } = useAuthContext()
     const handleForm=async(e)=>{
         e.preventDefault()
         try {

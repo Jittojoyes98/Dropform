@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../auth";
+import { useAuthContext } from "../auth";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, TextField } from "@mui/material";
@@ -18,35 +18,43 @@ const loginSchema = yup.object({
 const LoginPage = () => {
   const [error, setError] = useState()
   // const [loading, setLoading] = useState(false)
-  const { login, currentUser,signInWithEmail,signInWithGoogle, signInOutsider,loading,setLoading} = useAuth()
+  const { login, currentUser,signInWithEmail,signInWithGoogle, signInOutsider,loading,setLoading} = useAuthContext()
   const navigate = useNavigate()
   const handleForm = async (email,password) => {
     try {
       setError("")
       setLoading(true)
-      await signInWithEmail(email, password)
-      navigate("/dashboard")
-    } catch (error) {
-      console.log(error);
-      if (error.code == "auth/internal-error"){
-        setError("There was an unsupported response from server.")
-      }else{
-        setError(
-          <>
-            Your login info is not right. Try again, or
-            <Link to="password/request" className="forgot-link small-text-light">reset your password</Link>reset your password.
-            if it slipped your mind.
-          </>
-        )
+      const {data, error}= await signInWithEmail(email, password)
+      if(!error && data){
+        navigate("/dashboard")
       }
-      
+      if(error){
+        if(error.message=="Invalid login credentials"){
+          setError(
+            <>
+              Your login info is not right. Try again, or
+              <Link to="password/request" className="forgot-link small-text-light">reset your password</Link>reset your password.
+              if it slipped your mind.
+            </>
+          )
+        }else{
+          setError("There was an unsupported response from server.")
+        }
+      }
+    } catch (error) {
+      setError("There was an unsupported response from server.")
     }
     setLoading(false)
   }
-  const handleGoogle = async () => {
+  const handleGoogle =  async() => {
     try {
-      await signInWithGoogle()
-      navigate("/dashboard")
+      const {data , error}= await signInWithGoogle()
+      if(!error && data){
+        console.log("Google sign in success");
+      }
+      if(error){
+        console.log("There was an error");
+      }
     } catch (error) {
       setError("There was an unsupported response from server.")
     }
