@@ -28,9 +28,8 @@ const Header = ({ layout }) => {
     }
     const LogoChoose=()=>{
         if(layout==="home"){
-            return ""
+            return "Dropform"
         }else{
-            console.log("YEP");
             return (
                 <div>Dashboard Logo</div>
             )
@@ -54,13 +53,14 @@ const Header = ({ layout }) => {
     }
 
     const headerType = layout === "login" || layout === "signup" 
-    console.log(layout);
+    const isDashboard=layout === "dashboard"
+    const isHome=layout==="home"
     return (
-        <div className={classNames('header-wrapper',{ 'header-wrapper-credentials':headerType})}>
-            <div className='header-content'>
+        <div className={classNames({'header-wrapper-fixed':isHome,'header-wrapper-block':!isHome},{ 'header-wrapper-credentials':headerType,"header-wrapper-home":!headerType && layout !=="dashboard" },{"header-wrapper-dashboard":layout ==="dashboard"})}>
+            <div className={classNames('header-content',{"header-content-fixed":!isDashboard,"header-content-full":isDashboard})}>
                 <div className='logo'>
                 {
-                    (headerType) ? "Dropform" : LogoChoose()
+                    (headerType) ? "" : LogoChoose()
                 }
                 </div>
                 {/* <div></div> */}
