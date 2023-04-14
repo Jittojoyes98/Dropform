@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../auth";
-import { collection,doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../_firebase/firebaseInitialize";
+import { Button } from "@mui/material";
 
 const Dashboard = () => {
-    const { logout, currentUser, setCurrentUser,loading,setLoading,signOut } = useAuthContext()
+    const { currentUser, setCurrentUser,signOut } = useAuthContext()
     const [pending,setPending]=useState(false)
     const [data,setData]=useState(null)
 
@@ -30,13 +29,47 @@ const Dashboard = () => {
       )
     }
     console.log(currentUser);
+    // 12 , 32
     return (
-      <>
-        <h1>Hii {currentUser && currentUser.user?.displayName}</h1>
-        <button type="submit" onClick={handleLogout}>Log out</button>
-        <div>Dashboard</div>
-      </>
-  )
+      <div className="dashboard-wrapper">
+        <button onClick={handleLogout}>Logout</button>
+        <div className="dashboard-main">
+          <div className="left-dashboard-wrapper">
+            <p>Workspaces and Responses</p>
+          </div>
+          <div className="right-dashboard-wrapper">
+            <div className="right-dashboard">
+              <div className="right-dashboard-menu">
+                <div>My Dropforms</div>
+                <div className="dashboard-general">
+                  <div className="">
+                    <Button variant='contained' className='secondary-button redirect-button'>
+                    <span className="plus-svg">
+                      <svg class="SVGInline-svg" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6c0-1.10457.89543-2 2-2h8c0 1.10457-.89543 2-2 2H0z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M6 0v8c0 1.10457-.89543 2-2 2V2c0-1.104569.89543-2 2-2z"></path>
+                      </svg>
+                    </span>
+                    Create dropform
+                    </Button>
+                  </div>
+                  <div>
+                    date created
+                  </div>
+                </div>
+              </div>
+              <div className="dashboard-card-wrapper">
+                {/* show all cards here */}
+                <div className="form-cards">
+                  <div>card1</div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    )
 };
 
 export {Dashboard};

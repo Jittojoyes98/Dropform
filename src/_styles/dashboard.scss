@@ -1,0 +1,80 @@
+.main{
+    .logo-button{
+        background-color: $logo-background-color;
+        color: white;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: rgb(0 0 0 / 7%) 0px 0px 0px 1px inset;
+        margin-right: 12px;
+    }
+    .logo-button-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .user-logo{
+        height: 32px;
+        width: 32px;
+        color: white;
+    }
+    .user-logo-image{
+        border-radius: 50%;
+    }
+    .user-menu{
+        cursor: pointer;
+    }
+    .dashboard-wrapper{
+        height: 100%;
+        // overflow-y: scroll;
+    }
+    .dashboard-main{
+        display: flex;
+        height: 100%;
+
+    }
+    .left-dashboard-wrapper{
+        width: 256px;
+        flex-shrink: 0;
+    }
+    .right-dashboard-wrapper{
+        flex-shrink: 0;
+        flex-grow: 1;
+        background-color: $dashboard-background;
+    }
+    .right-dashboard{
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+    .right-dashboard-menu{
+        border-bottom: 1px solid $dashboard-divider;
+        padding-bottom: 24px;
+    }
+    .plus-svg{
+        color: white;
+    }
+    .dashboard-general{
+        display: flex;
+        justify-content: space-between;
+    }
+    .dashboard-card-wrapper{
+        padding: 24px 32px 80px;
+    }
+    
+}
+.MuiTooltip-popper{
+    .tooltip-title{
+        .tooltip-name{
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .tooltip-email{
+            color: $liner-color;
+        }
+    }
+}

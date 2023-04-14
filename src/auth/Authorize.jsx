@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth,provider,persistedAuth } from "../_firebase/firebaseInitialize";
-import { signInAnonymously,signInWithPopup,sendPasswordResetEmail,signInWithEmailAndPassword,createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { supabase } from "../_supabase/supabaseInitialize";
 
 const AuthContext=createContext()

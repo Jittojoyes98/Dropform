@@ -1,5 +1,6 @@
 @import './colors.scss';
 @import './variables.scss';
+@import './dashboard.scss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap');
 
 // Base styles
@@ -20,8 +21,9 @@
     --grad-3: linear-gradient(99.87deg, #0b0d60 -10.92%, #115962 107.49%);
 }
 
-html {
+html,body {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body,
@@ -72,8 +74,14 @@ img {
     height: auto;
 }
 
+#app{
+    height: 100%;
+}
+
 // Main styles and reusable classes
 .main{
+    height: 100%;
+    overflow-y: hidden; //change later
     .centre-div{
         display: flex;
         justify-content: center;
@@ -116,6 +124,7 @@ img {
         height: auto;
         padding: 8px 24px;
         justify-content:space-between;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     }
     .header-content-full{
         max-width: 100%;
@@ -129,6 +138,10 @@ img {
     }
     .content-other{
         margin-top: 24px;
+        height: 100%;
+    }
+    .content-dashboard{
+        height: 100%;
     }
     
     .header-content {
@@ -411,6 +424,9 @@ img {
         color: rgb(241, 236, 227);
         padding: 0;
         cursor: pointer;
+    }
+    .auth-height{
+        height: 80%;
     }
 }
 

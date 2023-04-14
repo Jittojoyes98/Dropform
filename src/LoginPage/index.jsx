@@ -99,7 +99,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="centre-div">
+    <div className="centre-div auth-height">
       <div>
         <span className="centre-div">
           <a href="/">

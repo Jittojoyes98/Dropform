@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth"
-import { auth } from "../_firebase/firebaseInitialize";
 
 const SignupPage = () => {
   const [error,setError]=useState("")
@@ -23,7 +22,7 @@ const SignupPage = () => {
   }
   
   return (
-    <div className="centre-div">
+    <div className="centre-div auth-height">
       <div>
         <span className="centre-div">
           <a href="/">

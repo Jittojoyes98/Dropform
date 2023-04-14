@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../auth";
-import { firebaseConfig } from "../../_firebase/firebaseInitialize";
 import { supabase } from "../../_supabase/supabaseInitialize";
 
 export const PrivateRoute = () => {

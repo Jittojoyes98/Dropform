@@ -8,7 +8,7 @@ const Layout = ({ layout }) => {
     // make use of loader, the full loader (mainly for auth loader)
     const isHome=layout==="home"
     const isDashboard=layout==="dashboard"
-    // 24px
+
     return (
         <div className='main'>
             <Header layout={layout} />
