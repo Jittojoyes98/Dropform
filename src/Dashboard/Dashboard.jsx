@@ -29,7 +29,6 @@ const Dashboard = () => {
       )
     }
     console.log(currentUser);
-    // 12 , 32
     return (
       <div className="dashboard-wrapper">
         <button onClick={handleLogout}>Logout</button>

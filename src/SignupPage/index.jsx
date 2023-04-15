@@ -23,7 +23,7 @@ const SignupPage = () => {
   
   return (
     <div className="centre-div auth-height">
-      <div>
+      <div className="auth-form-wrapper">
         <span className="centre-div">
           <a href="/">
             {/* image will be used here now just the Name */}

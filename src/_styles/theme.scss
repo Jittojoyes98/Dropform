@@ -427,6 +427,10 @@ img {
     }
     .auth-height{
         height: 80%;
+        overflow-y: auto;
+    }
+    .auth-form-wrapper{
+        height: 100%;
     }
 }
 
