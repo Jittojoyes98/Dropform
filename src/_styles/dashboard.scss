@@ -65,7 +65,36 @@
     .dashboard-card-wrapper{
         padding: 24px 32px 80px;
     }
-    
+    .form-card{
+        width: 178px;
+        height: 208px;
+        overflow-y: auto;
+        border-radius: 8px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s ease-in-out 0s;
+        background-color: $body-background-color ;
+        box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
+    }
+    .form-card:hover{
+        box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px,
+        rgb(0 0 0 / 6%) 0px 2px 12px,rgb(0 0 0 / 4%) 0px 8px 14px,
+        rgb(0 0 0 / 2%) 0px 12px 16px;
+    }
+    .form-name{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height:118px ;
+        padding: 16px;
+        
+    }
+    .form-card-link{
+        display: block;
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
 }
 .MuiTooltip-popper{
     .tooltip-title{
