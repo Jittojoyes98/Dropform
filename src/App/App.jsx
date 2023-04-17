@@ -11,6 +11,7 @@ import { ForgotPassword } from '../ForgotPassword'
 import { PrivateRoute } from '../_components/PrivateRoute'
 import SignUpEmail from '../SignupPage/SignUpEmail'
 import NewPassword from '../ForgotPassword/NewPassword'
+import Editor from '../Editor/Editor'
 
 
 const App = () => {
@@ -26,6 +27,9 @@ const App = () => {
                     <Route element={<PrivateRoute/>}>
                         <Route path="/dashboard" element={<Layout layout="dashboard" />}>
                             <Route index element={<Dashboard />} />
+                        </Route>
+                        <Route path="/editor" element={<Layout layout="editor" />}>
+                            <Route index element={<Editor />} />
                         </Route>
                     </Route>
 

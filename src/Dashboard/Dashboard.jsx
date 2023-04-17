@@ -62,7 +62,7 @@ const Dashboard = () => {
                 {/* show all cards here */}
                 <div className="form-cards">
                   <Box className="form-card">
-                    <Link className="form-card-link" to={"/whiteboard"}>
+                    <Link className="form-card-link" to={"/editor"}>
                       <div className="form-name">
                         <p>My Dropform</p>
                       </div>
