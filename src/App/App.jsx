@@ -35,8 +35,8 @@ const App = () => {
                         <Route path='/login/password/update' element={<NewPassword />} />
                     </Route>
                     <Route path="/signup" element={<Layout layout="signup" />}>
-                            <Route index element={<SignupPage />} />
-                            <Route path='/signup/email' element={<SignUpEmail/>}/>
+                        <Route index element={<SignupPage />} />
+                        <Route path='/signup/email' element={<SignUpEmail/>}/>
                     </Route>
                     
                 </Routes>
