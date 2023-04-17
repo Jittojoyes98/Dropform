@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../auth";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     const { currentUser, setCurrentUser,signOut } = useAuthContext()
@@ -58,9 +59,11 @@ const Dashboard = () => {
               </div>
               <div className="dashboard-card-wrapper">
                 {/* show all cards here */}
+                <Link to={"/editor"}>
                 <div className="form-cards">
                   <div>card1</div>
                 </div>
+                </Link>
                 
               </div>
             </div>
