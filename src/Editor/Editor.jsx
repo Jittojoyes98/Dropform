@@ -24,12 +24,15 @@ const Editor = () => {
     ]
     const [components,setComponents]=useState([])
     const [dragging,setDragging]=useState(false)
+    const [animationId,setAnimationId]=useState()
 
     const handleDragStart=(event)=>{
         console.log(event,"dragging started");
         setDragging(true)
     }
     const handleDragEnd=(event)=>{
+        console.log(animationId);
+        cancelAnimationFrame(animationId)
         const {active, over} = event;
         console.log(active, over,"dragging ended");
         let id=active.id
@@ -57,12 +60,12 @@ const Editor = () => {
                 
             </DndProvider> */}
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                <CoreEditorDesign setComponents={setComponents} components={components} divs={divs}/>
+                <CoreEditorDesign setComponents={setComponents} animationId={animationId} setAnimationId={setAnimationId} components={components} divs={divs}/>
                 <div className="editor-styles">
                 {
-                    divs.map((div)=> {
+                    divs.map((div,index)=> {
                         return (
-                            <CoreEditorStyles id={div.id} heading={div.heading}/>
+                            <CoreEditorStyles key={index} id={div.id} heading={div.heading}/>
                         )
                     })
                 }

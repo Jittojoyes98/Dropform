@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {useDroppable} from '@dnd-kit/core';
 
-const CoreEditorDesign = ({components}) => {
+const CoreEditorDesign = ({components,setAnimationId,animationId}) => {
     const {isOver, setNodeRef} = useDroppable({
         id: 'droppable',
         data:{
@@ -12,17 +12,15 @@ const CoreEditorDesign = ({components}) => {
         color: isOver ? 'green' : undefined,
     };
 
-    // let animationId;
+    function animate(){
+        console.log(requestAnimationFrame(animate),"ANIMATED");
+        setAnimationId(requestAnimationFrame(animate))
+    }
 
-    // function animate(){
-    //     animationId=requestAnimationFrame(animate)
-    // }
-
-    // useEffect(() => {
-    //     animate();
-    //     console.log(animationId);
-    //     return () => cancelAnimationFrame(animationId)
-    // }, []);
+    useEffect(() => {
+        animate();
+        return () => cancelAnimationFrame(animationId)
+    }, []);
     
     return (
         <div className="editor-design">
