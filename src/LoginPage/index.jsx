@@ -101,6 +101,7 @@ const LoginPage = () => {
   return (
     <div className="centre-div auth-height">
       <div className="auth-form-wrapper">
+        {/* add a wrapper div here */}
         <span className="centre-div">
           <a href="/">
             {/* image will be used here now just the Name */}
