@@ -1,8 +1,10 @@
-import { Button, Tooltip } from '@mui/material'
+import { Button, Input, Tooltip } from '@mui/material'
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../auth';
+//  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down
+
 
 const Header = ({ layout }) => {
     const {currentUser}=useAuthContext()
@@ -15,12 +17,54 @@ const Header = ({ layout }) => {
     const handleOragnisation=()=>{
 
     }
-    // const renderDashboard=()=>{
-    //     // different layout for different dashboard pages
-    // }
-    // if(layout==="dashboard"){
-    //     return renderDashboard()
-    // }
+    if(layout==="editor"){
+        return(
+            <div className="header-wrapper-dashboard">
+                <div className="header-content header-content-full">
+                    <div className='logo'>
+                        <span>
+                            <Link to={"/dashboard"}>My workspace</Link>
+                            {"/"}
+                            <input type='text' value="My Drpform"/>
+                        </span>
+                    </div>
+                    <div>options</div>
+                    <div className='auth-content'>
+                        <Tooltip title={
+                            currentUser ?
+                            <div className='tooltip-title'>
+                                <p className='tooltip-name'>{currentUser.user_metadata.full_name.toUpperCase()}</p>
+                                <p className='tooltip-email'>{currentUser.user_metadata.email}</p>
+                            </div>
+                            :
+                            <></>
+                        } 
+                        componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
+                                '& .MuiTooltip-arrow': {
+                                  color: 'common.black',
+                                },
+                                padding:"11px",
+                                fontSize:"14px",
+                              },
+                            },
+                        }}
+                        arrow
+                        >
+                        <div className='user-menu'>
+                            <div className='user-logo'>
+                                <img src={`https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(" ","+")}`} className='user-logo-image'/>
+                            </div>
+                        </div>
+                        </Tooltip>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    
     const headerType = layout === "login" || layout === "signup" 
     const isDashboard=layout === "dashboard"
     const isHome=layout==="home"
