@@ -16,17 +16,16 @@ function animateLayoutChanges(args) {
 
 const SortableItems = ({id}) => {
     const { attributes, listeners, setNodeRef,transform,transition}=useSortable({
-        animateLayoutChanges,
+        // animateLayoutChanges,
         id:id    
     })
     const style={
         transform:CSS.Transform.toString(transform),
         transition,
-        transitionDuration:0,
     }
     return (
-        <div className="change" ref={setNodeRef} {...listeners} style={style} {...attributes} >
-            <p >{id}</p>
+        <div className="change" ref={setNodeRef} style={style} {...attributes} {...listeners} >
+            <p>{id}</p>
         </div>
     )
 };

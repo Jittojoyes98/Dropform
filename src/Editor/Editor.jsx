@@ -27,15 +27,12 @@ const Editor = () => {
     ]
     const [components,setComponents]=useState([])
     const [dragging,setDragging]=useState(false)
-    const [animationId,setAnimationId]=useState()
 
     const handleDragStart=(event)=>{
         console.log(event,"dragging started");
         setDragging(true)
     }
     const handleDragEnd=(event)=>{
-        // console.log(animationId);
-        // cancelAnimationFrame(animationId)
         const {active, over} = event;
         console.log(active, over,"dragging ended");
         let id=active.id
@@ -73,7 +70,7 @@ const Editor = () => {
                     <DndContext 
                         collisionDetection={closestCenter} 
                         onDragEnd={handleDragEndLeft}
-                        measuring={measuringConfig}
+                        // measuring={measuringConfig}
                     >
 
                         <SortableContext
@@ -82,7 +79,7 @@ const Editor = () => {
                             
                         >
                             {
-                                languages.map((lan,index)=>(<SortableItems  key={index} id={lan}/>))
+                                languages.map((lan,index)=>(<SortableItems  key={lan} id={lan}/>))
                             }
                         </SortableContext>
                     </DndContext>
@@ -101,17 +98,17 @@ const Editor = () => {
                 
             </DndProvider> */}
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                <CoreEditorDesign setComponents={setComponents} animationId={animationId} setAnimationId={setAnimationId} components={components} divs={divs}/>
+                <CoreEditorDesign setComponents={setComponents} components={components} divs={divs}/>
                 <div className="editor-styles">
                 {
                     divs.map((div,index)=> {
                         return (
-                            <CoreEditorStyles key={index} id={div.id} heading={div.heading}/>
+                            <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading}/>
                         )
                     })
                 }
                 </div>
-                <DragOverlay>
+                <DragOverlay dropAnimation={null}>
                     {
                         dragging ? <CoreOverlay/> :null
                     }

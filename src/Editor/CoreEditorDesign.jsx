@@ -12,15 +12,6 @@ const CoreEditorDesign = ({components,setAnimationId,animationId}) => {
         color: isOver ? 'green' : undefined,
     };
 
-    // function animate(){
-    //     console.log(requestAnimationFrame(animate),"ANIMATED");
-    //     setAnimationId(requestAnimationFrame(animate))
-    // }
-
-    // useEffect(() => {
-    //     animate();
-    //     return () => cancelAnimationFrame(animationId)
-    // }, []);
     
     return (
         <div className="editor-design">
