@@ -72,11 +72,9 @@ const Editor = () => {
                         onDragEnd={handleDragEndLeft}
                         // measuring={measuringConfig}
                     >
-
                         <SortableContext
                             items={languages}
-                            strategy={verticalListSortingStrategy}
-                            
+                            strategy={verticalListSortingStrategy}                  
                         >
                             {
                                 languages.map((lan,index)=>(<SortableItems  key={lan} id={lan}/>))
@@ -84,19 +82,6 @@ const Editor = () => {
                         </SortableContext>
                     </DndContext>
             </div>
-            {/* <DndProvider backend={HTML5Backend}>
-                <EditorDesign setComponents={setComponents} components={components} divs={divs}/>
-                <div className="editor-styles">
-                {
-                    divs.map((div)=> {
-                        return (
-                            <EditorStyles id={div.id} heading={div.heading}/>
-                        )
-                    })
-                }
-                </div>
-                
-            </DndProvider> */}
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
                 <CoreEditorDesign setComponents={setComponents} components={components} divs={divs}/>
                 <div className="editor-styles">

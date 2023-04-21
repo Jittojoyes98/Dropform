@@ -1,4 +1,4 @@
-import { Button, Input, Tooltip } from '@mui/material'
+import { Button, Input, TextField, Tooltip } from '@mui/material'
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -22,10 +22,11 @@ const Header = ({ layout }) => {
             <div className="header-wrapper-dashboard">
                 <div className="header-content header-content-full">
                     <div className='logo'>
-                        <span>
+                        <span className='editor-links'>
                             <Link to={"/dashboard"}>My workspace</Link>
                             {"/"}
-                            <input type='text' value="My Drpform"/>
+                            {/* <input type='text' value="My Drpform"/> */}
+                            <TextField variant='outlined' size='small' value="My typeform" className='dropform-name-input' />
                         </span>
                     </div>
                     <div>options</div>

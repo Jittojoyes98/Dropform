@@ -15,7 +15,7 @@ const CoreEditorStyles = ({id,heading}) => {
     }
 
     return (
-        <div ref={setNodeRef} className="change">
+        <div ref={setNodeRef} className="change ">
             <p  style={style} {...listeners} {...attributes} >{heading}</p>
         </div>
     )
