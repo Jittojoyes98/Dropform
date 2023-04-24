@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../auth';
+import { supabase } from '../_supabase/supabaseInitialize';
 //  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down
 
 
@@ -14,8 +15,11 @@ const Header = ({ layout }) => {
     const handlePath=(path)=>{
         navigate(`/${path}`)
     }
-    const handleOragnisation=()=>{
-
+    const handleOragnisation=async()=>{
+        const { data, error } = await supabase.functions.invoke('handle_create_question', {
+            body: { id: currentUser.id }
+        })
+        console.log(data);
     }
     if(layout==="editor"){
         return(
