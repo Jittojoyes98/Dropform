@@ -8,11 +8,12 @@ const Layout = ({ layout }) => {
     // make use of loader, the full loader (mainly for auth loader)
     const isHome=layout==="home"
     const isDashboard=layout==="dashboard"
+    const isEditor=layout==="editor"
 
     return (
         <div className='main'>
             <Header layout={layout} />
-            <div className={classNames({"content":isHome,"content-dashboard":isDashboard,"content-other":(!isDashboard && !isHome)})}>
+            <div className={classNames({ "content": isHome, "content-dashboard": (isDashboard || isEditor), "content-other":(!isDashboard && !isHome && !isEditor)})}>
                 <Outlet />
             </div>
             <Footer layout={layout} />
