@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../auth';
 import { supabase } from '../_supabase/supabaseInitialize';
-//  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down
-
+//  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down.
 
 const Header = ({ layout }) => {
     const {currentUser}=useAuthContext()
@@ -16,9 +15,7 @@ const Header = ({ layout }) => {
         navigate(`/${path}`)
     }
     const handleOragnisation=async()=>{
-        const { data, error } = await supabase.functions.invoke('handle_create_question', {
-            body: { id: currentUser.id }
-        })
+        const { data, error } = await supabase.rpc('add_question', { type:"Short",question:"Hello, What is your name ?", user_id: currentUser.id})
         console.log(data);
     }
     if(layout==="editor"){
