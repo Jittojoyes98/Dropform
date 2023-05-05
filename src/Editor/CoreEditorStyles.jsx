@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import {CSS} from '@dnd-kit/utilities';
 import React from "react";
 
-const CoreEditorStyles = ({id,heading}) => {
+const CoreEditorStyles = ({id,heading,svgIcon}) => {
     const {attributes, listeners, setNodeRef, transform,isDragging}=useDraggable({
         id:id,
         data:{
@@ -16,7 +16,16 @@ const CoreEditorStyles = ({id,heading}) => {
 
     return (
         <div ref={setNodeRef} className="change ">
-            <p  style={style} {...listeners} {...attributes} >{heading}</p>
+            <div style={style} {...listeners} {...attributes} >
+
+            
+            <div>
+                {
+                    svgIcon
+                }
+            </div>
+            <p >{heading}</p>
+            </div>
         </div>
     )
 };

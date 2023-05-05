@@ -107,3 +107,27 @@
         }
     }
 }
+
+
+@media screen and (max-width :1024px) {
+    .main{
+        .left-dashboard-wrapper{
+            display: none;
+        }
+    }
+    
+}
+
+@media screen and (max-width: 992px) {
+    
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    
+}
+@media screen and (min-height :768px ){
+    
+}
+
+@media screen and (max-width: 576px) {}
