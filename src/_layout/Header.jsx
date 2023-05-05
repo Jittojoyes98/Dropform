@@ -15,7 +15,7 @@ const Header = ({ layout }) => {
         navigate(`/${path}`)
     }
     const handleOragnisation=async()=>{
-        const { data, error } = await supabase.rpc('add_question', { type:"Short",question:"Hello, What is your name ?", user_id: currentUser.id})
+        const { data, error } = await supabase.rpc('add_question_form_creation', { type:"Short",question:"Guy", created_user_id: currentUser.id})
         console.log(data);
     }
     if(layout==="editor"){
