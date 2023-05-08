@@ -11,20 +11,18 @@ const CoreEditorStyles = ({id,heading,svgIcon}) => {
     })
     const style={
         transform: CSS.Translate.toString(CSS.Transform.None),
-        color: isDragging ? "red":undefined
+        color: isDragging ? "red":undefined,
     }
 
     return (
-        <div ref={setNodeRef} className="change ">
+        <div ref={setNodeRef} className="widget-element"  >
             <div style={style} {...listeners} {...attributes} >
-
-            
-            <div>
-                {
-                    svgIcon
-                }
-            </div>
-            <p >{heading}</p>
+                <div>
+                    {
+                        svgIcon
+                    }
+                </div>
+                <p >{heading}</p>
             </div>
         </div>
     )

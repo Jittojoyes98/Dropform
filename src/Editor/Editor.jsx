@@ -1,8 +1,8 @@
 import React, { useState } from "react";;
 import { DndContext, DragOverlay, closestCenter, MeasuringStrategy } from "@dnd-kit/core";
-import CoreEditorDesign from "./CoreEditorDesign";
-import CoreEditorStyles from "./CoreEditorStyles";
-import CoreOverlay from "./CoreOverlay";
+import CoreEditorDesign from "./EditorDesign";
+import CoreEditorStyles from "./EditorStyles";
+import CoreOverlay from "./Overlay";
 import SortableItems from "./SortableItems";
 import { arrayMove,SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 

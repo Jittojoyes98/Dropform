@@ -44,7 +44,7 @@ const Dashboard = () => {
                 <div>My Dropforms</div>
                 <div className="dashboard-general">
                   <div className="centre-div">
-                    <div className="">
+                    <div className="menu-svg">
                       <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#737373" d="M4 4h4v4H4zM4 10h4v4H4zM4 16h4v4H4zM10 4h4v4h-4zM10 10h4v4h-4zM10 16h4v4h-4zM16 4h4v4h-4zM16 10h4v4h-4zM16 16h4v4h-4z"></path></svg>
                     </div>
                     <Button variant='contained' className='secondary-button redirect-button'>

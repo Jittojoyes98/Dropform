@@ -95,6 +95,9 @@
         width: 100%;
         color: black;
     }
+    .menu-svg{
+        display: none;
+    }
 }
 .MuiTooltip-popper{
     .tooltip-title{
@@ -113,6 +116,9 @@
     .main{
         .left-dashboard-wrapper{
             display: none;
+        }
+        .menu-svg{
+            display: block;
         }
     }
     
