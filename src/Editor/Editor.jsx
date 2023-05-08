@@ -12,9 +12,9 @@ const Editor = () => {
             id:1,
             heading:"Text",
             svgIcon:<svg
-                width="200"
-                height="200"
-                viewBox="0 0 50 50"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 >
@@ -28,9 +28,9 @@ const Editor = () => {
             id:2,
             heading:"Number",
             svgIcon:<svg
-            width="200"
-            height="200"
-            viewBox="0 0 50 50"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -59,8 +59,10 @@ const Editor = () => {
         const {active, over} = event;
         console.log(active, over,"dragging ended");
         let id=active.id
-        const droppedDiv=divs.filter((div)=>div.id===id)
-        setComponents(components=>[...components,droppedDiv[0]])
+        if(over){
+            const droppedDiv=divs.filter((div)=>div.id===id)
+            setComponents(components=>[...components,droppedDiv[0]])
+        }
         setDragging(false)
     }
     const [languages,setLanguages]=useState(["python","javascript","java"])
@@ -108,14 +110,16 @@ const Editor = () => {
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
                 <CoreEditorDesign setComponents={setComponents} components={components} divs={divs}/>
                 <div className="editor-styles">
-                {
-                    divs.map((div,index)=> {
-                        return (
-                            <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
-                        )
-                    })
-                    
-                }
+                <div className="widget-wrapper">
+                    <span style={{width : "100%"}} >Commonly used</span>
+                    {
+                        divs.map((div,index)=> {
+                            return (
+                                <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
+                            )
+                        })
+                    }
+                </div>
                 </div>
                 <DragOverlay dropAnimation={null}>
                     {

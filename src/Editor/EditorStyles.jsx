@@ -15,7 +15,7 @@ const CoreEditorStyles = ({id,heading,svgIcon}) => {
     }
 
     return (
-        <div ref={setNodeRef} className="widget-element"  >
+        <div ref={setNodeRef} className="widget-element"  style={{height : "72px", width :"72px"}}>
             <div style={style} {...listeners} {...attributes} >
                 <div>
                     {
