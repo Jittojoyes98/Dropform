@@ -1,10 +1,12 @@
-import React, { useState } from "react";;
+import React, { useRef, useState } from "react";;
 import { DndContext, DragOverlay, closestCenter, MeasuringStrategy } from "@dnd-kit/core";
 import CoreEditorDesign from "./EditorDesign";
 import CoreEditorStyles from "./EditorStyles";
 import CoreOverlay from "./Overlay";
 import SortableItems from "./SortableItems";
 import { arrayMove,SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { createPortal } from "react-dom";
+import {restrictToWindowEdges} from '@dnd-kit/modifiers';
 
 const Editor = () => {
     const divs=[
@@ -88,6 +90,8 @@ const Editor = () => {
             strategy: MeasuringStrategy.Always,
         }
     };
+    const editorRef=useRef(null)
+    console.log(editorRef);
     return (
     <div className="editor-wrapper">
         <div className="editor-main">
@@ -108,7 +112,7 @@ const Editor = () => {
                     </DndContext>
             </div>
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                <CoreEditorDesign setComponents={setComponents} components={components} divs={divs}/>
+                <CoreEditorDesign setComponents={setComponents} components={components} divs={divs} editorRef={editorRef}/>
                 <div className="editor-styles">
                 <div className="widget-wrapper">
                     <span style={{width : "100%"}} >Commonly used</span>
@@ -121,11 +125,15 @@ const Editor = () => {
                     }
                 </div>
                 </div>
-                <DragOverlay dropAnimation={null}>
+                { editorRef.current ? createPortal(
+                <DragOverlay dropAnimation={null} modifiers={[restrictToWindowEdges]} zIndex={2}>
                     {
                         dragging ? <CoreOverlay/> :null
                     }
-                </DragOverlay>
+                </DragOverlay>,
+                editorRef.current
+                ): <></>}
+                
             </DndContext>
         </div>
     </div>

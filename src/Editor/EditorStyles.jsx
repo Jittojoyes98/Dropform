@@ -12,11 +12,13 @@ const CoreEditorStyles = ({id,heading,svgIcon}) => {
     const style={
         transform: CSS.Translate.toString(CSS.Transform.None),
         color: isDragging ? "red":undefined,
+        height : "72px",
+        width :"72px"
     }
 
     return (
-        <div ref={setNodeRef} className="widget-element"  style={{height : "72px", width :"72px"}}>
-            <div style={style} {...listeners} {...attributes} >
+        <div ref={setNodeRef} className="widget-element" style={style} {...listeners} {...attributes}>
+            <div >
                 <div>
                     {
                         svgIcon

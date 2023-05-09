@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {useDroppable} from '@dnd-kit/core';
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
-const CoreEditorDesign = ({components,setAnimationId,animationId}) => {
+const CoreEditorDesign = ({components,editorRef}) => {
     const {isOver, setNodeRef} = useDroppable({
         id: 'droppable',
         data:{
@@ -17,24 +17,6 @@ const CoreEditorDesign = ({components,setAnimationId,animationId}) => {
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
 
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //     const windowWidth = window.innerWidth;
-    //     const windowHeight = window.innerHeight;
-    //     const newWidth = Math.round(windowWidth * 0.5);
-    //     const newHeight = Math.round(windowHeight * 0.5);
-    //     const newScale = Math.min(newWidth / width, newHeight / height);
-    //     setWidth(newWidth);
-    //     setHeight(newHeight);
-    //     setScale(newScale);
-    //     };
-
-    //     window.addEventListener('resize', handleResize);
-
-    //     return () => {
-    //     window.removeEventListener('resize', handleResize);
-    //     };
-    // }, [width, height]);
     const updateWidthAndHeight = () => {
         setWidth(window.innerWidth);
         setHeight(window.innerHeight);
@@ -43,19 +25,26 @@ const CoreEditorDesign = ({components,setAnimationId,animationId}) => {
         window.addEventListener("resize", updateWidthAndHeight);
         return () => window.removeEventListener("resize", updateWidthAndHeight);
     });
+    const [changedHeight,setChangedHeight]=useState(748)
     useEffect(()=>{
-        setScale( Math.min( 
-            width / 748, 
-            height / 1024 
-        ))
-        console.log("Changing",scale);
+        let scaled=Math.min( 
+            width / 1024, 
+            height / 748,1 
+        )
+        setScale(scaled)
+        setChangedHeight(()=>{
+            if(Math.min(height,748)===748){
+                return 848;
+            }
+            return Math.min(height,748);
+        })
     },[height,width])
 
     
     return (
-        <div className="editor-design">
+        <div className="editor-design" ref={editorRef}>
             <div className="editor-space-wrapper">
-                <div className="editor-space" style={{transform: `scale(${scale})`}}>
+                <div className="editor-space" style={{transform: `scale(${scale})`,height:`${changedHeight-100}px` }}>
                     <div className="editor-drop" ref={setNodeRef} >
                     {
                     components.length > 0 ? (

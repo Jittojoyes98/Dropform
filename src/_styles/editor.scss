@@ -14,6 +14,8 @@
     .editor-styles{
         width: 297px;
         border-left: 1px solid $dashboard-divider;
+        z-index: 3;
+        background-color: white;
     }
     .editor-design{
         flex: 1 1 0%;
