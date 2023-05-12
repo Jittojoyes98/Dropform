@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useDroppable} from '@dnd-kit/core';
+import { useStore } from "zustand";
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
 const CoreEditorDesign = ({components,editorRef}) => {
@@ -12,6 +13,10 @@ const CoreEditorDesign = ({components,editorRef}) => {
     const style = {
         color: isOver ? 'green' : undefined,
     };
+
+    // const selectedItem=useStore((state)=>state.selectedItem)
+    // const openProperties=useStore((state)=>state.openProperties)
+
 
     const [scale, setScale] = useState(1);
     const [width, setWidth] = useState(window.innerWidth);
@@ -48,7 +53,14 @@ const CoreEditorDesign = ({components,editorRef}) => {
                     <div className="editor-drop" ref={setNodeRef} >
                     {
                     components.length > 0 ? (
-                        components.map((component)=>(<p>{component.heading}</p>))
+                        components.map((component,index)=>{
+
+                            return (
+                                <p key={index} >
+                                    {component.heading}
+                                </p>
+                            )
+                        })
                     ):
                     <div>
                         We are doing things here
