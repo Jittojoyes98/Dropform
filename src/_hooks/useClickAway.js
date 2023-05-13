@@ -6,6 +6,7 @@ const useClickAway = (setAway) => {
     const handleClickOutside=(event)=>{
         if(ref.current && !ref.current.contains(event.target)){
             setAway(false)
+            console.log("SET AWAY",event.target);
         }
 
     }

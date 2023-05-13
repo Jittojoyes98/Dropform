@@ -7,19 +7,12 @@ import SortableItems from "./SortableItems";
 import { arrayMove,SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 import {restrictToWindowEdges} from '@dnd-kit/modifiers';
-import { create } from "zustand"
-
-const useStore=create((set)=>({
-    itemSelected:false,
-    selectedItem:null,
-    openProperties:(id)=>set((state)=>({...state,itemSelected:true,selectedItem:id})),
-    closeProperties:()=>set((state)=>({...state,itemSelected:false,selectedItem:null}))
-}))
+import { editorStore } from "./EditorStore";
 
 
 const Editor = () => {
-    const openProperties=useStore((state)=>state.openProperties)
-    const closeProperties=useStore((state)=>state.closeProperties)
+    const openProperties = editorStore((state)=>state.openProperties)
+    const closeProperties = editorStore((state)=>state.closeProperties)
 
     const divs=[
         {
@@ -75,8 +68,9 @@ const Editor = () => {
         let id=active.id
         if(over){
             const droppedDiv=divs.filter((div)=>div.id===id)
-            setComponents(components=>[...components,droppedDiv[0]])
-            openProperties()
+            openProperties(components.length+1)
+            console.log("OPENING");
+            setComponents(components=>[...components,droppedDiv[0]])  
         }
         setDragging(false)
     }

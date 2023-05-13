@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useDroppable} from '@dnd-kit/core';
-import { useStore } from "zustand";
+import { editorStore } from "./EditorStore";
+import classNames from "classnames";
+import useClickAway from "../_hooks/useClickAway";
+
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
 const CoreEditorDesign = ({components,editorRef}) => {
@@ -14,13 +17,18 @@ const CoreEditorDesign = ({components,editorRef}) => {
         color: isOver ? 'green' : undefined,
     };
 
-    // const selectedItem=useStore((state)=>state.selectedItem)
-    // const openProperties=useStore((state)=>state.openProperties)
+    
+    const selectedItem = editorStore((state)=>state.selectedItem)
+    const openProperties = editorStore((state)=>state.openProperties)
+    const closeProperties = editorStore((state) => state.closeProperties)
 
 
     const [scale, setScale] = useState(1);
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
+
+    const { ref: inputRef } = useClickAway(closeProperties)
+
 
     const updateWidthAndHeight = () => {
         setWidth(window.innerWidth);
@@ -54,9 +62,8 @@ const CoreEditorDesign = ({components,editorRef}) => {
                     {
                     components.length > 0 ? (
                         components.map((component,index)=>{
-
                             return (
-                                <p key={index} >
+                                <p key={index} ref={inputRef} onClick={() => openProperties(index + 1)} className={classNames("input",{ "selected-input": selectedItem && (selectedItem === index + 1) })}>
                                     {component.heading}
                                 </p>
                             )
