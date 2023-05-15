@@ -1,8 +1,11 @@
 import {create } from "zustand"
 
-export const editorStore = create((set) => ({
-    itemSelected: false,
+export const editorStore = create((set,get) => ({
+    // itemSelected: false,
     selectedItem: null,
-    openProperties: (id) => set((state) => ({ itemSelected: true, selectedItem: id })),
-    closeProperties: () => set((state) => ({ itemSelected: false, selectedItem: null }))
+    isDropped:false,
+    changeDrop:() => set((state) => ({isDropped : false})),
+    openPropertiesDropping: (id) => set((state) => ({ selectedItem: id ,isDropped : true})),
+    openPropertiesClicking: (id) => set((state) => ({ selectedItem: id ,isDropped:false})),
+    closeProperties: () => set((state) => ({ selectedItem: null }))
 }))

@@ -11,7 +11,7 @@ import { editorStore } from "./EditorStore";
 
 
 const Editor = () => {
-    const openProperties = editorStore((state)=>state.openProperties)
+    const openPropertiesDropping = editorStore((state)=>state.openPropertiesDropping)
 
     const divs=[
         {
@@ -68,6 +68,7 @@ const Editor = () => {
         if(over){
             const droppedDiv=divs.filter((div)=>div.id===id)
             console.log("OPENING");
+            openPropertiesDropping(components.length+1)
             setComponents(components=>[...components,droppedDiv[0]])  
         }
         setDragging(false)

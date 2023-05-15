@@ -20,7 +20,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
 
     
     const selectedItem = editorStore((state)=>state.selectedItem)
-    const openProperties = editorStore((state)=>state.openProperties)
+    const openPropertiesClicking = editorStore((state)=>state.openPropertiesClicking)
     const closeProperties = editorStore((state) => state.closeProperties)
 
 
@@ -28,7 +28,12 @@ const CoreEditorDesign = ({components,editorRef}) => {
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
 
-    const { ref: inputRef } = useClickAway(closeProperties)
+    const isDropped = editorStore((state)=>state.isDropped)
+
+    let { ref: inputRef } = useClickAway(closeProperties,isDropped)
+    
+
+
 
 
     const updateWidthAndHeight = () => {
@@ -54,6 +59,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
         })
     },[height,width])
 
+
     
     return (
         <div className="editor-design" ref={editorRef}>
@@ -64,7 +70,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
                     components.length > 0 ? (
                         components.map((component,index)=>{
                             return (
-                                <Input closeProperties={closeProperties} key={index} heading={component.heading}  select={selectedItem && (selectedItem === index + 1)} handleClick={() => openProperties(index + 1)} />
+                                <Input key={index}  inputRef={inputRef} heading={component.heading}  select={selectedItem && (selectedItem === index + 1)} handleClick={() => openPropertiesClicking(index + 1)} />
                             )
                         })
                     ):
