@@ -30,10 +30,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
 
     const isDropped = editorStore((state)=>state.isDropped)
 
-    let { ref: inputRef } = useClickAway(closeProperties,isDropped)
-    
-
-
+    let { ref: inputRef } = useClickAway(closeProperties)
 
 
     const updateWidthAndHeight = () => {

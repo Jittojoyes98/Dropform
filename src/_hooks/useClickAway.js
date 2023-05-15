@@ -10,30 +10,27 @@ const useClickAway = (setAway) => {
     const isDropped = editorStore((state)=>state.isDropped)
     const changeDrop = editorStore((state)=>state.changeDrop)
 
-    let firstUpdate=true
-    const handleClickOutside =(event) => {
-        console.log(firstUpdate);
-        if (firstUpdate) {
-            firstUpdate=false;
+    const handleClickOutside =useCallback((event) => {
+        if (isDropped) {
+            changeDrop()
             return;
         }
-        
         if (ref.current && !ref.current.contains(event.target)) {
             setAway(false)
             console.log("SET AWAY", event.target);
         }
         
-    }
+    },[isDropped])
 
     useEffect(()=>{
-        if(isDropped){
-            document.addEventListener("click",handleClickOutside,true);
-            changeDrop()
-        }
+        document.removeEventListener("click", handleClickOutside)
+        document.addEventListener("click",handleClickOutside,true);
+
         return ()=>{
             document.removeEventListener("click",handleClickOutside,true)
         }
-    },[isDropped])
+    }, [handleClickOutside])
+    
     return {ref}
 };
 
