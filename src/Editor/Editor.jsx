@@ -12,7 +12,6 @@ import { editorStore } from "./EditorStore";
 
 const Editor = () => {
     const openProperties = editorStore((state)=>state.openProperties)
-    const closeProperties = editorStore((state)=>state.closeProperties)
 
     const divs=[
         {
@@ -68,7 +67,6 @@ const Editor = () => {
         let id=active.id
         if(over){
             const droppedDiv=divs.filter((div)=>div.id===id)
-            openProperties(components.length+1)
             console.log("OPENING");
             setComponents(components=>[...components,droppedDiv[0]])  
         }

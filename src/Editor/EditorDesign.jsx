@@ -3,6 +3,7 @@ import {useDroppable} from '@dnd-kit/core';
 import { editorStore } from "./EditorStore";
 import classNames from "classnames";
 import useClickAway from "../_hooks/useClickAway";
+import Input from "../Input/Input";
 
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
@@ -63,9 +64,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
                     components.length > 0 ? (
                         components.map((component,index)=>{
                             return (
-                                <p key={index} ref={inputRef} onClick={() => openProperties(index + 1)} className={classNames("input",{ "selected-input": selectedItem && (selectedItem === index + 1) })}>
-                                    {component.heading}
-                                </p>
+                                <Input closeProperties={closeProperties} key={index} heading={component.heading}  select={selectedItem && (selectedItem === index + 1)} handleClick={() => openProperties(index + 1)} />
                             )
                         })
                     ):
