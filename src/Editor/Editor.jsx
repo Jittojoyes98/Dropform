@@ -8,10 +8,14 @@ import { arrayMove,SortableContext, verticalListSortingStrategy } from "@dnd-kit
 import { createPortal } from "react-dom";
 import {restrictToWindowEdges} from '@dnd-kit/modifiers';
 import { editorStore } from "./EditorStore";
+import EditorDesignSettings from "./EditorDesignSettings";
 
 
 const Editor = () => {
     const openPropertiesDropping = editorStore((state)=>state.openPropertiesDropping)
+    const selectedItem = editorStore((state)=>state.selectedItem)
+    const itemSelected = editorStore((state)=>state.itemSelected)
+
 
     const divs=[
         {
@@ -119,16 +123,23 @@ const Editor = () => {
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
                 <CoreEditorDesign setComponents={setComponents} components={components} divs={divs} editorRef={editorRef}/>
                 <div className="editor-styles">
-                <div className="widget-wrapper">
-                    <span style={{width : "100%"}} >Commonly used</span>
-                    {
-                        divs.map((div,index)=> {
-                            return (
-                                <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
+                    <div className="widget-wrapper">
+                        {
+                            itemSelected ? <EditorDesignSettings/>:(
+                                <>
+                                    <span style={{width : "100%"}} >Commonly used</span>
+                                    {
+                                        divs.map((div,index)=> {
+                                            return (
+                                                <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
+                                            )
+                                        })
+                                    }
+                                </>
                             )
-                        })
-                    }
-                </div>
+                        }
+                    </div>
+                    
                 </div>
                 { editorRef.current ? createPortal(
                 <DragOverlay dropAnimation={null} modifiers={[restrictToWindowEdges]} zIndex={2}>

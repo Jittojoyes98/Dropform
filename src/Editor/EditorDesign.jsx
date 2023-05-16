@@ -22,6 +22,8 @@ const CoreEditorDesign = ({components,editorRef}) => {
     const selectedItem = editorStore((state)=>state.selectedItem)
     const openPropertiesClicking = editorStore((state)=>state.openPropertiesClicking)
     const closeProperties = editorStore((state) => state.closeProperties)
+    
+
 
 
     const [scale, setScale] = useState(1);
@@ -30,7 +32,7 @@ const CoreEditorDesign = ({components,editorRef}) => {
 
     const isDropped = editorStore((state)=>state.isDropped)
 
-    let { ref: inputRef } = useClickAway(closeProperties)
+    let { ref: inputRef } = useClickAway(closeProperties,editorRef)
 
 
     const updateWidthAndHeight = () => {

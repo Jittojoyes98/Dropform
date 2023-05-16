@@ -5,20 +5,28 @@ import { editorStore } from "../Editor/EditorStore";
 // https://www.joshwcomeau.com/react/why-react-re-renders/
 // When a component re-renders, it tries to re-render all descendants, regardless of whether they're being passed a particular state variable through props or not.
 
-const useClickAway = (setAway) => {
+const useClickAway = (setAway,editorRef) => {
     const ref=useRef(null)
     const isDropped = editorStore((state)=>state.isDropped)
     const changeDrop = editorStore((state)=>state.changeDrop)
 
     const handleClickOutside =useCallback((event) => {
+        const refOut=ref.current && !ref.current.contains(event.target)
+        const editorRefOut=editorRef.current.contains(event.target)
+        const setAwayListener=(awayFunction)=>{
+            if (refOut) {    
+                if(editorRefOut){
+                    awayFunction()
+                    console.log("SET AWAY", event.target);
+                }
+                
+            }
+        }
         if (isDropped) {
-            changeDrop()
+            setAwayListener(changeDrop)
             return;
         }
-        if (ref.current && !ref.current.contains(event.target)) {
-            setAway(false)
-            console.log("SET AWAY", event.target);
-        }
+        setAwayListener(setAway)
         
     },[isDropped])
 
