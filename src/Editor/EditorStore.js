@@ -5,8 +5,8 @@ export const editorStore = create((set,get) => ({
     selectedItem: null,
     isDropped:false,
     closeSettings:()=>set((state)=>({itemSelected:false})),
-    changeDrop:() => set((state) => ({isDropped : false,selectedItem: null})),
+    changeDrop:() => set((state) => ({isDropped : false,selectedItem: null,itemSelected:false})),
     openPropertiesDropping: (id) => set((state) => ({ selectedItem: id ,isDropped : true,itemSelected:true})),
     openPropertiesClicking: (id) => set((state) => ({ selectedItem: id ,isDropped:false,itemSelected:true})),
-    closeProperties: () => set((state) => ({ selectedItem: null }))
+    closeProperties: () => set((state) => ({ selectedItem: null,itemSelected:false }))
 }))
