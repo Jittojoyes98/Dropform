@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import {CSS} from '@dnd-kit/utilities';
 import React from "react";
 
-const CoreEditorStyles = ({id,heading,svgIcon}) => {
+const Widget = ({id,heading,svgIcon}) => {
     const {attributes, listeners, setNodeRef, transform,isDragging}=useDraggable({
         id:id,
         data:{
@@ -30,4 +30,4 @@ const CoreEditorStyles = ({id,heading,svgIcon}) => {
     )
 };
 
-export default CoreEditorStyles;
+export default Widget;

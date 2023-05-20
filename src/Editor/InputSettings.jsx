@@ -2,7 +2,7 @@ import React from "react";
 import { editorStore } from "./EditorStore";
 
 
-const EditorDesignSettings = () => {
+const InputSettings = () => {
     const closeSettings = editorStore((state)=>state.closeSettings)
 
     return (
@@ -15,4 +15,4 @@ const EditorDesignSettings = () => {
     )
 };
 
-export default EditorDesignSettings;
+export default InputSettings;

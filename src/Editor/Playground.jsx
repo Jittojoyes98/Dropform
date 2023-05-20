@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useDroppable} from '@dnd-kit/core';
 import { editorStore } from "./EditorStore";
-import classNames from "classnames";
 import useClickAway from "../_hooks/useClickAway";
 import Input from "../Input/Input";
 
+// animation : https://web.dev/learn/css/animations/
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
-const CoreEditorDesign = ({components,editorRef}) => {
+const Playground = ({components,editorRef}) => {
     const {isOver, setNodeRef} = useDroppable({
         id: 'droppable',
         data:{
@@ -84,4 +84,4 @@ const CoreEditorDesign = ({components,editorRef}) => {
     )
 };
 
-export default CoreEditorDesign;
+export default Playground;

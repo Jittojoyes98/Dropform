@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";;
 import { DndContext, DragOverlay, closestCenter, MeasuringStrategy } from "@dnd-kit/core";
-import CoreEditorDesign from "./EditorDesign";
-import CoreEditorStyles from "./EditorStyles";
-import CoreOverlay from "./Overlay";
+import Playground from "./Playground";
+import Widget from "./Widgets";
+import Overlay from "./Overlay";
 import SortableItems from "./SortableItems";
 import { arrayMove,SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 import {restrictToWindowEdges} from '@dnd-kit/modifiers';
 import { editorStore } from "./EditorStore";
-import EditorDesignSettings from "./EditorDesignSettings";
+import InputSettings from "./InputSettings";
 
 
 const Editor = () => {
@@ -114,24 +114,24 @@ const Editor = () => {
                             items={languages}
                             strategy={verticalListSortingStrategy}                  
                         >
-                            {
-                                languages.map((lan,index)=>(<SortableItems  key={lan} id={lan}/>))
-                            }
+                        {
+                            languages.map((lan,index)=>(<SortableItems  key={lan} id={lan}/>))
+                        }
                         </SortableContext>
                     </DndContext>
             </div>
             <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                <CoreEditorDesign setComponents={setComponents} components={components} divs={divs} editorRef={editorRef}/>
-                <div className="editor-styles">
+                    <Playground setComponents={setComponents} components={components} divs={divs} editorRef={editorRef}/>
+                <div className="editor-sidebar">
                     <div className="widget-wrapper">
                         {
-                            itemSelected ? <EditorDesignSettings/>:(
+                                itemSelected ? <InputSettings/>:(
                                 <>
                                     <span style={{width : "100%"}} >Commonly used</span>
                                     {
                                         divs.map((div,index)=> {
                                             return (
-                                                <CoreEditorStyles key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
+                                                <Widget key={div.heading} id={div.id} heading={div.heading} svgIcon={div.svgIcon}/>
                                             )
                                         })
                                     }
@@ -144,7 +144,7 @@ const Editor = () => {
                 { editorRef.current ? createPortal(
                 <DragOverlay dropAnimation={null} modifiers={[restrictToWindowEdges]} zIndex={2}>
                     {
-                        dragging ? <CoreOverlay/> :null
+                        dragging ? <Overlay/> :null
                     }
                 </DragOverlay>,
                 editorRef.current

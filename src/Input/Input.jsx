@@ -13,7 +13,7 @@ const Input = ({ heading, select, handleClick, inputRef}) => {
     },[])
 
     return (
-        <p ref={inputRef}  onClick={handleClick} className={classNames("input", { "selected-input": select })} onMouseOver={handleOnHover} onMouseLeave={handleOnAway}>
+        <p ref={inputRef} onClick={handleClick} className={classNames("input", { "selected-input": select || hover })} onMouseOver={handleOnHover} onMouseLeave={handleOnAway}>
             {heading}
         </p>
     )
