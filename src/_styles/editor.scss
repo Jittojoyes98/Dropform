@@ -50,12 +50,18 @@
             transform: scale(0.1);
         }
     }
-    .editor-drop{
+    .editor-drop-wrapper{
         height: 90%;
         flex-grow: 1;
         overflow-y: auto;
         background-color: rgb(250, 250, 250);
         // background-color: white;
+    }
+    .editor-drop{
+        padding: 10px;
+        border: 1px dashed  #6d92f8;
+        text-align: center;
+        margin: 30px;
     }
     .dropform-name-input{
         .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{

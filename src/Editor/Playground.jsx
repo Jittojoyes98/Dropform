@@ -64,7 +64,7 @@ const Playground = ({components,editorRef}) => {
         <div className="editor-design" ref={editorRef}>
             <div className="editor-space-wrapper">
                 <div className="editor-space" style={{transform: `scale(${scale})`,height:`${changedHeight-100}px` }}>
-                    <div className="editor-drop" ref={setNodeRef} >
+                    <div className="editor-drop-wrapper"  >
                     {
                     components.length > 0 ? (
                         components.map((component,index)=>{
@@ -73,10 +73,11 @@ const Playground = ({components,editorRef}) => {
                             )
                         })
                     ):
-                    <div>
-                        We are doing things here
-                    </div>
+                    <></>
                     }
+                    <div ref={setNodeRef} className="editor-drop">
+                        <span>Drag new inputs to your form</span>
+                    </div>
                     </div>
                 </div>
             </div>
