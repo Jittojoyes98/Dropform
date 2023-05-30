@@ -1,468 +1,461 @@
-@import './colors.scss';
-@import './variables.scss';
-@import './dashboard.scss';
-@import './editor.scss';
+@import "./colors.scss";
+@import "./variables.scss";
+@import "./dashboard.scss";
+@import "./editor.scss";
 @import "./widget.scss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap');
+@import "./settings.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap");
 
 // Base styles
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --grey-1: #384853;
-    --grey-2: #6b7b8a;
-    --grey-3: #e3e6ea;
-    --grey-5: #f1f2f4;
-    --teal: #077f7f;
-    --black: #131313;
-    --grad-2: linear-gradient(102.73deg, #f1087e -1.51%, #fc945f 131.82%);
-    --grad-3: linear-gradient(99.87deg, #0b0d60 -10.92%, #115962 107.49%);
+  --grey-1: #384853;
+  --grey-2: #6b7b8a;
+  --grey-3: #e3e6ea;
+  --grey-5: #f1f2f4;
+  --teal: #077f7f;
+  --black: #131313;
+  --grad-2: linear-gradient(102.73deg, #f1087e -1.51%, #fc945f 131.82%);
+  --grad-3: linear-gradient(99.87deg, #0b0d60 -10.92%, #115962 107.49%);
 }
 
-html,body {
-    scroll-behavior: smooth;
-    height: 100%;
+html,
+body {
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body,
 button,
 input,
 textarea {
-    font-family: $font-family;
-    font-size: $normal-font-size;
+  font-family: $font-family;
+  font-size: $normal-font-size;
 }
 
 body {
-    background-color: $body-background-color;
-    color: $body-text-color;
-    -webkit-font-smoothing: antialiased;
-    font-family: $font-family;
-    font-size: $normal-font-size;
+  background-color: $body-background-color;
+  color: $body-text-color;
+  -webkit-font-smoothing: antialiased;
+  font-family: $font-family;
+  font-size: $normal-font-size;
 }
 
 h1,
 h2,
 h3 {
-    color: var(--title-color);
-    font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-    cursor: pointer;
-    border: none;
-    outline: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .button-tag {
-    cursor: pointer;
-    border: none;
-    outline: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-#app{
-    height: 100%;
+#app {
+  height: 100%;
 }
 
 // Main styles and reusable classes
-.main{
+.main {
+  height: 100%;
+  overflow-y: hidden; //change later
+  .centre-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .align-center {
+    text-align: center;
+    width: 100%;
+  }
+  .margin-fix {
+    margin: 25px 0px;
+  }
+  .header-wrapper-fixed {
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 0px 24px;
+    height: 88px;
+    background-color: $body-background-color;
+    width: 100%;
+  }
+  .header-wrapper-block {
+    display: flex;
+    align-items: center;
+    padding: 0px 24px;
+    height: 88px;
+    background-color: $body-background-color;
+    width: 100%;
+  }
+  .header-wrapper-credentials {
+    height: auto;
+    padding: 8px 24px;
+    justify-content: flex-end;
+  }
+  .header-wrapper-home {
+    justify-content: center;
+  }
+  .header-wrapper-dashboard {
+    height: auto;
+    padding: 8px 16px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+  .header-content-full {
+    max-width: 100%;
+  }
+  .header-content-fixed {
+    max-width: 1370px;
+  }
+
+  .content {
+    margin-top: 88px;
+  }
+  .content-other {
+    margin-top: 24px;
     height: 100%;
-    overflow-y: hidden; //change later
-    .centre-div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  }
+  .content-dashboard {
+    height: 100%;
+  }
+
+  .header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .primary-button {
+    color: $body-text-color;
+    text-transform: none;
+    font-family: $font-family;
+    font-size: 14px;
+    border: 1px solid $body-text-color;
+    transition: background-color 0.2s ease-out 0s, border-color, color, opacity;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+    padding: 8px 16px;
+  }
+
+  .primary-button:hover {
+    opacity: 0.8;
+    border: 1px solid $body-text-color;
+    background-color: transparent;
+  }
+
+  .secondary-button {
+    color: $body-background-color;
+    text-transform: none;
+    font-family: $font-family;
+    font-size: 14px;
+    // border: 1px solid $body-text-color;
+    transition: background-color 0.2s ease-out 0s, border-color, color, opacity;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+    padding: 8px 16px;
+    background-color: $body-text-color;
+    box-shadow: none;
+    border: 1px solid $body-text-color;
+  }
+
+  .secondary-button:hover {
+    background-color: $body-text-color;
+    box-shadow: none;
+
+    line-height: 22px;
+    padding: 8px 16px;
+    border: 1px solid $body-text-color;
+  }
+
+  .auth-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .auth-button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .redirect-button:hover {
+    opacity: 0.8;
+  }
+
+  .or-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 256px;
+    background-color: $liner-color;
+    height: 1px;
+  }
+  .fix-width {
+    // for flex items the width does not work only min-width works
+    // else use these below commented styles
+    // flex-basis: 256px;
+    // flex-grow: 0;
+    // flex-shrink: 0;
+    min-width: 256px;
+  }
+  .or-text {
+    position: relative;
+    top: -0.9em;
+    padding: 0 15px;
+    background-color: white;
+    color: $liner-color;
+    font-size: 14px;
+  }
+  .small-text-light {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .small-text-dark {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .large-text-light {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .large-text-light {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .forgot-link {
+    color: $common-color;
+    text-decoration: underline;
+  }
+  .auth-content button:first-child {
+    margin-right: 16px;
+  }
+  .common-text-light {
+    font-size: 14px;
+    color: $body-text-light-color;
+  }
+  .tertiary-button {
+    color: $body-text-light-color;
+    text-transform: none;
+    font-family: $font-family;
+    font-size: 12px;
+    padding: 8px 12px 6px;
+    border: 1px solid $body-text-color;
+    // transition: background-color 0.2s ease-out 0s,
+    // border-color,
+    // color,
+    // opacity;
+    line-height: 14px;
+    letter-spacing: 0.1px;
+    background-color: $body-background-color;
+    box-shadow: none;
+  }
+  .tertiary-button:hover {
+    background-color: $body-background-color;
+    border: 1px solid $body-text-color;
+    padding: 8px 12px 6px;
+    box-shadow: none;
+  }
+  .social-button {
+    margin-top: 15px;
+    border-radius: 3px;
+    width: 100%;
+    color: $field-text-color;
+    height: 40px;
+    line-height: 2.4;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid $border-light;
+  }
+  .social-button:hover {
+    border: 1px solid $border-light;
+  }
+  .login-form-wrapper {
+    padding-left: 72px;
+    padding-right: 72px;
+    padding-top: 20px;
+    .Mui-disabled {
+      color: white;
+      background-color: $border-light;
     }
-    .align-center{
-        text-align: center;
-        width: 100%;
+  }
+  .login-title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: $body-text-light-color;
+  }
+  .signup-email-wrapper {
+    max-width: 542px;
+  }
+  .label-wrapper {
+    padding: 7px 10px 7px 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  .credential-field {
+    width: 256px;
+    background: transparent;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: $field-text-color;
+    input {
+      padding: 6px 14px;
+      border: 1px solid $common-color;
+      border-radius: 4px;
     }
-    .margin-fix{
-        margin: 25px 0px;
+    input[type="text"]:focus {
+      box-shadow: 0 0 8px $border-color-focus;
     }
-    .header-wrapper-fixed {
-        position: fixed;
-        top: 0;
-        display: flex; 
-        align-items: center;
-        padding: 0px 24px;
-        height: 88px;
-        background-color: $body-background-color;
-        width: 100%;
+    .Mui-focused .MuiOutlinedInput-notchedOutline {
+      border: 1px solid $field-text-color;
     }
-    .header-wrapper-block{
-        display: flex; 
-        align-items: center;
-        padding: 0px 24px;
-        height: 88px;
-        background-color: $body-background-color;
-        width: 100%;
+  }
+  .credential-field:hover {
+    background: transparent;
+    line-height: 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    font-weight: 400;
+    input {
+      padding: 6px 14px;
     }
-    .header-wrapper-credentials{
-        height: auto;
-        padding: 8px 24px;
-        justify-content: flex-end;
-    }
-    .header-wrapper-home{
-        justify-content: center;
-    }
-    .header-wrapper-dashboard{
-        height: auto;
-        padding: 8px 16px;
-        justify-content:space-between;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    }
-    .header-content-full{
-        max-width: 100%;
-    }
-    .header-content-fixed{
-        max-width: 1370px;
-    }
-    
-    .content {
-        margin-top: 88px;
-    }
-    .content-other{
-        margin-top: 24px;
-        height: 100%;
-    }
-    .content-dashboard{
-        height: 100%;
-    }
-    
-    .header-content {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .primary-button {
-        color: $body-text-color;
-        text-transform: none;
-        font-family: $font-family;
-        font-size: 14px;
-        border: 1px solid $body-text-color;
-        transition: background-color 0.2s ease-out 0s,
-            border-color,
-            color,
-            opacity;
-        line-height: 22px;
-        letter-spacing: 0.1px;
-        padding: 8px 16px;
-        
+  }
+  .credential-field-inactive {
+    width: 256px;
+    background: transparent;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: $field-text-color;
+    border-radius: 4px;
+
+    // input {
+    //     padding: 6px 14px;
+    //     border: 1px solid $common-color;
+    //     border-radius: 4px;
+    // }
+
+    // input[type="text"]:focus {
+    //     box-shadow: 0 0 8px $border-color-focus;
+    // }
+
+    .MuiInputBase-adornedEnd {
+      padding: 0px 4px;
     }
 
-    .primary-button:hover {
-        opacity: 0.8;
-        border: 1px solid $body-text-color;
-        background-color: transparent;
+    .Mui-focused .MuiOutlinedInput-notchedOutline {
+      border: 1px solid $field-text-color;
     }
+  }
+  .credential-field-inactive:hover {
+    background: transparent;
+    line-height: 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    font-weight: 400;
+    border-radius: 4px;
 
-    .secondary-button{
-        color: $body-background-color;
-        text-transform: none;
-        font-family: $font-family;
-        font-size: 14px;
-        // border: 1px solid $body-text-color;
-        transition: background-color 0.2s ease-out 0s,
-        border-color,
-        color,
-        opacity;
-        line-height: 22px;
-        letter-spacing: 0.1px;
-        padding: 8px 16px;
-        background-color: $body-text-color;
-        box-shadow: none;
-        border: 1px solid $body-text-color;
+    .MuiInputBase-adornedEnd {
+      padding: 0px 4px;
     }
-
-    .secondary-button:hover{
-        background-color: $body-text-color;
-        box-shadow: none;
-        
-        line-height: 22px;
-        padding: 8px 16px;
-        border: 1px solid $body-text-color;
-    }
-
-    .auth-content{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .auth-button{
-        width: 100%;
-        font-size: 16px;
-        font-weight: 400;
-    }
-    .redirect-button:hover{
-        opacity: 0.8;
-    }
-    
-    .or-wrapper{
-        text-align: center;
-        margin-bottom: 20px;
-        width: 256px;
-        background-color: $liner-color;
-        height: 1px;
-    }
-    .fix-width{
-        // for flex items the width does not work only min-width works 
-        // else use these below commented styles 
-        // flex-basis: 256px;
-        // flex-grow: 0;
-        // flex-shrink: 0;
-        min-width: 256px;
-    }
-    .or-text{
-        position: relative;
-        top: -0.9em;
-        padding: 0 15px;
-        background-color: white;
-        color: $liner-color;
-        font-size: 14px;
-    }
-    .small-text-light{
-        font-size: 14px;
-        font-weight: 400;
-    }
-    .small-text-dark{
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .large-text-light{
-        font-size: 16px;
-        font-weight: 400;
-    }
-    .large-text-light{
-        font-size: 16px;
-        font-weight: 600;
-    }
-    .forgot-link{
-        color: $common-color;
-        text-decoration: underline;
-    }
-    .auth-content button:first-child{
-        margin-right: 16px;
-    }
-    .common-text-light{
-        font-size: 14px;
-        color: $body-text-light-color;
-    }
-    .tertiary-button{
-        color: $body-text-light-color;
-        text-transform: none;
-        font-family: $font-family;
-        font-size: 12px;
-        padding: 8px 12px 6px;
-        border: 1px solid $body-text-color;
-        // transition: background-color 0.2s ease-out 0s,
-        // border-color,
-        // color,
-        // opacity;
-        line-height: 14px;
-        letter-spacing: 0.1px;
-        background-color: $body-background-color;
-        box-shadow: none;
-    }
-    .tertiary-button:hover{
-        background-color: $body-background-color;
-        border: 1px solid $body-text-color;
-        padding: 8px 12px 6px;
-        box-shadow: none;
-    }
-    .social-button{
-        margin-top: 15px;
-        border-radius: 3px;
-        width: 100%;
-        color: $field-text-color;
-        height: 40px;
-        line-height: 2.4;
-        font-size: 16px;
-        font-weight: 400;
-        border: 1px solid $border-light;
-    }
-    .social-button:hover{
-        border: 1px solid $border-light;
-    }
-    .login-form-wrapper{
-        padding-left: 72px;
-        padding-right: 72px;
-        padding-top: 20px;
-        .Mui-disabled{
-            color: white;
-            background-color: $border-light;
-        }
-    }
-    .login-title{
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: 400;
-        margin-top: 10px;
-        margin-bottom: 15px;
-        color: $body-text-light-color;
-    }
-    .signup-email-wrapper{
-        max-width: 542px;
-    }
-    .label-wrapper{
-        padding: 7px 10px 7px 0;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 24px;
-    }
-    .credential-field{
-        width: 256px;
-        background: transparent;
-        line-height: 16px;
-        font-size: 16px;
-        font-weight: 400;
-        color: $field-text-color;
-        input{
-            padding: 6px 14px;
-            border: 1px solid $common-color;
-            border-radius: 4px;
-        }
-        input[type="text"]:focus{
-            box-shadow: 0 0 8px $border-color-focus;  
-        }
-        .Mui-focused .MuiOutlinedInput-notchedOutline {
-            border: 1px solid $field-text-color;
-        }
-    }
-    .credential-field:hover{
-        background: transparent;
-        line-height: 16px;
-        font-size: 16px;
-        border-radius: 4px;
-        font-weight: 400;
-        input {
-            padding: 6px 14px;
-        }
-    }
-    .credential-field-inactive{
-        width: 256px;
-        background: transparent;
-        line-height: 16px;
-        font-size: 16px;
-        font-weight: 400;
-        color: $field-text-color;
-        border-radius: 4px;
-        
-        // input {
-        //     padding: 6px 14px;
-        //     border: 1px solid $common-color;
-        //     border-radius: 4px;
-        // }
-        
-        // input[type="text"]:focus {
-        //     box-shadow: 0 0 8px $border-color-focus;
-        // }
-        
-        .MuiInputBase-adornedEnd {
-            padding: 0px 4px;
-        }
-        
-        .Mui-focused .MuiOutlinedInput-notchedOutline {
-            border: 1px solid $field-text-color;
-        }
-    }
-    .credential-field-inactive:hover {
-        background: transparent;
-        line-height: 16px;
-        font-size: 16px;
-        border-radius: 4px;
-        font-weight: 400;
-        border-radius: 4px;
-    
-        .MuiInputBase-adornedEnd {
-            padding: 0px 4px;
-        }
-    }
-    .validation-error{
-        color: $error-text-validation;
-        padding: 8px 0 6px 18px;
-        line-height: 18px;
-        font-size: 14px;
-        width: 256px;
-    }
-    .error-box-wrapper{
-        width: 256px;
-        display: flex;
-        border: 1px solid $border-light;
-        min-height: 18px;
-        border-radius: 3px;
-        margin-bottom: 15px;
-    }
-    .error-span{
-        min-width: 36px;
-        background-color: $error-text-validation;
-    }
-    .error-box{
-        padding: 12px 18px 12px 18px;
-        text-align: left;
-        color: $common-color;
-        font-size: 14px;
-    }
-    .icon-password{
-        height: 32px;
-        width: 32px;
-        color: rgb(241, 236, 227);
-        padding: 0;
-        cursor: pointer;
-    }
-    .auth-height{
-        height: 80%;
-        overflow-y: auto;
-    }
-    .auth-form-wrapper{
-        height: 100%;
-    }
+  }
+  .validation-error {
+    color: $error-text-validation;
+    padding: 8px 0 6px 18px;
+    line-height: 18px;
+    font-size: 14px;
+    width: 256px;
+  }
+  .error-box-wrapper {
+    width: 256px;
+    display: flex;
+    border: 1px solid $border-light;
+    min-height: 18px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+  }
+  .error-span {
+    min-width: 36px;
+    background-color: $error-text-validation;
+  }
+  .error-box {
+    padding: 12px 18px 12px 18px;
+    text-align: left;
+    color: $common-color;
+    font-size: 14px;
+  }
+  .icon-password {
+    height: 32px;
+    width: 32px;
+    color: rgb(241, 236, 227);
+    padding: 0;
+    cursor: pointer;
+  }
+  .auth-height {
+    height: 80%;
+    overflow-y: auto;
+  }
+  .auth-form-wrapper {
+    height: 100%;
+  }
 }
-
 
 // screens
 
-@media screen and (max-width :1024px) {
-    
+@media screen and (max-width: 1024px) {
 }
 
 @media screen and (max-width: 992px) {
-    .menu {
-        display: none;
-    }
+  .menu {
+    display: none;
+  }
 
-    .menu-dropdown {
-        display: block;
-    }
+  .menu-dropdown {
+    display: block;
+  }
 }
 
 /* For medium devices */
 @media screen and (max-width: 768px) {
-    .login-page {
-        .login-wrapper {
-            width: 100%;
-        }
+  .login-page {
+    .login-wrapper {
+      width: 100%;
     }
+  }
 }
-@media screen and (min-height :768px ){
-    
+@media screen and (min-height: 768px) {
 }
 
-@media screen and (max-width: 576px) {}
+@media screen and (max-width: 576px) {
+}
