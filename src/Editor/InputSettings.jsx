@@ -4,6 +4,41 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+
+const StyledTabs = styled((props) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  "& .MuiTabs-indicatorSpan": {
+    maxWidth: 40,
+    width: "100%",
+    backgroundColor: "rgb(38, 38, 39)",
+  },
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: "none",
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: theme.typography.pxToRem(15),
+    marginRight: theme.spacing(1),
+    color: "rgb(137, 137, 137)",
+    "&.Mui-selected": {
+      color: "rgb(38, 38, 39)",
+    },
+    "&.Mui-focusVisible": {
+      backgroundColor: "rgba(100, 95, 228, 0.32)",
+    },
+  })
+);
 
 const InputSettings = () => {
   const closeSettings = editorStore((state) => state.closeSettings);
@@ -40,15 +75,16 @@ const InputSettings = () => {
 
       <div>
         <Box sx={{ width: "100%" }}>
-          <Tabs
+          <StyledTabs
             value={tabIndex}
             onChange={handleChange}
             aria-label="settings-tab"
+            className="input-settings-tab"
           >
-            <Tab value={1} label="Question" />
-            <Tab value={2} label="Styles" />
-            <Tab value={3} label="three" />
-          </Tabs>
+            <StyledTab value={1} label="Question" />
+            <StyledTab value={2} label="Styles" />
+            <StyledTab value={3} label="three" />
+          </StyledTabs>
 
           <Box sx={{ padding: 2 }}>
             {tabIndex === 1 && (

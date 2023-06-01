@@ -3,7 +3,21 @@
     width: 100%;
   }
   .settings-header {
+    padding: 14px;
     display: flex;
     justify-content: space-between;
   }
+  .MuiTabs-flexContainer {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
+  }
+  // .input-settings-tab {
+  //   .MuiTabs-indicator {
+  //     display: flex;
+  //     justify-content: center;
+  //     background-color: transparent;
+  //     max-width: 40px;
+  //     width: 100%;
+  //     background-color: #635ee7;
+  //   }
+  // }
 }
