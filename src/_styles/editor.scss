@@ -1,111 +1,119 @@
-.main{
-    .editor-wrapper{
+.main {
+  .editor-wrapper {
+    height: 100%;
+  }
+  .editor-main {
+    height: 100%;
+    display: flex;
+    // overflow-y: auto;
+  }
+  .editor-order {
+    width: 256px;
+    border-right: 1px solid $dashboard-divider;
+  }
+  .editor-sidebar {
+    width: 297px;
+    border-left: 1px solid $dashboard-divider;
+    z-index: 3;
+    background-color: white;
+  }
+  .editor-design {
+    flex: 1 1 0%;
+    min-width: 0px;
+    padding: 32px 16px 64px;
+    background-color: rgb(250, 250, 250);
+    display: flex;
+    justify-content: center;
+  }
+  .editor-space-wrapper {
+    height: 748px;
+    width: 1024px;
+  }
+  .editor-space {
+    display: flex;
+    align-items: center;
+    background-color: rgb(237, 239, 245);
+    height: 100%;
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
+    border-radius: 8px;
+    animation-name: onboarding;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-play-state: running;
+    animation-iteration-count: 1;
+  }
+  @keyframes onboarding {
+    0% {
+      transform: scale(0.1);
+    }
+  }
+  .editor-drop-wrapper {
+    height: 90%;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: rgb(250, 250, 250);
+    // background-color: white;
+  }
+  .editor-drop {
+    padding: 10px;
+    border: 1px dashed #6d92f8;
+    text-align: center;
+    margin: 30px;
+  }
+  .editor-drop-onover-wrapper {
+    border: 1px solid $ondrop-element;
+  }
+  .editor-drop-onover {
+    background-color: #c1d0fa;
+    color: white;
+    border: none;
+    transition: background-color 100ms ease-in;
+    width: 100%;
+  }
+  .dropform-name-input {
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+      border-radius: 4px;
+      height: 32px;
+      outline: none;
+      min-width: 64px;
+      max-width: 100%;
+      font-size: 14px;
+      line-height: 20px;
+
+      input {
+        cursor: text;
+        padding: 6px 11px;
+        outline: none;
         height: 100%;
+        width: 100px;
+        min-width: 88px;
+        max-width: 100%;
+        // max-width: 100%;
+        font-size: 14px;
+        line-height: 20px;
+        box-sizing: border-box;
+      }
+      fieldset {
+        padding: 0px;
+        // border: none;
+      }
     }
-    .editor-main{
-        height: 100%;
-        display: flex;
-        // overflow-y: auto;
-    }
-    .editor-order{
-        width: 256px;
-        border-right: 1px solid $dashboard-divider;
-    }
-    .editor-sidebar{
-        width: 297px;
-        border-left: 1px solid $dashboard-divider;
-        z-index: 3;
-        background-color: white;
-    }
-    .editor-design{
-        flex: 1 1 0%;
-        min-width: 0px;
-        padding: 32px 16px 64px;
-        background-color: rgb(250, 250, 250);
-        display: flex;
-        justify-content: center;
-        
-    }
-    .editor-space-wrapper{
-        height: 748px;
-        width: 1024px;
-    }
-    .editor-space{
-        display: flex;
-        align-items: center;
-        background-color: rgb(237, 239, 245);
-        height: 100%;
-        width: 100%;
-        box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
-        border-radius: 8px;
-        animation-name: onboarding;
-        animation-duration: 1.5s;
-        animation-timing-function: ease-in-out;
-        animation-delay: 0s;
-        animation-play-state: running;
-        animation-iteration-count: 1; 
-    }
-    @keyframes onboarding {
-        0%{
-            transform: scale(0.1);
-        }
-    }
-    .editor-drop-wrapper{
-        height: 90%;
-        flex-grow: 1;
-        overflow-y: auto;
-        background-color: rgb(250, 250, 250);
-        // background-color: white;
-    }
-    .editor-drop{
-        padding: 10px;
-        border: 1px dashed  #6d92f8;
-        text-align: center;
-        margin: 30px;
-    }
-    .dropform-name-input{
-        .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-            border-radius: 4px;
-            height: 32px;
-            outline: none;
-            min-width: 64px;
-            max-width: 100%;
-            font-size: 14px;
-            line-height: 20px; 
-         
-            input {
-                cursor: pointer;
-                padding: 6px 11px;
-                outline: none;
-                height: 100%;
-                width: 100px;
-                min-width: 88px;
-                max-width: 100%;
-                // max-width: 100%;
-                font-size: 14px;
-                line-height: 20px;
-                box-sizing: border-box;
-            }
-            fieldset{
-                padding: 0px;
-                // border: none;
-            }
-        }
-        
-    }
-    .editor-links{
-        display: flex;
-        // height: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .input{
-        padding: 10px;
-        margin: 30px;
-        border: 1px solid $widget-element-border;
-    }
-    .selected-input {
-        border: 1px black solid;
-    }
+  }
+  .editor-links {
+    display: flex;
+    // height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input {
+    padding: 10px;
+    margin: 30px;
+    border: 1px solid $widget-element-border;
+  }
+  .selected-input {
+    border: 1px black solid;
+  }
 }

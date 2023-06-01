@@ -45,8 +45,8 @@ const InputSettings = () => {
             onChange={handleChange}
             aria-label="settings-tab"
           >
-            <Tab value={1} label="one" />
-            <Tab value={2} label="two" />
+            <Tab value={1} label="Question" />
+            <Tab value={2} label="Styles" />
             <Tab value={3} label="three" />
           </Tabs>
 
