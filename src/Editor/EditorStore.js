@@ -10,3 +10,9 @@ export const editorStore = create((set,get) => ({
     openPropertiesClicking: (id) => set((state) => ({ selectedItem: id ,isDropped:false,itemSelected:true})),
     closeProperties: () => set((state) => ({ selectedItem: null,itemSelected:false }))
 }))
+
+export const dndStore=create((set,get)=>({
+    activeId:null,
+    setActiveIdOnStart: (id) => set((state) => ({ activeId: id})),
+    setActiveIdOnEnd : ()=>set((event)=>({activeId : null })) 
+}))
