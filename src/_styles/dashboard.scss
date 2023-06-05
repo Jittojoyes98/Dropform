@@ -107,6 +107,20 @@
     display: none;
   }
 }
+
+.MuiModal-root {
+  .create-form-modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    padding: 4px;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000;
+  }
+}
+
 .MuiTooltip-popper {
   .tooltip-title {
     .tooltip-name {

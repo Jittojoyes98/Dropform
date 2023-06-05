@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthContext } from "../auth";
 import Button from "@mui/material/Button";
 import DashboardCard from "./DashboardCard";
+import CreateForm from "../_ui/CreateFormModal/CreateForm";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
-  const [pending, setPending] = useState(false);
-  const [data, setData] = useState(null);
+  const [pending, setPending] = React.useState(false);
+  const [data, setData] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
 
   const handleLogout = async () => {
     try {
@@ -20,15 +22,23 @@ const Dashboard = () => {
   const fetchData = async () => {
     console.log("HEEY");
   };
-  useEffect(() => {
+
+  React.useEffect(() => {
     // will be fetching the api here
     fetchData();
   }, []);
+
   if (pending) {
     return <div>Loading</div>;
   }
-  let responses;
-  console.log(currentUser);
+  const handleOpenCreate = React.useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleCloseCreate = React.useCallback(() => {
+    setOpen(false);
+  }, []);
+
   return (
     <div className="dashboard-wrapper">
       <button onClick={handleLogout}>Logout</button>
@@ -62,6 +72,7 @@ const Dashboard = () => {
                     variant="contained"
                     className="dashboard-create secondary-button"
                     style={{ padding: "6px 12px" }}
+                    onClick={handleOpenCreate}
                   >
                     <span className="plus-svg">
                       <svg
@@ -100,6 +111,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <CreateForm open={open} handleClose={handleCloseCreate} />
     </div>
   );
 };

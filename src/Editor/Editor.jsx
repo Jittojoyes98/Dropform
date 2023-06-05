@@ -16,16 +16,15 @@ import {
 } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-import { editorStore, dndStore } from "./EditorStore";
+import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
 
 const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
-  const setActiveIdOnStart = dndStore((state) => state.setActiveIdOnStart)
-  const setActiveIdOnEnd = dndStore((state) => state.setActiveIdOnEnd)
-
+  const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
+  const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
 
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
@@ -80,14 +79,14 @@ const Editor = () => {
 
   const handleDragStart = (event) => {
     setDragging(true);
-    console.log("ACTIVE",event);
-    setActiveIdOnStart(event.active.id)
+    console.log("ACTIVE", event);
+    setActiveIdOnStart(event.active.id);
   };
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
     let id = active.id;
-    setActiveIdOnEnd()
+    setActiveIdOnEnd();
 
     if (over) {
       const droppedDiv = divs.filter((div) => div.id === id);
