@@ -1,11 +1,14 @@
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
 import { supabase } from "../_supabase/supabaseInitialize";
+import ProfileDropdown from "../_ui/ProfileDropdown/ProfileDropdown";
 //  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down.
 
 const Header = ({ layout }) => {
@@ -17,9 +20,11 @@ const Header = ({ layout }) => {
   const handlePath = (path) => {
     navigate(`/${path}`);
   };
+
   const handleDropName = (e) => {
     setDropName(e.target.value);
   };
+
   const handleOragnisation = async () => {
     const { data, error } = await supabase.rpc("add_question_form_creation", {
       type: "Short",
@@ -28,6 +33,56 @@ const Header = ({ layout }) => {
     });
     console.log(data);
   };
+
+  const headerType = layout === "login" || layout === "signup";
+  const isDashboard = layout === "dashboard";
+  const isHome = layout === "home";
+  const selectPath = layout === "login" ? "signup" : "login";
+  // const handleProfileClose = () => {
+  //   setAnchorEl(null);
+  // };
+  // const open = Boolean(anchorEl);
+  // const id = open ? "simple-popover" : undefined;
+
+  const ProfileIcon = () => {
+    return (
+      <Tooltip
+        title={
+          currentUser ? (
+            <div className="tooltip-title">
+              <p className="tooltip-name">
+                {currentUser.user_metadata.full_name.toUpperCase()}
+              </p>
+              <p className="tooltip-email">{currentUser.user_metadata.email}</p>
+            </div>
+          ) : (
+            <></>
+          )
+        }
+        componentsProps={{
+          tooltip: {
+            sx: {
+              bgcolor: "common.black",
+              "& .MuiTooltip-arrow": {
+                color: "common.black",
+              },
+              padding: "11px",
+              fontSize: "14px",
+            },
+          },
+        }}
+        arrow
+      >
+        <ProfileDropdown
+          src={`https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
+            " ",
+            "+"
+          )}`}
+        />
+      </Tooltip>
+    );
+  };
+
   if (layout === "editor") {
     return (
       <div className="header-wrapper-dashboard">
@@ -48,57 +103,12 @@ const Header = ({ layout }) => {
           </div>
           <div>options</div>
           <div className="auth-content">
-            <Tooltip
-              title={
-                currentUser ? (
-                  <div className="tooltip-title">
-                    <p className="tooltip-name">
-                      {currentUser.user_metadata.full_name.toUpperCase()}
-                    </p>
-                    <p className="tooltip-email">
-                      {currentUser.user_metadata.email}
-                    </p>
-                  </div>
-                ) : (
-                  <></>
-                )
-              }
-              componentsProps={{
-                tooltip: {
-                  sx: {
-                    bgcolor: "common.black",
-                    "& .MuiTooltip-arrow": {
-                      color: "common.black",
-                    },
-                    padding: "11px",
-                    fontSize: "14px",
-                  },
-                },
-              }}
-              arrow
-            >
-              <div className="user-menu">
-                <div className="user-logo">
-                  <img
-                    src={`https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
-                      " ",
-                      "+"
-                    )}`}
-                    className="user-logo-image"
-                  />
-                </div>
-              </div>
-            </Tooltip>
+            <ProfileIcon />
           </div>
         </div>
       </div>
     );
   }
-
-  const headerType = layout === "login" || layout === "signup";
-  const isDashboard = layout === "dashboard";
-  const isHome = layout === "home";
-  const selectPath = layout === "login" ? "signup" : "login";
 
   const LoginSignUp = () => {
     return (
@@ -148,49 +158,7 @@ const Header = ({ layout }) => {
 
   const HeaderChoose = () => {
     if (layout === "dashboard") {
-      return (
-        <Tooltip
-          title={
-            currentUser ? (
-              <div className="tooltip-title">
-                <p className="tooltip-name">
-                  {currentUser.user_metadata.full_name.toUpperCase()}
-                </p>
-                <p className="tooltip-email">
-                  {currentUser.user_metadata.email}
-                </p>
-              </div>
-            ) : (
-              <></>
-            )
-          }
-          componentsProps={{
-            tooltip: {
-              sx: {
-                bgcolor: "common.black",
-                "& .MuiTooltip-arrow": {
-                  color: "common.black",
-                },
-                padding: "11px",
-                fontSize: "14px",
-              },
-            },
-          }}
-          arrow
-        >
-          <div className="user-menu">
-            <div className="user-logo">
-              <img
-                src={`https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
-                  " ",
-                  "+"
-                )}`}
-                className="user-logo-image"
-              />
-            </div>
-          </div>
-        </Tooltip>
-      );
+      return <ProfileIcon />;
     }
     return (
       <>
