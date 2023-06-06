@@ -38,15 +38,37 @@ const Header = ({ layout }) => {
   const isDashboard = layout === "dashboard";
   const isHome = layout === "home";
   const selectPath = layout === "login" ? "signup" : "login";
-  // const handleProfileClose = () => {
-  //   setAnchorEl(null);
-  // };
-  // const open = Boolean(anchorEl);
-  // const id = open ? "simple-popover" : undefined;
+  const src = `https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
+    " ",
+    "+"
+  )}`;
 
   const ProfileIcon = () => {
+    const [open, setOpen] = React.useState(false);
+    const [openDrop, setOpenDrop] = React.useState(true);
+
+    const handleClose = (event) => {
+      if (event.type == "click") {
+        setOpenDrop(false);
+      }
+      setOpen(false);
+    };
+
+    const handleOpen = (event) => {
+      if (event.type == "click") {
+        setOpenDrop(true);
+        setOpen(false);
+      } else if (!open) {
+        setOpen(true);
+      }
+    };
+
     return (
       <Tooltip
+        open={open && openDrop}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        disableFocusListener={true}
         title={
           currentUser ? (
             <div className="tooltip-title">
@@ -73,12 +95,13 @@ const Header = ({ layout }) => {
         }}
         arrow
       >
-        <ProfileDropdown
-          src={`https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
-            " ",
-            "+"
-          )}`}
-        />
+        <div className="user-menu">
+          <ProfileDropdown
+            src={src}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+          />
+        </div>
       </Tooltip>
     );
   };
