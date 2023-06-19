@@ -116,4 +116,23 @@
   .selected-input {
     border: 1px black solid;
   }
+  .input-text-wrapper{
+    padding: 16px;
+    margin: 30px;
+    border: 1px solid $widget-element-border;
+    border-radius: 12px;
+  }
+  .input-text-handle-content{
+    transform: translateY(-100%);
+    padding-bottom:16px ;
+    margin: 0px;
+    max-width: 20%;
+    max-height: 20%;
+    display: inline-block;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .input-text-question{
+    display: flex;
+  }
 }

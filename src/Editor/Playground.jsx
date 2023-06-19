@@ -4,6 +4,7 @@ import { editorStore } from "./EditorStore";
 import useClickAway from "../_hooks/useClickAway";
 import Input from "../Input/Input";
 import classNames from "classnames";
+import InputQuestion from "../_ui/InputQuestion/InputQuestion";
 
 // animation : https://web.dev/learn/css/animations/
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
@@ -94,6 +95,7 @@ const Playground = ({ components, editorRef }) => {
                 Drag new inputs to your form
               </div>
             </div>
+            <InputQuestion/> 
           </div>
         </div>
       </div>
