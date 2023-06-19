@@ -10,14 +10,6 @@ const Dashboard = () => {
   const [data, setData] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      setCurrentUser();
-    } catch (error) {
-      console.log("There was an error");
-    }
-  };
   // if there is no current user put on loading state
   const fetchData = async () => {
     console.log("HEEY");
@@ -41,7 +33,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-wrapper">
-      <button onClick={handleLogout}>Logout</button>
       <div className="dashboard-main">
         <div className="left-dashboard-wrapper">
           <p>Workspaces and Responses</p>
