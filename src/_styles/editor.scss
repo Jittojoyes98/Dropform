@@ -32,7 +32,7 @@
   .editor-space {
     display: flex;
     align-items: center;
-    background-color: rgb(237, 239, 245);
+    background-color: $input-background-common;
     height: 100%;
     width: 100%;
     box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
@@ -116,23 +116,111 @@
   .selected-input {
     border: 1px black solid;
   }
-  .input-text-wrapper{
+  .input-text-wrapper {
     padding: 16px;
     margin: 30px;
     border: 1px solid $widget-element-border;
     border-radius: 12px;
+    background-color: white;
   }
-  .input-text-handle-content{
+  // reusable
+  .input-text-handle-content {
     transform: translateY(-100%);
-    padding-bottom:16px ;
+    padding-bottom: 16px;
     margin: 0px;
-    max-width: 20%;
+    margin-right: 46px;
+    max-width: 12%;
     max-height: 20%;
     display: inline-block;
     padding-left: 0px;
     padding-right: 0px;
+    position: absolute;
+    right: 0;
+    .MuiStack-root {
+      background-color: $handle-content-light;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 0px 4px;
+    }
+    .css-1tk1bks-MuiDivider-root {
+      border-color: white;
+      padding-top: 2px;
+    }
+    .input-text-handle-content-name {
+      display: flex;
+      align-items: center;
+    }
   }
-  .input-text-question{
+
+  .input-text-question {
     display: flex;
+  }
+  .input-text-question-num {
+    padding: 0px;
+    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    p {
+      font-family: $font-family;
+      font-size: 14px;
+    }
+  }
+  .input-text-question-field-wr {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .input-text-question-field {
+    width: 100%;
+    background-color: $input-background-common;
+    .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root {
+      border: 0px;
+      background-color: $input-background-common;
+    }
+    .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root:hover {
+      background-color: $input-background-common;
+    }
+    input {
+      font-family: $font-family;
+      font-size: 20px;
+      padding: 6px 5px;
+      height: 30px;
+    }
+    input::-webkit-input-placeholder {
+      color: $body-text-color;
+      opacity: 1;
+    }
+    input:focus::-webkit-input-placeholder {
+      color: $body-text-color;
+      opacity: 0.7;
+    }
+  }
+  .input-text-answer-field-wr {
+    padding-left: 35px;
+    padding-right: 10px;
+    width: 100%;
+    .css-q0jhri-MuiInputBase-root-MuiInput-root.Mui-disabled:before {
+      border-bottom: 1px solid $ondrop-element;
+    }
+  }
+  .input-text-answer-field {
+    width: 100%;
+    background-color: white;
+
+    input {
+      font-family: $font-family;
+      font-size: 24px;
+      padding: 0px 5px;
+      height: 30px;
+      cursor: text;
+    }
+    .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled {
+      -webkit-text-fill-color: $ondrop-element;
+      opacity: 1;
+    }
+  }
+  .input-text-handle-delete {
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
   }
 }
