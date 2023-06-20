@@ -59,15 +59,16 @@
   .editor-drop {
     padding: 10px;
     border: 1px dashed #6d92f8;
+    background-color: $input-background-common;
     text-align: center;
     margin: 30px;
   }
   .editor-drop-onover-wrapper {
-    border: 1px solid $ondrop-element;
+    border: 0.5px solid $ondrop-border;
   }
   .editor-drop-onover {
-    background-color: #c1d0fa;
-    color: white;
+    // background-color: #c1d0fa;
+    color: $ondrop-border;
     border: none;
     transition: background-color 100ms ease-in;
     width: 100%;
@@ -176,13 +177,13 @@
   }
   .input-text-question-field {
     width: 100%;
-    background-color: $input-background-common;
     .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root {
       border: 0px;
-      background-color: $input-background-common;
+      // give the required color.
+      background-color: white;
     }
     .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root:hover {
-      background-color: $input-background-common;
+      background-color: white;
     }
     input {
       font-family: $font-family;
@@ -227,5 +228,16 @@
     height: 24px;
     width: 24px;
     cursor: pointer;
+  }
+  .overlay-wrapper {
+    min-width: 400px;
+    min-height: 100px;
+    border-radius: 6px;
+    background-color: $handle-content-light;
+    border: 1px solid $ondrop-element;
+    opacity: 0.8;
+    p {
+      width: 100%;
+    }
   }
 }
