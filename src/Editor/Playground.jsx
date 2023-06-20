@@ -72,6 +72,7 @@ const Playground = ({ components, editorRef }) => {
                   <Input
                     key={index}
                     inputRef={inputRef}
+                    component={component}
                     heading={component.heading}
                     select={selectedItem && selectedItem === index + 1}
                     handleClick={() => openPropertiesClicking(index + 1)}
@@ -95,7 +96,6 @@ const Playground = ({ components, editorRef }) => {
                 Drag new inputs to your form
               </div>
             </div>
-            <InputQuestion/> 
           </div>
         </div>
       </div>

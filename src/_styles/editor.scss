@@ -107,35 +107,40 @@
     justify-content: center;
     align-items: center;
   }
-
-  .input {
-    padding: 10px;
-    margin: 30px;
+  .unselected-input {
     border: 1px solid $widget-element-border;
   }
   .selected-input {
-    border: 1px black solid;
+    border: 1px $select-input-border solid;
   }
   .input-text-wrapper {
+    position: relative;
     padding: 16px;
+    padding-bottom: 52px;
     margin: 30px;
-    border: 1px solid $widget-element-border;
     border-radius: 12px;
     background-color: white;
   }
   // reusable
+  .dispaly-input-text-handle-content {
+    display: inline-block;
+  }
+  .hide-input-text-handle-content {
+    display: none;
+  }
   .input-text-handle-content {
     transform: translateY(-100%);
-    padding-bottom: 16px;
+    padding-bottom: 18px;
     margin: 0px;
     margin-right: 46px;
     max-width: 12%;
     max-height: 20%;
-    display: inline-block;
     padding-left: 0px;
     padding-right: 0px;
     position: absolute;
     right: 0;
+    top: 1px;
+    color: white;
     .MuiStack-root {
       background-color: $handle-content-light;
       border-top-left-radius: 4px;

@@ -10,9 +10,9 @@ import deleteSVG from "../../../assets/delete.svg";
 
 const ariaLabel = { "aria-label": "description" };
 
-const InputQuestion = () => {
+const InputQuestion = ({ isActive }) => {
   return (
-    <Box className="input-text-wrapper">
+    <>
       <Box className="input-text-question">
         <Container className="input-text-question-num">
           <Typography>{`1 ->`}</Typography>
@@ -29,7 +29,13 @@ const InputQuestion = () => {
           />
         </Container>
         {/* reusable part */}
-        <Container className="input-text-handle-content">
+        <Container
+          className={`input-text-handle-content ${
+            isActive
+              ? "dispaly-input-text-handle-content"
+              : "hide-input-text-handle-content"
+          }`}
+        >
           <Stack
             direction="row"
             divider={<Divider orientation="vertical" flexItem />}
@@ -59,7 +65,7 @@ const InputQuestion = () => {
           />
         </Container>
       </Box>
-    </Box>
+    </>
   );
 };
 

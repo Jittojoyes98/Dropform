@@ -170,6 +170,7 @@ const Editor = () => {
                 dropAnimation={null}
                 modifiers={[restrictToWindowEdges]}
                 zIndex={2}
+                style={{ cursor: "grabbing" }}
               >
                 {dragging ? <Overlay /> : null}
               </DragOverlay>,

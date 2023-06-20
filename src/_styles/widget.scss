@@ -1,17 +1,17 @@
-.main{
-    .widget-element{
-        margin: 2px;
-        border: 1px $widget-element-border solid;
-        padding: 0.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-    .widget-wrapper{
-        display: flex;
-        flex-wrap: wrap;
-    }
+.main {
+  .widget-element {
+    margin: 2px;
+    border: 1px $widget-element-border solid;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: move;
+    border-radius: 4px;
+  }
+  .widget-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
