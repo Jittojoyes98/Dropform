@@ -125,6 +125,9 @@ img {
     justify-content: center;
   }
   .header-wrapper-dashboard {
+    position: relative;
+    background-color: white;
+    z-index: 3;
     height: auto;
     padding: 8px 16px;
     justify-content: space-between;

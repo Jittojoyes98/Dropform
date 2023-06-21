@@ -54,8 +54,19 @@ const InputQuestion = ({ isActive }) => {
           </Stack>
         </Container>
       </Box>
-      <Box>desc</Box>
-      <Box className="">
+      <Box>
+        <Container>
+          <TextField
+            variant="filled"
+            placeholder="Description (optional)"
+            className="input-text-question-field"
+            InputProps={{
+              disableUnderline: true,
+            }}
+          />
+        </Container>
+      </Box>
+      <Box className="input-text-answer-field-div">
         <Container className="input-text-answer-field-wr">
           <Input
             className="input-text-answer-field"

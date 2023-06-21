@@ -7,7 +7,6 @@ import { Typography } from "@mui/material";
 
 const CoreOverlay = forwardRef(({ children, ...props }, ref) => {
   const activeId = useDndStore((state) => state.activeId);
-
   return (
     <Box className="overlay-wrapper" ref={ref} {...props}>
       <Container>

@@ -131,7 +131,7 @@
   }
   .input-text-handle-content {
     transform: translateY(-100%);
-    padding-bottom: 18px;
+    padding-bottom: 1px;
     margin: 0px;
     margin-right: 46px;
     max-width: 12%;
@@ -239,5 +239,10 @@
     p {
       width: 100%;
     }
+  }
+  .input-text-question-desc {
+  }
+  .input-text-answer-field-div {
+    margin-top: 32px;
   }
 }

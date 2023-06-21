@@ -15,7 +15,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
-import { restrictToWindowEdges } from "@dnd-kit/modifiers";
+import { restrictToWindowEdges, createSnapModifier } from "@dnd-kit/modifiers";
 import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
 
@@ -116,6 +116,8 @@ const Editor = () => {
       strategy: MeasuringStrategy.Always,
     },
   };
+  const gridSize = 10; // pixels
+  const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
   return (
     <div className="editor-wrapper">
@@ -168,9 +170,9 @@ const Editor = () => {
             createPortal(
               <DragOverlay
                 dropAnimation={null}
-                modifiers={[restrictToWindowEdges]}
+                modifiers={[snapToGridModifier]}
                 zIndex={2}
-                style={{ cursor: "grabbing" }}
+                style={{ cursor: "grabbing", marginLeft: "20px" }}
               >
                 {dragging ? <Overlay /> : null}
               </DragOverlay>,
