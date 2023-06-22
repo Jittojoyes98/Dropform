@@ -120,7 +120,72 @@
     padding: 4px;
     background-color: white;
     transform: translate(-50%, -50%);
-    border: 2px solid #000;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .create-form-modal-header {
+    padding: 0px;
+    #modal-generateform-title {
+      margin-bottom: 16px;
+    }
+  }
+  .create-form-modal-closewrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    img {
+      cursor: pointer;
+    }
+  }
+  .css-k4qjio-MuiFormHelperText-root.Mui-error {
+    position: absolute;
+    top: 100%;
+    font-family: $font-family;
+    font-size: 12px;
+    margin: 1px;
+  }
+  .create-form-modal-name-wr {
+    font-size: 14px;
+    .credential-field {
+      background: transparent;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 3px 0px;
+      color: $field-text-color;
+      input {
+        padding: 6px 14px;
+        border: 1px solid $common-color;
+        border-radius: 4px;
+      }
+      .Mui-focused .MuiOutlinedInput-notchedOutline {
+        border: 1px solid $field-text-color;
+      }
+    }
+  }
+  .secondary-button {
+    color: $body-background-color;
+    text-transform: none;
+    font-family: $font-family;
+    font-size: 14px;
+    // border: 1px solid $body-text-color;
+    transition: background-color 0.2s ease-out 0s, border-color, color, opacity;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+    padding: 8px 16px;
+    background-color: $body-text-color;
+    box-shadow: none;
+    border: 1px solid $body-text-color;
+  }
+
+  .secondary-button:hover {
+    background-color: $body-text-color;
+    box-shadow: none;
+
+    line-height: 22px;
+    padding: 8px 16px;
+    border: 1px solid $body-text-color;
   }
 }
 

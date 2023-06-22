@@ -26,12 +26,10 @@ const Header = ({ layout }) => {
   };
 
   const handleOragnisation = async () => {
-    const { data, error } = await supabase.rpc("add_question_form_creation", {
-      type: "Short",
-      question: "Guy",
-      created_user_id: currentUser.id,
+    const { data, error } = await supabase.rpc("create_form_function", {
+      created_user_id: "Short",
+      name: "Guy",
     });
-    console.log(data);
   };
 
   const headerType = layout === "login" || layout === "signup";
