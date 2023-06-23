@@ -3,26 +3,23 @@ import { useAuthContext } from "../auth";
 import Button from "@mui/material/Button";
 import DashboardCard from "./DashboardCard";
 import CreateForm from "../_ui/CreateFormModal/CreateForm";
+import { useCreateFormStore } from "../_services/CreateFormService";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
+  const { fetchForms, loading, data, error } = useCreateFormStore();
   const [pending, setPending] = React.useState(false);
-  const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
   // if there is no current user put on loading state
-  const fetchData = async () => {
-    console.log("HEEY");
-  };
 
   React.useEffect(() => {
-    // will be fetching the api here
-    fetchData();
-  }, []);
+    if (currentUser?.id) {
+      fetchForms(currentUser.id);
+    }
+  }, [currentUser]);
 
-  if (pending) {
-    return <div>Loading</div>;
-  }
   const handleOpenCreate = React.useCallback(() => {
     setOpen(true);
   }, []);
@@ -95,8 +92,10 @@ const Dashboard = () => {
             <div className="dashboard-card-wrapper">
               <div className="form-cards">
                 {/* show all cards here */}
-                <DashboardCard />
-                <DashboardCard />
+                {data?.map((form, id) => {
+                  console.log(form);
+                  return <DashboardCard key={id} formData={form} />;
+                })}
               </div>
             </div>
           </div>
