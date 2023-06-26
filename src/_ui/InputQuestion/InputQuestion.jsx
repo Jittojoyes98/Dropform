@@ -59,7 +59,7 @@ const InputQuestion = ({ isActive }) => {
           <TextField
             variant="filled"
             placeholder="Description (optional)"
-            className="input-text-question-field"
+            className="input-text-question-field  input-text-question-description"
             InputProps={{
               disableUnderline: true,
             }}
@@ -69,7 +69,7 @@ const InputQuestion = ({ isActive }) => {
       <Box className="input-text-answer-field-div">
         <Container className="input-text-answer-field-wr">
           <Input
-            className="input-text-answer-field"
+            className="input-text-answer-field "
             placeholder="Type your answer here..."
             inputProps={ariaLabel}
             disabled={true}

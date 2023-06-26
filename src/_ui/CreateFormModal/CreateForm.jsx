@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useAuthContext } from "../../auth";
 import { useCreateFormStore } from "../../_services/CreateFormService";
+import { useNavigate } from "react-router-dom";
 
 const formNameSchema = yup.object({
   formName: yup
@@ -33,6 +34,7 @@ const style = {
 const CreateForm = ({ open, handleClose }) => {
   const { currentUser } = useAuthContext();
   const createForm = useCreateFormStore((state) => state.createForm);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -41,6 +43,8 @@ const CreateForm = ({ open, handleClose }) => {
     validationSchema: formNameSchema,
     onSubmit: (values) => {
       createForm(values, currentUser.id);
+      handleClose();
+      navigate("/editor");
     },
   });
   return (

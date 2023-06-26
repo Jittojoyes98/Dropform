@@ -21,7 +21,7 @@ export const useCreateFormStore = create((set, get) => ({
     set(() => ({ loading: true }));
     try {
       const { data, error } = await supabase.rpc("get_forms", {
-        user_id: id,
+        users_id: id,
       });
       set(() => ({ loading: false, data: data }));
     } catch (error) {

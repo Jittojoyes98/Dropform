@@ -9,13 +9,14 @@ const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
   const { fetchForms, loading, data, error } = useCreateFormStore();
   const [pending, setPending] = React.useState(false);
-  // const [data, setData] = React.useState(null);
+  const firstRender = React.useRef(true);
   const [open, setOpen] = React.useState(false);
 
   // if there is no current user put on loading state
 
   React.useEffect(() => {
-    if (currentUser?.id) {
+    if (currentUser?.id && firstRender.current) {
+      firstRender.current = false;
       fetchForms(currentUser.id);
     }
   }, [currentUser]);
@@ -93,7 +94,6 @@ const Dashboard = () => {
               <div className="form-cards">
                 {/* show all cards here */}
                 {data?.map((form, id) => {
-                  console.log(form);
                   return <DashboardCard key={id} formData={form} />;
                 })}
               </div>
