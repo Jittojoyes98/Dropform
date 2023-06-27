@@ -13,7 +13,7 @@ module.exports = (env) => {
         template: "src/index.html", // to import index.html file inside index.js
       }),
       new Dotenv({
-        path: `${env.development ? "./.env" : "./.env"}`, // change based on production and development
+        path: path.resolve(__dirname, ".env"), // change based on production and development
       }),
     ],
     devServer: {
