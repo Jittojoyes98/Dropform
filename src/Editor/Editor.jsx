@@ -20,13 +20,14 @@ import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
 import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
-import { divs } from "../_helpers/constants.js";
+import useInputIcons from "../_hooks/useInputIcons";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
 
 const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
+  const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
   const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
 
