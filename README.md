@@ -11,7 +11,7 @@
 - To run the server locally, run: `npm run serve`
 - Your server will start at `http://localhost:3030`.
 
-**_What is College Space?_**
+**_What is Dropform?_**
 
 - A React Web App where users can create customizable forms.
 - Realtime updation of forms.
