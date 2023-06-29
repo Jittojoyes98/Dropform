@@ -15,10 +15,25 @@
 
 - A React Web App where users can create customizable forms.
 - Realtime updation of forms.
+- As of now only numbers and text fields.
 
 **_Screenshots:_**
 
+Dashboard :
+![Screenshot of the Dropform Dashboard](assets/readme/dashboard.png)
+
+Editor :
+![Screenshot of the Dropform Editor](assets/readme/editor.png)
+
+Form Elements :
+![Screenshot of the Dropform Form Elements](assets/readme/form-elements.png)
+
+Drag and Drop :
+![Screenshot of the Dropform Editor](assets/readme/DragandDrop.png)
+
 **_About:_**
+
+A Web App to create custom forms using drag and drop functionality. User will be able to set custom settings for each form elements.
 
 - **_Tech Stack:_**
 
@@ -30,7 +45,6 @@
 
 **_Contact:_**
 
-<!-- - [LinkedIn](https://www.linkedin.com/in/gautam-arora-b2788b191/) -->
+- [LinkedIn](https://www.linkedin.com/in/jittojoyes/)
 
 - [Github](https://github.com/Jittojoyes98/)
-<!-- - [Instagram](https://www.instagram.com/gautamarora6248/) -->
