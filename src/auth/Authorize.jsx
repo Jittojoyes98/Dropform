@@ -26,14 +26,14 @@ const Authorize = ({ children }) => {
       provider: "google",
       options: {
         queryParams: {
-          redirect_to: "http://localhost:3030/dashboard",
+          redirect_to: "https://zesty-lily-b856cc.netlify.app/dashboard",
         },
       },
     });
   }
   function forgotPassword(email) {
     return supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://localhost:3030/login/password/update",
+      redirectTo: "https://zesty-lily-b856cc.netlify.app/login/password/update",
     });
   }
   function signOut() {
