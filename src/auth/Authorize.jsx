@@ -26,14 +26,14 @@ const Authorize = ({ children }) => {
       provider: "google",
       options: {
         queryParams: {
-          redirect_to: "https://zesty-lily-b856cc.netlify.app/dashboard",
+          redirect_to: "https://dropform.vercel.app/dashboard",
         },
       },
     });
   }
   function forgotPassword(email) {
     return supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://zesty-lily-b856cc.netlify.app/login/password/update",
+      redirectTo: "https://dropform.vercel.app/login/password/update",
     });
   }
   function signOut() {
