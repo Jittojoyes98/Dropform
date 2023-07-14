@@ -1,10 +1,15 @@
-export const firebaseApiKey = process.env.REACT_APP_API_KEY;
-export const firebaseAuthDomain = process.env.REACT_APP_AUTH_DOMAIN;
-export const firebaseProjectId = process.env.REACT_APP_PROJECT_ID;
-export const firebaseStorageBucket = process.env.REACT_APP_STORAGE_BUCKET;
-export const firebaseMessagingSenderId =
-  process.env.REACT_APP_MESSAGING_SENDER_ID;
-export const firebaseAppId = process.env.REACT_APP_APP_ID;
-export const firebaseMeasurementId = process.env.REACT_APP_MEASUREMENT_ID;
 export const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
 export const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const prod = {
+  url: {
+    API_URL: "https://dropform.vercel.app/",
+  },
+};
+
+const dev = {
+  url: {
+    API_URL: "http://localhost:3030/",
+  },
+};
+
+export const config = process.env.NODE_ENV === "development" ? dev : prod;

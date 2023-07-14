@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../_supabase/supabaseInitialize";
+import { config } from "../_helpers/constants";
 
 const AuthContext = createContext();
 
@@ -26,14 +27,14 @@ const Authorize = ({ children }) => {
       provider: "google",
       options: {
         queryParams: {
-          redirect_to: "https://dropform.vercel.app/dashboard",
+          redirect_to: `${config.url.API_URL}dashboard`,
         },
       },
     });
   }
   function forgotPassword(email) {
     return supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://dropform.vercel.app/login/password/update",
+      redirectTo: `${config.url.API_URL}login/password/update`,
     });
   }
   function signOut() {
