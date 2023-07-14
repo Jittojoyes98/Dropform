@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dropform</title>
   </head>
+  <script></script>
 
   <body>
     <div id="app"></div>
+    <% if (process.env.NODE_ENV === 'production') { %>
     <script src="https://dropform.vercel.app/bundle.js"></script>
-    <!-- issue resolved-->
+    <% } else { %>
+    <script src="http://localhost:3030/bundle.js"></script>
+    <% } %>
   </body>
 </html>
