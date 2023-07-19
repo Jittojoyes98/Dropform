@@ -73,7 +73,7 @@ const Playground = ({ components, editorRef }) => {
                     key={index}
                     inputRef={inputRef}
                     component={component}
-                    heading={component.heading}
+                    heading={component.type}
                     select={selectedItem && selectedItem === index + 1}
                     handleClick={() => openPropertiesClicking(index + 1)}
                   />

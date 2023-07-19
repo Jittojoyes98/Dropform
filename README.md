@@ -43,6 +43,7 @@ A Web App to create custom forms using drag and drop functionality. User will be
 - Zustand
 - SCSS
 - Material UI
+- DnD Kit
 
 **_Want to Contribute?_**
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const DashboardCard = ({ formData }) => {
   return (
     <Box className="form-card">
-      <Link className="form-card-link" to={"/editor"}>
+      <Link className="form-card-link" to={`/editor/${formData.id}`}>
         <div className="form-name">
           <p>{formData.form_name}</p>
         </div>

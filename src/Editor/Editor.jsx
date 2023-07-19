@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -15,24 +15,34 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
-import { createSnapModifier } from "@dnd-kit/modifiers";
+import {
+  createSnapModifier,
+  restrictToParentElement,
+} from "@dnd-kit/modifiers";
 import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
 import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
+import { useParams } from "react-router-dom";
+import { useQuestions } from "../_services/QuestionService";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
 
 const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
+  const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
   const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
+  useEffect(() => {
+    console.log("YES");
+    // FETCH THE DATA FOR THE CURRENT FORM INCLUDING FIELDS AND ALL
+  }, [formid]);
 
-  const [loading, error] = useCreateFormStore((state) => {
-    return [state.loading, state.error];
+  const [loading, error, createQuestion] = useQuestions((state) => {
+    return [state.loading, state.error, state.createQuestion];
   });
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
@@ -49,9 +59,14 @@ const Editor = () => {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     let id = active.id;
+    let type = active.data.current.type;
     setActiveIdOnEnd();
 
     if (over) {
+      // it means new question is created so do the rpc for creation of new question and add
+      // necessary data from it.
+      createQuestion(formid, type);
+
       const droppedDiv = divs.filter((div) => div.id === id);
       openPropertiesDropping(components.length + 1);
       setComponents((components) => [...components, droppedDiv[0]]);
@@ -61,15 +76,11 @@ const Editor = () => {
   const handleDragStartLeft = () => {};
   const handleDragSortableEnd = (event) => {
     const { active, over } = event;
-
+    console.log(active.id, over.id);
     if (active.id !== over.id) {
       setLanguages((language) => {
         const activeIndex = language.indexOf(active.id);
         const overIndex = language.indexOf(over.id);
-        console.log(
-          arrayMove(language, activeIndex, overIndex),
-          "THE CHANGED ARRAY"
-        );
         return arrayMove(language, activeIndex, overIndex);
       });
     }
@@ -89,8 +100,8 @@ const Editor = () => {
   setTimeout(() => {
     setLoadingState(false);
   }, 2000);
+
   if (loadingState) {
-    console.log("Yes happening");
     return (
       <div className="progress-wrapper">
         <CircularProgressLoader />
@@ -104,13 +115,13 @@ const Editor = () => {
           <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragSortableEnd}
-            // measuring={measuringConfig}
+            modifiers={[restrictToParentElement]}
           >
             <SortableContext
               items={languages}
               strategy={verticalListSortingStrategy}
             >
-              {languages.map((lan, index) => (
+              {languages.map((lan) => (
                 <SortableItems key={lan} id={lan} />
               ))}
             </SortableContext>
@@ -135,7 +146,7 @@ const Editor = () => {
                       <Widget
                         key={div.heading}
                         id={div.id}
-                        heading={div.heading}
+                        heading={div.type}
                         svgIcon={div.svgIcon}
                       />
                     );

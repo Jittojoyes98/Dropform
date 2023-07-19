@@ -27,7 +27,10 @@ const App = () => {
               <Route path="/dashboard" element={<Layout layout="dashboard" />}>
                 <Route index element={<Dashboard />} />
               </Route>
-              <Route path="/editor" element={<Layout layout="editor" />}>
+              <Route
+                path="/editor/:formid"
+                element={<Layout layout="editor" />}
+              >
                 <Route index element={<Editor />} />
               </Route>
             </Route>

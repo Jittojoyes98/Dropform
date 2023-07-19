@@ -4,7 +4,7 @@ const useInputIcons = () => {
   const divs = [
     {
       id: 1,
-      heading: "Text",
+      type: "text",
       svgIcon: (
         <svg
           width="20"
@@ -22,7 +22,7 @@ const useInputIcons = () => {
     },
     {
       id: 2,
-      heading: "Number",
+      type: "number",
       svgIcon: (
         <svg
           width="20"

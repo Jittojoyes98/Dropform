@@ -8,6 +8,7 @@ const Widget = ({ id, heading, svgIcon }) => {
       id: id,
       data: {
         id: id,
+        type: heading,
       },
     });
   const style = {
