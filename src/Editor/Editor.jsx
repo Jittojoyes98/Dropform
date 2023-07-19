@@ -25,6 +25,7 @@ import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
+import { useQuestions } from "../_services/QuestionService";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
 
 const Editor = () => {
@@ -40,15 +41,15 @@ const Editor = () => {
     // FETCH THE DATA FOR THE CURRENT FORM INCLUDING FIELDS AND ALL
   }, [formid]);
 
-  const [loading, error] = useCreateFormStore((state) => {
-    return [state.loading, state.error];
+  const [loading, error, createQuestion] = useQuestions((state) => {
+    return [state.loading, state.error, state.createQuestion];
   });
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState([]);
   const [dragging, setDragging] = useState(false);
   const [languages, setLanguages] = useState(["python", "javascript", "java"]);
-  console.log(components);
+
   const handleDragStart = (event) => {
     setDragging(true);
     console.log("ACTIVE", event);
@@ -58,11 +59,14 @@ const Editor = () => {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     let id = active.id;
+    let type = active.data.current.type;
     setActiveIdOnEnd();
 
     if (over) {
       // it means new question is created so do the rpc for creation of new question and add
       // necessary data from it.
+      createQuestion(formid, type);
+
       const droppedDiv = divs.filter((div) => div.id === id);
       openPropertiesDropping(components.length + 1);
       setComponents((components) => [...components, droppedDiv[0]]);
@@ -142,7 +146,7 @@ const Editor = () => {
                       <Widget
                         key={div.heading}
                         id={div.id}
-                        heading={div.heading}
+                        heading={div.type}
                         svgIcon={div.svgIcon}
                       />
                     );
