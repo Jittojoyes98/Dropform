@@ -34,7 +34,6 @@ const style = {
 const CreateForm = ({ open, handleClose }) => {
   const { currentUser } = useAuthContext();
   const createForm = useCreateFormStore((state) => state.createForm);
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +43,6 @@ const CreateForm = ({ open, handleClose }) => {
     onSubmit: (values) => {
       createForm(values, currentUser.id);
       handleClose();
-      navigate("/editor");
     },
   });
   return (

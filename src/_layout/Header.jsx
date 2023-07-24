@@ -25,13 +25,6 @@ const Header = ({ layout }) => {
     setDropName(e.target.value);
   };
 
-  const handleOragnisation = async () => {
-    const { data, error } = await supabase.rpc("create_form_function", {
-      created_user_id: "Short",
-      name: "Guy",
-    });
-  };
-
   const headerType = layout === "login" || layout === "signup";
   const isDashboard = layout === "dashboard";
   const isHome = layout === "home";
@@ -161,7 +154,7 @@ const Header = ({ layout }) => {
       return "Dropform";
     } else {
       return (
-        <div className="logo-button-wrapper" onClick={handleOragnisation}>
+        <div className="logo-button-wrapper">
           {currentUser ? (
             <>
               <div className="logo-button">

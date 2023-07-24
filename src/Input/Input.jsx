@@ -4,6 +4,8 @@ import classNames from "classnames";
 import { useIconMapper } from "../_hooks/useIconMapper";
 
 const Input = ({ heading, select, handleClick, inputRef, component }) => {
+  console.log(component.type);
+
   const [hover, setHover] = React.useState(false);
 
   const handleOnHover = React.useCallback(() => {
@@ -29,7 +31,7 @@ const Input = ({ heading, select, handleClick, inputRef, component }) => {
       onMouseOver={handleOnHover}
       onMouseLeave={handleOnAway}
     >
-      {component.id === 1 ? iconComponents[0].component : heading}
+      {iconComponents[component.type]}
     </Box>
   );
 };

@@ -32,27 +32,43 @@ const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
+  const [loading, error, createQuestion, getQuestion, questions] = useQuestions(
+    (state) => {
+      return [
+        state.loading,
+        state.error,
+        state.createQuestion,
+        state.getQuestion,
+        state.data,
+      ];
+    }
+  );
   const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
   const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
-  useEffect(() => {
-    console.log("YES");
-    // FETCH THE DATA FOR THE CURRENT FORM INCLUDING FIELDS AND ALL
-  }, [formid]);
-
-  const [loading, error, createQuestion] = useQuestions((state) => {
-    return [state.loading, state.error, state.createQuestion];
-  });
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState([]);
   const [dragging, setDragging] = useState(false);
   const [languages, setLanguages] = useState(["python", "javascript", "java"]);
+  const gridSize = 10; // pixels
+  const snapToGridModifier = createSnapModifier(gridSize);
+  const editorRef = useRef(null);
+
+  // will be changing and these by fetching
+  const [loadingState, setLoadingState] = useState(true);
+
+  useEffect(() => {
+    getQuestion(formid);
+  }, []);
+
+  useEffect(() => {
+    setComponents(questions);
+  }, [questions]);
 
   const handleDragStart = (event) => {
     setDragging(true);
-    console.log("ACTIVE", event);
     setActiveIdOnStart(event.active.id);
   };
 
@@ -63,17 +79,13 @@ const Editor = () => {
     setActiveIdOnEnd();
 
     if (over) {
-      // it means new question is created so do the rpc for creation of new question and add
-      // necessary data from it.
       createQuestion(formid, type);
-
-      const droppedDiv = divs.filter((div) => div.id === id);
       openPropertiesDropping(components.length + 1);
-      setComponents((components) => [...components, droppedDiv[0]]);
     }
     setDragging(false);
   };
   const handleDragStartLeft = () => {};
+
   const handleDragSortableEnd = (event) => {
     const { active, over } = event;
     console.log(active.id, over.id);
@@ -91,12 +103,6 @@ const Editor = () => {
     },
   };
 
-  const gridSize = 10; // pixels
-  const snapToGridModifier = createSnapModifier(gridSize);
-  const editorRef = useRef(null);
-
-  // will be changing and these by fetching
-  const [loadingState, setLoadingState] = useState(true);
   setTimeout(() => {
     setLoadingState(false);
   }, 2000);
@@ -108,6 +114,7 @@ const Editor = () => {
       </div>
     );
   }
+
   return (
     <div className="editor-wrapper">
       <div className="editor-main">

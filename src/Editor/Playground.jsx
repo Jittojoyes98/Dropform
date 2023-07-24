@@ -30,20 +30,20 @@ const Playground = ({ components, editorRef }) => {
   const [scale, setScale] = useState(1);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
-
+  const [changedHeight, setChangedHeight] = useState(748);
   const isDropped = editorStore((state) => state.isDropped);
-
   let { ref: inputRef } = useClickAway(closeProperties, editorRef);
 
   const updateWidthAndHeight = () => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   };
+
   useEffect(() => {
     window.addEventListener("resize", updateWidthAndHeight);
     return () => window.removeEventListener("resize", updateWidthAndHeight);
   });
-  const [changedHeight, setChangedHeight] = useState(748);
+
   useEffect(() => {
     let scaled = Math.min(width / 1024, height / 748, 1);
     setScale(scaled);
@@ -66,7 +66,7 @@ const Playground = ({ components, editorRef }) => {
           }}
         >
           <div className="editor-drop-wrapper">
-            {components.length > 0 ? (
+            {components && components.length > 0 ? (
               components.map((component, index) => {
                 return (
                   <Input
