@@ -79,13 +79,8 @@ const Editor = () => {
     setActiveIdOnEnd();
 
     if (over) {
-      // it means new question is created so do the rpc for creation of new question and add
-      // necessary data from it.
       createQuestion(formid, type);
-
-      const droppedDiv = divs.filter((div) => div.id === id);
       openPropertiesDropping(components.length + 1);
-      setComponents((components) => [...components, droppedDiv[0]]);
     }
     setDragging(false);
   };
