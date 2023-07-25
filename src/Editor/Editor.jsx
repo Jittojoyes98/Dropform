@@ -32,6 +32,7 @@ const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
+  const closeProperties = editorStore((state) => state.closeProperties);
   const [loading, error, createQuestion, getQuestion, questions] = useQuestions(
     (state) => {
       return [
@@ -51,7 +52,6 @@ const Editor = () => {
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState([]);
   const [dragging, setDragging] = useState(false);
-  const [languages, setLanguages] = useState(["python", "javascript", "java"]);
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
@@ -61,6 +61,7 @@ const Editor = () => {
 
   useEffect(() => {
     getQuestion(formid);
+    return () => closeProperties();
   }, []);
 
   useEffect(() => {
@@ -90,10 +91,10 @@ const Editor = () => {
     const { active, over } = event;
     console.log(active.id, over.id);
     if (active.id !== over.id) {
-      setLanguages((language) => {
-        const activeIndex = language.indexOf(active.id);
-        const overIndex = language.indexOf(over.id);
-        return arrayMove(language, activeIndex, overIndex);
+      setComponents((inpt) => {
+        const activeIndex = inpt.indexOf(active.id);
+        const overIndex = inpt.indexOf(over.id);
+        return arrayMove(inpt, activeIndex, overIndex);
       });
     }
   };
@@ -125,11 +126,11 @@ const Editor = () => {
             modifiers={[restrictToParentElement]}
           >
             <SortableContext
-              items={languages}
+              items={components}
               strategy={verticalListSortingStrategy}
             >
-              {languages.map((lan) => (
-                <SortableItems key={lan} id={lan} />
+              {components.map((inpt) => (
+                <SortableItems key={inpt} id={inpt} />
               ))}
             </SortableContext>
           </DndContext>
