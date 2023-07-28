@@ -71,6 +71,7 @@ const Playground = ({ components, editorRef }) => {
                 return (
                   <Input
                     key={index}
+                    questionNumber={index + 1}
                     inputRef={inputRef}
                     component={component}
                     heading={component.type}

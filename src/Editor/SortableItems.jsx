@@ -22,6 +22,8 @@ const SortableItems = ({ id }) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    padding: "10px",
+    cursor: "grabbing",
   };
   return (
     <div

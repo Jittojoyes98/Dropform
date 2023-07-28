@@ -48,6 +48,7 @@ const Editor = () => {
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
   const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
+  const [loadingState, setLoadingState] = useState(true);
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState([]);
@@ -55,9 +56,9 @@ const Editor = () => {
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
+  let questionNameCache = {};
 
   // will be changing and these by fetching
-  const [loadingState, setLoadingState] = useState(true);
 
   useEffect(() => {
     getQuestion(formid);
@@ -79,8 +80,22 @@ const Editor = () => {
     let type = active.data.current.type;
     setActiveIdOnEnd();
 
+    // create a closure here
+
     if (over) {
-      createQuestion(formid, type);
+      if (Object.keys(questionNameCache).length === 0) {
+        components.forEach((component) => {
+          if (!questionNameCache[component.type]) {
+            questionNameCache[component.type] = 0;
+          }
+          questionNameCache[component.type]++;
+        });
+      }
+      if (!questionNameCache[type]) {
+        questionNameCache[type] = 0;
+      }
+      questionNameCache[type]++;
+      createQuestion(formid, type, questionNameCache[type]);
       openPropertiesDropping(components.length + 1);
     }
     setDragging(false);
@@ -130,7 +145,7 @@ const Editor = () => {
               strategy={verticalListSortingStrategy}
             >
               {components.map((inpt) => (
-                <SortableItems key={inpt} id={inpt} />
+                <SortableItems key={inpt.id} id={inpt} />
               ))}
             </SortableContext>
           </DndContext>

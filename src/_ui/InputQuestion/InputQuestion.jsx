@@ -10,12 +10,12 @@ import deleteSVG from "../../../assets/delete.svg";
 
 const ariaLabel = { "aria-label": "description" };
 
-const InputQuestion = ({ isActive }) => {
+const InputQuestion = ({ isActive, questionNumber, questionName }) => {
   return (
     <>
       <Box className="input-text-question">
         <Container className="input-text-question-num">
-          <Typography>{`1 ->`}</Typography>
+          <Typography>{`${questionNumber} ->`}</Typography>
         </Container>
         <Container className="input-text-question-field-wr">
           <TextField
@@ -42,7 +42,7 @@ const InputQuestion = ({ isActive }) => {
             spacing={2}
           >
             <Box className="input-text-handle-content-name">
-              <Typography>Text 1</Typography>
+              <Typography>{questionName}</Typography>
             </Box>
             <Box>
               <img

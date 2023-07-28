@@ -5,7 +5,7 @@ export const useQuestions = create((set, get) => ({
   loading: false,
   error: null,
   data: null,
-  createQuestion: async (formid, type) => {
+  createQuestion: async (formid, type, questionNumber) => {
     set(() => ({ loading: true }));
 
     try {
@@ -14,7 +14,7 @@ export const useQuestions = create((set, get) => ({
         {
           current_form_id: formid,
           question_type: type,
-          question_text: "",
+          question_text: `${type} ${questionNumber}`,
         }
       );
       // now the whole list is not retured , will add the necessary in the future.
