@@ -4,7 +4,7 @@ import NumberQuestion from "../_components/NumberInput/NumberQuestion";
 
 export const useIconMapper = ({ isActive }) => {
   return {
-    text: <InputQuestion isActive={isActive} />,
-    number: <NumberQuestion />,
+    text: (props) => <InputQuestion isActive={isActive} {...props} />,
+    number: (props) => <NumberQuestion {...props} />,
   };
 };

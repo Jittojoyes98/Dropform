@@ -3,9 +3,14 @@ import Box from "@mui/material/Box";
 import classNames from "classnames";
 import { useIconMapper } from "../_hooks/useIconMapper";
 
-const Input = ({ heading, select, handleClick, inputRef, component }) => {
-  console.log(component.type);
-
+const Input = ({
+  heading,
+  select,
+  handleClick,
+  inputRef,
+  component,
+  questionNumber,
+}) => {
   const [hover, setHover] = React.useState(false);
 
   const handleOnHover = React.useCallback(() => {
@@ -16,7 +21,6 @@ const Input = ({ heading, select, handleClick, inputRef, component }) => {
   }, []);
   const iconComponents = useIconMapper({ isActive: select || hover });
 
-  //   iconComponents[0].component.props.isActive = select || hover;
   return (
     <Box
       ref={inputRef}
@@ -31,7 +35,10 @@ const Input = ({ heading, select, handleClick, inputRef, component }) => {
       onMouseOver={handleOnHover}
       onMouseLeave={handleOnAway}
     >
-      {iconComponents[component.type]}
+      {iconComponents[component.type]({
+        questionNumber,
+        questionName: component.question_name,
+      })}
     </Box>
   );
 };
