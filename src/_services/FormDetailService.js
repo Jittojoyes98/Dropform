@@ -1,7 +1,10 @@
 import { create } from "zustand";
 import { supabase } from "../_supabase/supabaseInitialize";
 
-export const useFormDetails = create(() => ({
+export const useFormDetails = create((set, get) => ({
   data: null,
-  getFormDetails: () => {},
+  currentFormDetails: (formData) => {
+    console.log(formData);
+    set(() => ({ data: formData }));
+  },
 }));
