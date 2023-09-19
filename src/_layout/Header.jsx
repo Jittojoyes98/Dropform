@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
 import { supabase } from "../_supabase/supabaseInitialize";
 import ProfileDropdown from "../_ui/ProfileDropdown/ProfileDropdown";
+import { useFormDetails } from "../_services/FormDetailService";
 //  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down.
 
 const Header = ({ layout }) => {
@@ -16,6 +17,13 @@ const Header = ({ layout }) => {
   //  we will take data from the walk through and store it somewhere.
   const navigate = useNavigate();
   const [dropName, setDropName] = useState("My Dropform");
+  const data = useFormDetails((state) => state.data);
+
+  useEffect(() => {
+    if (data) {
+      setDropName(data.form_name);
+    }
+  }, [data]);
 
   const handlePath = (path) => {
     navigate(`/${path}`);
@@ -194,6 +202,14 @@ const Header = ({ layout }) => {
     );
   };
 
+  const handleHeaderContent = () => {
+    if (headerType) {
+      return <LoginSignUp />;
+    } else {
+      return HeaderChoose();
+    }
+  };
+
   return (
     <div
       className={classNames(
@@ -213,9 +229,7 @@ const Header = ({ layout }) => {
       >
         <div className="logo">{headerType ? "" : LogoChoose()}</div>
         {/* <div></div> */}
-        <div className="auth-content">
-          {headerType ? <LoginSignUp /> : HeaderChoose()}
-        </div>
+        <div className="auth-content">{handleHeaderContent()}</div>
       </div>
     </div>
   );

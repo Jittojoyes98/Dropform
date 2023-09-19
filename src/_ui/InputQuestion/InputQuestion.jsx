@@ -7,10 +7,23 @@ import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import deleteSVG from "../../../assets/delete.svg";
+import { useQuestions } from "../../_services/QuestionService";
 
 const ariaLabel = { "aria-label": "description" };
 
-const InputQuestion = ({ isActive, questionNumber, questionName }) => {
+const InputQuestion = ({
+  isActive,
+  questionNumber,
+  questionName,
+  questionId,
+}) => {
+  const [loading, error, deleteQuestion, questions] = useQuestions((state) => {
+    return [state.loading, state.error, state.deleteQuestion, state.data];
+  });
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    deleteQuestion(questionId);
+  };
   return (
     <>
       <Box className="input-text-question">
@@ -44,7 +57,7 @@ const InputQuestion = ({ isActive, questionNumber, questionName }) => {
             <Box className="input-text-handle-content-name">
               <Typography>{questionName}</Typography>
             </Box>
-            <Box>
+            <Box onClick={handleDelete}>
               <img
                 src={deleteSVG}
                 alt="delete"

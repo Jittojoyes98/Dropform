@@ -38,6 +38,7 @@ const Input = ({
       {iconComponents[component.type]({
         questionNumber,
         questionName: component.question_name,
+        questionId: component.id,
       })}
     </Box>
   );
