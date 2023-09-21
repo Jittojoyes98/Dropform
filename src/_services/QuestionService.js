@@ -5,6 +5,7 @@ export const useQuestions = create((set, get) => ({
   loading: false,
   error: null,
   data: null,
+  fetchAgain: true,
   createQuestion: async (formid, type, questionNumber) => {
     set(() => ({ loading: true }));
 
@@ -40,20 +41,13 @@ export const useQuestions = create((set, get) => ({
     set(() => ({ loading: true }));
 
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("question")
         .delete()
         .eq("id", question_id);
 
-      console.log(data);
-      console.log(question_id);
-      let currentData;
-      if (data) {
-        console.log(data);
-        currentData = get().data;
-        const updatedData = currentData.filter((cmp) => cmp.id != data.id);
-        set(() => ({ loading: false, data: updatedData }));
-      }
+      let currentFetch = get().fetchAgain;
+      set(() => ({ loading: false, fetchAgain: !currentFetch }));
     } catch (error) {
       set(() => ({ error: error.message, loading: false }));
     }

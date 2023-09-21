@@ -30,6 +30,7 @@ const Header = ({ layout }) => {
   };
 
   const handleDropName = (e) => {
+    console.log(e.target.value);
     setDropName(e.target.value);
   };
 
