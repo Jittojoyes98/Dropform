@@ -33,17 +33,17 @@ const Editor = () => {
     (state) => state.openPropertiesDropping
   );
   const closeProperties = editorStore((state) => state.closeProperties);
-  const [loading, error, createQuestion, getQuestion, questions] = useQuestions(
-    (state) => {
+  const [loading, error, createQuestion, getQuestion, questions, fetchAgain] =
+    useQuestions((state) => {
       return [
         state.loading,
         state.error,
         state.createQuestion,
         state.getQuestion,
         state.data,
+        state.fetchAgain,
       ];
-    }
-  );
+    });
   const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
@@ -53,6 +53,7 @@ const Editor = () => {
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState([]);
   const [dragging, setDragging] = useState(false);
+  const [fetchQuestions, setFetchQuestions] = useState(true);
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
@@ -63,7 +64,7 @@ const Editor = () => {
   useEffect(() => {
     getQuestion(formid);
     return () => closeProperties();
-  }, []);
+  }, [fetchAgain]);
 
   useEffect(() => {
     setComponents(questions);
