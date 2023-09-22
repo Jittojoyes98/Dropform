@@ -26,12 +26,17 @@ import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
 import { useQuestions } from "../_services/QuestionService";
+import { useFormDetails } from "../_services/FormDetailService";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
 
 const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
+  const [data, getCurrentFormDetails] = useFormDetails((state) => {
+    return [state.data, state.getCurrentFormDetails];
+  });
+
   const closeProperties = editorStore((state) => state.closeProperties);
   const [loading, error, createQuestion, getQuestion, questions, fetchAgain] =
     useQuestions((state) => {
@@ -62,6 +67,9 @@ const Editor = () => {
   // will be changing and these by fetching
 
   useEffect(() => {
+    if (!editorRef.current) {
+      getCurrentFormDetails(formid);
+    }
     getQuestion(formid);
     return () => closeProperties();
   }, [fetchAgain]);

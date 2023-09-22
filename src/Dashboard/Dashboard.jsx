@@ -1,9 +1,10 @@
 import React from "react";
 import { useAuthContext } from "../auth";
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import DashboardCard from "./DashboardCard";
 import CreateForm from "../_ui/CreateFormModal/CreateForm";
 import { useCreateFormStore } from "../_services/CreateFormService";
+import CreateButton from "../_ui/CreateButton/CreateButton";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
@@ -57,46 +58,25 @@ const Dashboard = () => {
                       ></path>
                     </svg>
                   </div>
-                  <Button
-                    variant="contained"
-                    className="dashboard-create secondary-button"
-                    style={{ padding: "6px 12px" }}
-                    onClick={handleOpenCreate}
-                  >
-                    <span className="plus-svg">
-                      <svg
-                        class="SVGInline-svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="#fff"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M0 6c0-1.10457.89543-2 2-2h8c0 1.10457-.89543 2-2 2H0z"
-                        ></path>
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M6 0v8c0 1.10457-.89543 2-2 2V2c0-1.104569.89543-2 2-2z"
-                        ></path>
-                      </svg>
-                    </span>
-                    Create dropform
-                  </Button>
+                  <CreateButton handleOpenCreate={handleOpenCreate} />
                 </div>
                 <div>date created</div>
               </div>
             </div>
             <div className="dashboard-card-wrapper">
-              <div className="form-cards">
-                {/* show all cards here */}
-                {data?.map((form, id) => {
-                  return <DashboardCard key={id} formData={form} />;
-                })}
-              </div>
+              {data?.length > 0 ? (
+                <div className="form-cards">
+                  {/* show all cards here */}
+                  {data.map((form, id) => {
+                    return <DashboardCard key={id} formData={form} />;
+                  })}
+                </div>
+              ) : (
+                <Box className="form-empty">
+                  <p>Nothing here</p>
+                  <CreateButton handleOpenCreate={handleOpenCreate} />
+                </Box>
+              )}
             </div>
           </div>
         </div>
