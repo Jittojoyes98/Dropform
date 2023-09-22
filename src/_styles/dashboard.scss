@@ -76,6 +76,9 @@
     flex-wrap: wrap;
     min-width: 0px;
   }
+  .form-details-dropdown {
+    display: flex;
+  }
   .form-card {
     width: 178px;
     height: 208px;
@@ -95,15 +98,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 118px;
+    min-height: 138px;
     padding: 16px;
+    // border-bottom: 1px solid $widget-element-border;
+  }
+  .form-details-wrapper {
+    height: fit-content;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 0px 0px inset;
+    padding: 16px;
+    flex: 1 1 auto;
+  }
+  .form-details {
+    display: flex;
+    justify-content: space-between;
+    color: $response-text;
   }
   .form-card-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     color: black;
   }
+
   .menu-svg {
     display: none;
   }

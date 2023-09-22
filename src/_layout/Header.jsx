@@ -38,10 +38,9 @@ const Header = ({ layout }) => {
   const isDashboard = layout === "dashboard";
   const isHome = layout === "home";
   const selectPath = layout === "login" ? "signup" : "login";
-  const src = `https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${currentUser?.user_metadata.full_name.replace(
-    " ",
-    "+"
-  )}`;
+  const src = `https://ui-avatars.com/api/?background=a0a0ff&color=ffffff&name=${(
+    currentUser?.user_metadata?.full_name || "Anonymous Anonymous"
+  ).replace(" ", "+")}`;
 
   const ProfileIcon = () => {
     const [open, setOpen] = React.useState(false);
@@ -73,9 +72,10 @@ const Header = ({ layout }) => {
           currentUser ? (
             <div className="tooltip-title">
               <p className="tooltip-name">
-                {currentUser.user_metadata.full_name.toUpperCase()}
+                {currentUser?.user_metadata?.full_name?.toUpperCase() ||
+                  "Anonymous Anonymous".toUpperCase()}
               </p>
-              <p className="tooltip-email">{currentUser.user_metadata.email}</p>
+              <p className="tooltip-email">{currentUser?.email}</p>
             </div>
           ) : (
             <></>
