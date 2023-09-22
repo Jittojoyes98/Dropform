@@ -21,7 +21,7 @@ const Header = ({ layout }) => {
 
   useEffect(() => {
     if (data) {
-      setDropName(data.form_name);
+      setDropName(data[0].form_name);
     }
   }, [data]);
 

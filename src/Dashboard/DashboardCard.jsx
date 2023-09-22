@@ -14,7 +14,7 @@ const DashboardCard = ({ formData }) => {
       <Link
         className="form-card-link"
         to={`/editor/${formData.id}`}
-        onClick={() => currentFormDetails(formData)}
+        // onClick={() => currentFormDetails(formData)}
       >
         <div className="form-name">
           <p>{formData.form_name}</p>
