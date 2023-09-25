@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { editorStore } from "./EditorStore";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 const StyledTabs = styled((props) => (
@@ -40,7 +41,8 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   })
 );
 
-const InputSettings = () => {
+const InputSettings = ({ questionName }) => {
+  console.log(questionName);
   const closeSettings = editorStore((state) => state.closeSettings);
 
   const selectedItem = editorStore((state) => state.selectedItem);
@@ -49,12 +51,31 @@ const InputSettings = () => {
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+  let currentQuestion = questionName;
+  const [inputName, setInputName] = useState(questionName);
+
+  const handleNameChange = (e) => {
+    setInputName(e.target.value);
+  };
 
   return (
     <div className="settings-wrapper">
       <div className="settings-header">
-        <h3>{selectedItem}</h3>
-        <div onClick={closeSettings}>
+        <TextField
+          defaultValue={questionName}
+          value={inputName}
+          id="filled-hidden-label-small"
+          variant="outlined"
+          size="small"
+          className="input-text-question-field"
+          sx={{ marginRight: "10px" }}
+          // InputProps={{
+          //   disableUnderline: true,
+          // }}
+          onChange={handleNameChange}
+        />
+        {/* <p>{questionName}</p> */}
+        <div onClick={closeSettings} className="settings-close">
           <svg
             width="20"
             height="21"
