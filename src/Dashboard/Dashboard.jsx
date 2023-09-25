@@ -12,15 +12,25 @@ const Dashboard = () => {
   const [pending, setPending] = React.useState(false);
   const firstRender = React.useRef(true);
   const [open, setOpen] = React.useState(false);
+  const [fetchFormsAgain] = useCreateFormStore((state) => {
+    return [state.fetchFormsAgain];
+  });
 
   // if there is no current user put on loading state
+  let formAgain;
 
   React.useEffect(() => {
     if (currentUser?.id && firstRender.current) {
       firstRender.current = false;
       fetchForms(currentUser.id);
     }
-  }, [currentUser]);
+  }, [currentUser, fetchFormsAgain]);
+
+  React.useEffect(() => {
+    if (currentUser?.id) {
+      fetchForms(currentUser.id);
+    }
+  }, [fetchFormsAgain]);
 
   const handleOpenCreate = React.useCallback(() => {
     setOpen(true);
