@@ -168,8 +168,10 @@ const Editor = () => {
           />
           <div className="editor-sidebar">
             <div className="widget-wrapper">
-              {itemSelected ? (
-                <InputSettings />
+              {itemSelected && selectedItem ? (
+                <InputSettings
+                  questionName={components[selectedItem - 1]?.question_name}
+                />
               ) : (
                 <>
                   <span style={{ width: "100%" }}>Commonly used</span>
