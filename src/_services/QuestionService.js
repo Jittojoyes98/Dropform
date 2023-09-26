@@ -6,7 +6,7 @@ export const useQuestions = create((set, get) => ({
   error: null,
   data: null,
   fetchAgain: true,
-  createQuestion: async (formid, type, questionNumber) => {
+  createQuestion: async (formid, type, questionNumber, orderId) => {
     set(() => ({ loading: true }));
 
     try {
@@ -16,6 +16,7 @@ export const useQuestions = create((set, get) => ({
           current_form_id: formid,
           question_type: type,
           question_text: `${type} ${questionNumber}`,
+          order_id: orderId,
         }
       );
       // now the whole list is not retured , will add the necessary in the future.
@@ -44,6 +45,20 @@ export const useQuestions = create((set, get) => ({
       const { error } = await supabase
         .from("question")
         .delete()
+        .eq("id", question_id);
+
+      let currentFetch = get().fetchAgain;
+      set(() => ({ loading: false, fetchAgain: !currentFetch }));
+    } catch (error) {
+      set(() => ({ error: error.message, loading: false }));
+    }
+  },
+  updateQuestionName: async (question_id, name) => {
+    set(() => ({ loading: true }));
+    try {
+      const { error } = await supabase
+        .from("question")
+        .update({ question_name: name })
         .eq("id", question_id);
 
       let currentFetch = get().fetchAgain;

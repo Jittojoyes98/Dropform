@@ -104,7 +104,12 @@ const Editor = () => {
         questionNameCache[type] = 0;
       }
       questionNameCache[type]++;
-      createQuestion(formid, type, questionNameCache[type]);
+      createQuestion(
+        formid,
+        type,
+        questionNameCache[type],
+        components.length + 1
+      );
       openPropertiesDropping(components.length + 1);
     }
     setDragging(false);
@@ -168,10 +173,9 @@ const Editor = () => {
           />
           <div className="editor-sidebar">
             <div className="widget-wrapper">
-              {itemSelected && selectedItem ? (
-                <InputSettings
-                  questionName={components[selectedItem - 1]?.question_name}
-                />
+              {/* {console.log(selectedItem)} */}
+              {itemSelected && selectedItem > 0 ? (
+                <InputSettings currentInput={components[selectedItem - 1]} />
               ) : (
                 <>
                   <span style={{ width: "100%" }}>Commonly used</span>
