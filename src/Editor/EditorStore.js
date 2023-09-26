@@ -19,8 +19,9 @@ export const editorStore = create((set, get) => ({
       isDropped: false,
       itemSelected: true,
     })),
-  closeProperties: () =>
-    set((state) => ({ selectedItem: null, itemSelected: false })),
+  closeProperties: () => {
+    set((state) => ({ selectedItem: null, itemSelected: false }));
+  },
 }));
 
 export const useDndStore = create((set, get) => ({

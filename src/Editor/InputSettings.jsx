@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { editorStore } from "./EditorStore";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import ClickAwayListener from "@mui/base/ClickAwayListener";
+import { useQuestions } from "../_services/QuestionService";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -41,8 +43,12 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   })
 );
 
-const InputSettings = ({ questionName }) => {
-  console.log(questionName);
+const InputSettings = ({ currentInput }) => {
+  // console.log(questionName);
+  // issue with selcting the last question on clicking from one question to another.
+  const [updateQuestionName] = useQuestions((state) => {
+    return [state.updateQuestionName];
+  });
   const closeSettings = editorStore((state) => state.closeSettings);
 
   const selectedItem = editorStore((state) => state.selectedItem);
@@ -51,29 +57,38 @@ const InputSettings = ({ questionName }) => {
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-  let currentQuestion = questionName;
-  const [inputName, setInputName] = useState(questionName);
+  let currentInputName = currentInput?.question_name;
+  const [inputName, setInputName] = useState(currentInputName);
 
   const handleNameChange = (e) => {
     setInputName(e.target.value);
   };
 
+  const handleClickAway = () => {
+    if (inputName && inputName != currentInputName) {
+      updateQuestionName(currentInput.id, inputName);
+    } else {
+      setInputName(currentInputName);
+    }
+  };
+
   return (
     <div className="settings-wrapper">
       <div className="settings-header">
-        <TextField
-          defaultValue={questionName}
-          value={inputName}
-          id="filled-hidden-label-small"
-          variant="outlined"
-          size="small"
-          className="input-text-question-field"
-          sx={{ marginRight: "10px" }}
-          // InputProps={{
-          //   disableUnderline: true,
-          // }}
-          onChange={handleNameChange}
-        />
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <TextField
+            value={inputName}
+            id="filled-hidden-label-small"
+            variant="outlined"
+            size="small"
+            className="input-text-question-field"
+            sx={{ marginRight: "10px" }}
+            // InputProps={{
+            //   disableUnderline: true,
+            // }}
+            onChange={handleNameChange}
+          />
+        </ClickAwayListener>
         {/* <p>{questionName}</p> */}
         <div onClick={closeSettings} className="settings-close">
           <svg
