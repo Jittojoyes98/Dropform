@@ -67,4 +67,27 @@ export const useQuestions = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
+  changeOrderId: async (
+    question_id_over,
+    question_id_active,
+    order_id_over,
+    order_id_active
+  ) => {
+    set(() => ({ loading: true }));
+    try {
+      const { errorOver } = await supabase
+        .from("question")
+        .update({ order_id: order_id_active })
+        .eq("id", question_id_over);
+      const { errorActive } = await supabase
+        .from("question")
+        .update({ order_id: order_id_over })
+        .eq("id", question_id_active);
+
+      // let currentFetch = get().fetchAgain;
+      set(() => ({ loading: false }));
+    } catch (error) {
+      set(() => ({ error: error.message, loading: false }));
+    }
+  },
 }));

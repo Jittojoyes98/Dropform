@@ -49,6 +49,7 @@
   .right-dashboard {
     padding-left: 32px;
     padding-right: 32px;
+    height: 100%;
   }
   .right-dashboard-menu {
     border-bottom: 1px solid $dashboard-divider;
@@ -70,6 +71,17 @@
   }
   .dashboard-card-wrapper {
     padding: 24px 32px 80px;
+    height: 100%;
+  }
+  .dashboard-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-empty-text {
+    font-size: 24px;
+    line-height: 32px;
+    // font-family: ;
   }
   .form-cards {
     display: flex;

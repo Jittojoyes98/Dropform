@@ -5,6 +5,7 @@ import DashboardCard from "./DashboardCard";
 import CreateForm from "../_ui/CreateFormModal/CreateForm";
 import { useCreateFormStore } from "../_services/CreateFormService";
 import CreateButton from "../_ui/CreateButton/CreateButton";
+import dropDownSvg from "../../assets/empty.svg";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
@@ -73,21 +74,27 @@ const Dashboard = () => {
                 <div>date created</div>
               </div>
             </div>
-            <div className="dashboard-card-wrapper">
-              {data?.length > 0 ? (
+
+            {data?.length > 0 ? (
+              <div className="dashboard-card-wrapper ">
                 <div className="form-cards">
                   {/* show all cards here */}
                   {data.map((form, id) => {
                     return <DashboardCard key={id} formData={form} />;
                   })}
                 </div>
-              ) : (
+              </div>
+            ) : (
+              <div className="dashboard-card-wrapper dashboard-card">
                 <Box className="form-empty">
-                  <p>Nothing here</p>
+                  <img src={dropDownSvg} alt="dog" />
+                  <p className="form-empty-text">
+                    Come on in, {currentUser?.email?.split("@")[0]}
+                  </p>
                   <CreateButton handleOpenCreate={handleOpenCreate} />
                 </Box>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
