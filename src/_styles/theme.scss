@@ -142,6 +142,7 @@ img {
 
   .content {
     margin-top: 88px;
+    // height: 100%;
   }
   .content-other {
     margin-top: 24px;
@@ -431,6 +432,16 @@ img {
   }
   .auth-form-wrapper {
     height: 100%;
+  }
+  .home-wrapper {
+    .home-main {
+      width: 80%;
+      margin: 0px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+    }
   }
 }
 

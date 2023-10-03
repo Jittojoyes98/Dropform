@@ -38,17 +38,25 @@ const Editor = () => {
   });
 
   const closeProperties = editorStore((state) => state.closeProperties);
-  const [loading, error, createQuestion, getQuestion, questions, fetchAgain] =
-    useQuestions((state) => {
-      return [
-        state.loading,
-        state.error,
-        state.createQuestion,
-        state.getQuestion,
-        state.data,
-        state.fetchAgain,
-      ];
-    });
+  const [
+    loading,
+    error,
+    createQuestion,
+    getQuestion,
+    questions,
+    fetchAgain,
+    changeOrderId,
+  ] = useQuestions((state) => {
+    return [
+      state.loading,
+      state.error,
+      state.createQuestion,
+      state.getQuestion,
+      state.data,
+      state.fetchAgain,
+      state.changeOrderId,
+    ];
+  });
   const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
@@ -123,7 +131,18 @@ const Editor = () => {
       setComponents((inpt) => {
         const activeIndex = inpt.indexOf(active.id);
         const overIndex = inpt.indexOf(over.id);
-        return arrayMove(inpt, activeIndex, overIndex);
+        let currentActiveOrderId = inpt[activeIndex].order_id;
+        let currentOverOrderId = inpt[overIndex].order_id;
+        changeOrderId(
+          inpt[activeIndex].id,
+          inpt[overIndex].id,
+          currentActiveOrderId,
+          currentOverOrderId
+        );
+        inpt = arrayMove(inpt, activeIndex, overIndex);
+        inpt[activeIndex].order_id = currentOverOrderId;
+        inpt[overIndex].order_id = currentActiveOrderId;
+        return inpt;
       });
     }
   };
