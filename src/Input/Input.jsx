@@ -23,13 +23,13 @@ const Input = ({
   }, []);
   const iconComponents = useIconMapper({ isActive: select || hover });
 
-  const [deleteQuestion] = useQuestions((state) => {
-    return [state.deleteQuestion];
+  const [deleteQuestion, reorderQuestion] = useQuestions((state) => {
+    return [state.deleteQuestion, state.reorderQuestion];
   });
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    deleteQuestion(component.id);
+    deleteQuestion(component.id, component.form_id);
   };
 
   return (
