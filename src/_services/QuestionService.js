@@ -38,10 +38,16 @@ export const useQuestions = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
-  deleteQuestion: async (question_id) => {
+  deleteQuestion: async (question_id, form_id) => {
     set(() => ({ loading: true }));
-
     try {
+      const { data, errorReorder } = await supabase.rpc(
+        "delete_question_with_order",
+        {
+          formid: form_id,
+          questionid: question_id,
+        }
+      );
       const { error } = await supabase
         .from("question")
         .delete()
@@ -53,6 +59,7 @@ export const useQuestions = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
+  reorderQuestion: async (form_id) => {},
   updateQuestionName: async (question_id, name) => {
     set(() => ({ loading: true }));
     try {

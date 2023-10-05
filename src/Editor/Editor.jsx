@@ -163,6 +163,7 @@ const Editor = () => {
       </div>
     );
   }
+  console.log(components);
 
   return (
     <div className="editor-wrapper">
