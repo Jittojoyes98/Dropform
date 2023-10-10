@@ -70,7 +70,7 @@ const Editor = () => {
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
-  let questionNameCache = {};
+  const [questionCache, setQuestionCache] = useState({});
 
   // will be changing and these by fetching
 
@@ -84,6 +84,17 @@ const Editor = () => {
 
   useEffect(() => {
     setComponents(questions);
+    console.log(questionCache);
+    if (Object.keys(questionCache).length === 0) {
+      let questionNameCache = questionCache;
+      questions?.forEach((question) => {
+        if (!questionNameCache[question.type]) {
+          questionNameCache[question.type] = 0;
+        }
+        questionNameCache[question.type]++;
+      });
+      setQuestionCache(questionNameCache);
+    }
   }, [questions]);
 
   const handleDragStart = (event) => {
@@ -100,18 +111,13 @@ const Editor = () => {
     // create a closure here
 
     if (over) {
-      if (Object.keys(questionNameCache).length === 0) {
-        components.forEach((component) => {
-          if (!questionNameCache[component.type]) {
-            questionNameCache[component.type] = 0;
-          }
-          questionNameCache[component.type]++;
-        });
-      }
+      let questionNameCache = questionCache;
+
       if (!questionNameCache[type]) {
         questionNameCache[type] = 0;
       }
       questionNameCache[type]++;
+      setQuestionCache(questionNameCache);
       createQuestion(
         formid,
         type,
@@ -119,6 +125,7 @@ const Editor = () => {
         components.length + 1
       );
       openPropertiesDropping(components.length + 1);
+      // working on delete
     }
     setDragging(false);
   };
@@ -163,7 +170,6 @@ const Editor = () => {
       </div>
     );
   }
-  console.log(components);
 
   return (
     <div className="editor-wrapper">
@@ -188,6 +194,8 @@ const Editor = () => {
           <Playground
             setComponents={setComponents}
             components={components}
+            setQuestionCache={setQuestionCache}
+            questionCache={questionCache}
             divs={divs}
             editorRef={editorRef}
           />

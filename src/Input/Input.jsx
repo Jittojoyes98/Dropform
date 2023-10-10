@@ -12,6 +12,7 @@ const Input = ({
   inputRef,
   component,
   questionNumber,
+  handleQuestionDelete,
 }) => {
   const [hover, setHover] = React.useState(false);
 
@@ -30,6 +31,7 @@ const Input = ({
   const handleDelete = (e) => {
     e.stopPropagation();
     deleteQuestion(component.id, component.form_id);
+    handleQuestionDelete(component.type);
   };
 
   return (
