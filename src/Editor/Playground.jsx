@@ -9,7 +9,12 @@ import InputQuestion from "../_ui/InputQuestion/InputQuestion";
 // animation : https://web.dev/learn/css/animations/
 // resizing : https://www.pluralsight.com/guides/render-window-resize-react
 
-const Playground = ({ components, editorRef }) => {
+const Playground = ({
+  components,
+  editorRef,
+  setQuestionCache,
+  questionCache,
+}) => {
   const { isOver, setNodeRef } = useDroppable({
     id: "droppable",
     data: {
@@ -55,6 +60,12 @@ const Playground = ({ components, editorRef }) => {
     });
   }, [height, width]);
 
+  const handleDelete = (type) => {
+    let questionNameCache = questionCache;
+    questionNameCache[type]--;
+    setQuestionCache(questionNameCache);
+  };
+
   return (
     <div className="editor-design" ref={editorRef}>
       <div className="editor-space-wrapper">
@@ -70,6 +81,7 @@ const Playground = ({ components, editorRef }) => {
               components.map((component, index) => {
                 return (
                   <Input
+                    handleQuestionDelete={handleDelete}
                     key={index}
                     questionNumber={index + 1}
                     inputRef={inputRef}
