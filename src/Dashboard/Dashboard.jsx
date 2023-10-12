@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthContext } from "../auth";
 import Box from "@mui/material/Box";
 import DashboardCard from "./DashboardCard";
@@ -6,10 +6,11 @@ import CreateForm from "../_ui/CreateFormModal/CreateForm";
 import { useCreateFormStore } from "../_services/CreateFormService";
 import CreateButton from "../_ui/CreateButton/CreateButton";
 import dropDownSvg from "../../assets/empty.svg";
+import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
-  const { fetchForms, loading, data, error } = useCreateFormStore();
+  const { fetchForms, data, loading, error } = useCreateFormStore();
   const [pending, setPending] = React.useState(false);
   const firstRender = React.useRef(true);
   const [open, setOpen] = React.useState(false);
@@ -74,8 +75,13 @@ const Dashboard = () => {
                 <div>date created</div>
               </div>
             </div>
+            {/* use the loader here and then render accordingly */}
 
-            {data?.length > 0 ? (
+            {loading ? (
+              <div className="progress-wrapper">
+                <CircularProgressLoader />
+              </div>
+            ) : data.length > 0 ? (
               <div className="dashboard-card-wrapper ">
                 <div className="form-cards">
                   {/* show all cards here */}

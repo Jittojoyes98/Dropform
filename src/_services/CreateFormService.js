@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { supabase } from "../_supabase/supabaseInitialize";
 
 export const useCreateFormStore = create((set, get) => ({
-  loading: false,
+  loading: true,
   error: null,
   data: null,
   fetchFormsAgain: true,

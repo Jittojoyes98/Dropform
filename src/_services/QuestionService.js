@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { supabase } from "../_supabase/supabaseInitialize";
 
 export const useQuestions = create((set, get) => ({
-  loading: false,
+  loading: true,
   error: null,
   data: null,
   fetchAgain: true,
@@ -59,7 +59,7 @@ export const useQuestions = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
-  reorderQuestion: async (form_id) => {},
+
   updateQuestionName: async (question_id, name) => {
     set(() => ({ loading: true }));
     try {

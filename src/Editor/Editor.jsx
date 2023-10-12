@@ -33,13 +33,13 @@ const Editor = () => {
   const openPropertiesDropping = editorStore(
     (state) => state.openPropertiesDropping
   );
-  const [data, getCurrentFormDetails] = useFormDetails((state) => {
-    return [state.data, state.getCurrentFormDetails];
+  const [formLoading, data, getCurrentFormDetails] = useFormDetails((state) => {
+    return [state.loading, state.data, state.getCurrentFormDetails];
   });
 
   const closeProperties = editorStore((state) => state.closeProperties);
   const [
-    loading,
+    questionLoading,
     error,
     createQuestion,
     getQuestion,
@@ -61,18 +61,21 @@ const Editor = () => {
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
   const setActiveIdOnEnd = useDndStore((state) => state.setActiveIdOnEnd);
-  const [loadingState, setLoadingState] = useState(true);
   const selectedItem = editorStore((state) => state.selectedItem);
   const itemSelected = editorStore((state) => state.itemSelected);
-  const [components, setComponents] = useState([]);
+  const [components, setComponents] = useState(null);
   const [dragging, setDragging] = useState(false);
   const [fetchQuestions, setFetchQuestions] = useState(true);
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
   const [questionCache, setQuestionCache] = useState({});
-
-  // will be changing and these by fetching
+  // const measuringConfig = {
+  //   droppable: {
+  //     strategy: MeasuringStrategy.Always,
+  //   },
+  // };
+  // will be working on this.
 
   useEffect(() => {
     if (!editorRef.current) {
@@ -84,7 +87,6 @@ const Editor = () => {
 
   useEffect(() => {
     setComponents(questions);
-    console.log(questionCache);
     if (Object.keys(questionCache).length === 0) {
       let questionNameCache = questionCache;
       questions?.forEach((question) => {
@@ -153,17 +155,8 @@ const Editor = () => {
       });
     }
   };
-  const measuringConfig = {
-    droppable: {
-      strategy: MeasuringStrategy.Always,
-    },
-  };
 
-  setTimeout(() => {
-    setLoadingState(false);
-  }, 2000);
-
-  if (loadingState) {
+  if (!components || formLoading || questionLoading) {
     return (
       <div className="progress-wrapper">
         <CircularProgressLoader />
@@ -184,7 +177,7 @@ const Editor = () => {
               items={components}
               strategy={verticalListSortingStrategy}
             >
-              {components.map((inpt) => (
+              {components?.map((inpt) => (
                 <SortableItems key={inpt.id} id={inpt} />
               ))}
             </SortableContext>
