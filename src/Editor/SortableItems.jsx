@@ -24,6 +24,7 @@ const SortableItems = ({ id }) => {
     transition,
     padding: "10px",
     cursor: "grabbing",
+    minHeight: "56px",
   };
   return (
     <div
@@ -33,7 +34,7 @@ const SortableItems = ({ id }) => {
       {...attributes}
       {...listeners}
     >
-      <p>{id.type}</p>
+      <p>{id.question_name}</p>
     </div>
   );
 };
