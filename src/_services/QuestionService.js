@@ -59,7 +59,6 @@ export const useQuestions = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
-
   updateQuestionName: async (question_id, name) => {
     set(() => ({ loading: true }));
     try {

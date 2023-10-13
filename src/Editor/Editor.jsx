@@ -4,6 +4,9 @@ import {
   DragOverlay,
   closestCenter,
   MeasuringStrategy,
+  useSensors,
+  useSensor,
+  PointerSensor,
 } from "@dnd-kit/core";
 import Playground from "./Playground";
 import Widget from "./Widgets";
@@ -69,7 +72,9 @@ const Editor = () => {
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
+  const initialLoad = useRef(true);
   const [questionCache, setQuestionCache] = useState({});
+
   // const measuringConfig = {
   //   droppable: {
   //     strategy: MeasuringStrategy.Always,
@@ -156,7 +161,7 @@ const Editor = () => {
     }
   };
 
-  if (!components || formLoading || questionLoading) {
+  if (!components) {
     return (
       <div className="progress-wrapper">
         <CircularProgressLoader />
@@ -164,11 +169,20 @@ const Editor = () => {
     );
   }
 
+  // const sensors = useSensors(
+  //   useSensor(PointerSensor, {
+  //     activationConstraint: {
+  //       distance: 8,
+  //     },
+  //   })
+  // );
+
   return (
     <div className="editor-wrapper">
       <div className="editor-main">
         <div className="editor-order">
           <DndContext
+            // sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragSortableEnd}
             modifiers={[restrictToParentElement]}
@@ -177,8 +191,13 @@ const Editor = () => {
               items={components}
               strategy={verticalListSortingStrategy}
             >
-              {components?.map((inpt) => (
-                <SortableItems key={inpt.id} id={inpt} />
+              {components?.map((inpt, index) => (
+                <SortableItems
+                  key={inpt.id}
+                  id={inpt}
+                  index={index + 1}
+                  selectedItem={selectedItem}
+                />
               ))}
             </SortableContext>
           </DndContext>

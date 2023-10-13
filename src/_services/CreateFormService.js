@@ -40,5 +40,18 @@ export const useCreateFormStore = create((set, get) => ({
       set(() => ({ error: error.message, loading: false }));
     }
   },
+  updateFormName: async (form_id, name) => {
+    set(() => ({ loading: true }));
+    try {
+      const { error } = await supabase
+        .from("question")
+        .update({ form_name: name })
+        .eq("id", form_id);
+
+      set(() => ({ loading: false }));
+    } catch (error) {
+      set(() => ({ error: error.message, loading: false }));
+    }
+  },
   clearData: () => {},
 }));
