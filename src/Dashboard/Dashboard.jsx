@@ -77,15 +77,15 @@ const Dashboard = () => {
             </div>
             {/* use the loader here and then render accordingly */}
 
-            {loading ? (
+            {loading && !data ? (
               <div className="progress-wrapper">
                 <CircularProgressLoader />
               </div>
-            ) : data.length > 0 ? (
+            ) : data?.length > 0 ? (
               <div className="dashboard-card-wrapper ">
                 <div className="form-cards">
                   {/* show all cards here */}
-                  {data.map((form, id) => {
+                  {data?.map((form, id) => {
                     return <DashboardCard key={id} formData={form} />;
                   })}
                 </div>
