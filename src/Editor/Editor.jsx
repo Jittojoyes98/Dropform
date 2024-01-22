@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -213,8 +213,8 @@ const Editor = () => {
           />
           <div className="editor-sidebar">
             <div className="widget-wrapper">
-              {/* {console.log(selectedItem)} */}
-              {itemSelected && selectedItem > 0 ? (
+              {console.log(selectedItem, "Selected item")}
+              {itemSelected && components[selectedItem - 1] ? (
                 <InputSettings currentInput={components[selectedItem - 1]} />
               ) : (
                 <>
