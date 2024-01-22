@@ -1,22 +1,25 @@
-import React, { Suspense } from "react";
-import "@/_styles/theme.scss";
-import { Layout } from "../_layout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "../LoginPage";
-import HomePage from "../HomePage";
-import SignupPage from "../SignupPage";
-import { Authorize } from "../auth";
-import { Dashboard } from "../Dashboard";
-import { ForgotPassword } from "../ForgotPassword";
-import { PrivateRoute } from "../_components/PrivateRoute";
-import SignUpEmail from "../SignupPage/SignUpEmail";
-import NewPassword from "../ForgotPassword/NewPassword";
-import Editor from "../Editor/Editor";
+import React, { Suspense } from 'react'
+import { Layout } from '../_layout'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import LoginPage from '../LoginPage'
+import HomePage from '../HomePage'
+import SignupPage from '../SignupPage'
+import { Authorize } from '../auth'
+import { Dashboard } from '../Dashboard'
+import { ForgotPassword } from '../ForgotPassword'
+import { PrivateRoute } from '../_components/PrivateRoute'
+import SignUpEmail from '../SignupPage/SignUpEmail'
+import NewPassword from '../ForgotPassword/NewPassword'
+import Editor from '../Editor/Editor'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import '@/_styles/theme.scss'
 
 const App = () => {
   return (
     <BrowserRouter basename="/">
       <Suspense>
+        <ToastContainer />
         <Authorize>
           <Routes>
             {/* add routes here */}
@@ -51,7 +54,7 @@ const App = () => {
         </Authorize>
       </Suspense>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default App;
+export default App

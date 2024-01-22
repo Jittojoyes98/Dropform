@@ -1,8 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import classNames from "classnames";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
-import classNames from "classnames";
+
 
 const Layout = ({ layout }) => {
   // make use of loader, the full loader (mainly for auth loader)

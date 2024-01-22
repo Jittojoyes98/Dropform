@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
 import { useFormDetails } from "../_services/FormDetailService";
 import dropDownSvg from "../../assets/dropdown.svg";
 import { useCreateFormStore } from "../_services/CreateFormService";
@@ -12,11 +12,12 @@ const DashboardCard = ({ formData }) => {
   const currentFormDetails = useFormDetails(
     (state) => state.currentFormDetails
   );
-  const [deleteForms] = useCreateFormStore((state) => {
-    return [state.deleteForms];
+  const [deleteForms,error] = useCreateFormStore((state) => {
+    return [state.deleteForms,state.error];
   });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
