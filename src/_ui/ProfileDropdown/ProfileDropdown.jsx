@@ -3,8 +3,16 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useAuthContext } from "../../auth";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
-export default function ProfileDropdown({ src, handleClose, handleOpen }) {
+export default function ProfileDropdown({
+  src,
+  handleClose,
+  handleOpen,
+  userDetails,
+  email,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
 
@@ -28,6 +36,8 @@ export default function ProfileDropdown({ src, handleClose, handleOpen }) {
       console.log("There was an error");
     }
   };
+  console.log(userDetails);
+
   return (
     <>
       <div className="user-logo" onClick={handleClick} aria-describedby={id}>
@@ -47,8 +57,21 @@ export default function ProfileDropdown({ src, handleClose, handleOpen }) {
           horizontal: "right",
         }}
       >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-        <Button onClick={handleLogout}>Logout</Button>
+        <Box className="dropdown-wrapper">
+          <Box>
+            <div className="popover-user-logo">
+              <img src={src} className="user-logo-image" />
+              <Box className="user-details">
+                <p>{userDetails}</p>
+                <p>{email}</p>
+              </Box>
+            </div>
+          </Box>
+          <Box></Box>
+          <Box>
+            <Button onClick={handleLogout}>Logout</Button>
+          </Box>
+        </Box>
       </Popover>
     </>
   );

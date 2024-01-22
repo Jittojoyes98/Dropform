@@ -30,9 +30,16 @@ const Header = ({ layout }) => {
   };
 
   const handleDropName = (e) => {
-    console.log(e.target.value);
     setDropName(e.target.value);
   };
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
   const headerType = layout === "login" || layout === "signup";
   const isDashboard = layout === "dashboard";
@@ -61,6 +68,9 @@ const Header = ({ layout }) => {
         setOpen(true);
       }
     };
+    const userDetails =
+      currentUser?.user_metadata?.full_name?.toUpperCase() ||
+      "Anonymous Anonymous".toUpperCase();
 
     return (
       <Tooltip
@@ -71,10 +81,7 @@ const Header = ({ layout }) => {
         title={
           currentUser ? (
             <div className="tooltip-title">
-              <p className="tooltip-name">
-                {currentUser?.user_metadata?.full_name?.toUpperCase() ||
-                  "Anonymous Anonymous".toUpperCase()}
-              </p>
+              <p className="tooltip-name">{userDetails}</p>
               <p className="tooltip-email">{currentUser?.email}</p>
             </div>
           ) : (
@@ -97,7 +104,9 @@ const Header = ({ layout }) => {
       >
         <div className="user-menu">
           <ProfileDropdown
+            userDetails={userDetails}
             src={src}
+            email={currentUser?.email}
             handleClose={handleClose}
             handleOpen={handleOpen}
           />
