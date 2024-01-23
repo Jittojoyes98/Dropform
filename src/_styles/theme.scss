@@ -445,6 +445,87 @@ img {
   }
 }
 
+// --------------------------------------- //
+
+// div#driver-highlighted-element-stage,
+// div#driver-page-overlay {
+//   background: transparent !important;
+//   outline: 5000px solid rgba(0, 0, 0, 0.75);
+// }
+
+// .dark-theme-walkthrough#driver-popover-item {
+//   background-color: $bg-dark-light !important;
+//   border-color: rgba(101, 109, 119, 0.16) !important;
+
+//   .driver-popover-title {
+//     color: var(--slate12) !important;
+//   }
+
+//   .driver-popover-tip {
+//     border-color: transparent transparent transparent $bg-dark-light !important;
+//   }
+
+//   .driver-popover-description {
+//     color: #d9dcde !important;
+//   }
+
+//   .driver-popover-footer .driver-close-btn {
+//     color: #ffffff !important;
+//     text-shadow: none !important;
+//   }
+
+//   .driver-prev-btn,
+//   .driver-next-btn {
+//     text-shadow: none !important;
+//   }
+// }
+
+#driver-popover-item {
+  padding: 20px !important;
+
+  .driver-prev-btn,
+  .driver-next-btn,
+  .driver-close-btn {
+    border: none !important;
+    background: none !important;
+    padding-left: 0 !important;
+    font-size: 14px !important;
+  }
+
+  .driver-next-btn,
+  .driver-prev-btn {
+    color: red !important;
+  }
+
+  .driver-disabled {
+    color: red;
+    opacity: 0.5;
+  }
+
+  .driver-popover-footer {
+    margin-top: 20px !important;
+  }
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.popover.popover-dark-themed {
+  background-color: red;
+  border-color: rgba(101, 109, 119, 0.16);
+
+  .popover-body {
+    color: #d9dcde !important;
+  }
+
+  .popover-header {
+    background-color: var(--slate2);
+    color: var(--slate11);
+    border-bottom-color: var;
+  }
+}
+
 // screens
 
 @media screen and (max-width: 1024px) {

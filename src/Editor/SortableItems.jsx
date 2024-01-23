@@ -38,7 +38,11 @@ const SortableItems = ({ id, selectedItem, index }) => {
       onClick={() => {
         console.log("hii");
       }}
-      className={selectedItem && id.order_id == selectedItem ? "change" : ""}
+      className={
+        selectedItem && id.order_id == selectedItem
+          ? "sortable change"
+          : "sortable"
+      }
       ref={setNodeRef}
       style={style}
       {...attributes}

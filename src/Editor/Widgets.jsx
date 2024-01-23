@@ -1,6 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import React from "react";
+import React, { useEffect } from "react";
+import { initEditorWalkThrough } from "../_helpers/walkThrough";
 
 const Widget = ({ id, heading, svgIcon }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -17,10 +18,14 @@ const Widget = ({ id, heading, svgIcon }) => {
     width: "72px",
   };
 
+  useEffect(() => {
+    initEditorWalkThrough();
+  }, []);
+
   return (
     <div
       ref={setNodeRef}
-      className="widget-element"
+      className={`widget-element widget-${heading}`}
       style={style}
       {...listeners}
       {...attributes}
