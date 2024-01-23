@@ -7,6 +7,7 @@ import { useCreateFormStore } from "../_services/CreateFormService";
 import CreateButton from "../_ui/CreateButton/CreateButton";
 import dropDownSvg from "../../assets/empty.svg";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
+import { addToLocalStorage, getDataFromLocalStorage } from "../_helpers/utils";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
@@ -25,6 +26,9 @@ const Dashboard = () => {
     if (currentUser?.id && firstRender.current) {
       firstRender.current = false;
       fetchForms(currentUser.id);
+      if (getDataFromLocalStorage("walkthroughCompleted") == undefined) {
+        addToLocalStorage({ key: "walkthroughCompleted", value: false });
+      }
     }
   }, [currentUser, fetchFormsAgain]);
 

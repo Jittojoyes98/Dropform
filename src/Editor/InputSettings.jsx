@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { editorStore } from "./EditorStore";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -46,6 +46,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 const InputSettings = ({ currentInput }) => {
   // console.log(questionName);
   // issue with selcting the last question on clicking from one question to another.
+  console.log(currentInput, "THE CURRENT QUESTION");
   const [updateQuestionName] = useQuestions((state) => {
     return [state.updateQuestionName];
   });
@@ -58,26 +59,34 @@ const InputSettings = ({ currentInput }) => {
     setTabIndex(newValue);
   };
   let currentInputName = currentInput?.question_name;
-  const [inputName, setInputName] = useState(currentInputName);
+  const [inputName, setInputName] = useState(currentInput?.question_name);
+  const inputRef = React.useRef(currentInput?.question_name);
 
   const handleNameChange = (e) => {
     setInputName(e.target.value);
+    inputRef.current = e.target.value;
   };
+  React.useEffect(() => {
+    setInputName(currentInput?.question_name);
+    inputRef.current = currentInput?.question_name;
+  }, [currentInput]);
 
-  const handleClickAway = () => {
+  const handleClickAway = React.useCallback(() => {
+    console.log("Input Changed");
     if (inputName && inputName != currentInputName) {
+      console.log("Calling API", inputName, "-----", currentInputName);
       updateQuestionName(currentInput.id, inputName);
     } else {
       setInputName(currentInputName);
     }
-  };
+  }, [inputName]);
 
   return (
     <div className="settings-wrapper">
       <div className="settings-header">
         <ClickAwayListener onClickAway={handleClickAway}>
           <TextField
-            value={inputName}
+            value={inputRef.current}
             id="filled-hidden-label-small"
             variant="outlined"
             size="small"
