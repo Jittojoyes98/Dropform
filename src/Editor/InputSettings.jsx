@@ -8,6 +8,8 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useQuestions } from "../_services/QuestionService";
+import { Input, InputAdornment, Stack } from "@mui/material";
+import useSettingsMapper from "../_hooks/useSettingsMapper";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -55,31 +57,34 @@ const InputSettings = ({ currentInput }) => {
   const selectedItem = editorStore((state) => state.selectedItem);
   const [tabIndex, setTabIndex] = React.useState(1);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = React.useCallback((event, newValue) => {
     setTabIndex(newValue);
-  };
+  }, []);
   let currentInputName = currentInput?.question_name;
   const [inputName, setInputName] = useState(currentInput?.question_name);
   const inputRef = React.useRef(currentInput?.question_name);
 
-  const handleNameChange = (e) => {
+  const handleNameChange = React.useCallback((e) => {
     setInputName(e.target.value);
     inputRef.current = e.target.value;
-  };
+  }, []);
+
   React.useEffect(() => {
     setInputName(currentInput?.question_name);
     inputRef.current = currentInput?.question_name;
   }, [currentInput]);
 
   const handleClickAway = React.useCallback(() => {
-    console.log("Input Changed");
     if (inputName && inputName != currentInputName) {
-      console.log("Calling API", inputName, "-----", currentInputName);
       updateQuestionName(currentInput.id, inputName);
     } else {
       setInputName(currentInputName);
     }
   }, [inputName]);
+
+  console.log(currentInput);
+
+  const QuestionSettings = useSettingsMapper();
 
   return (
     <div className="settings-wrapper">
@@ -131,12 +136,8 @@ const InputSettings = ({ currentInput }) => {
             <StyledTab value={3} label="three" />
           </StyledTabs>
 
-          <Box sx={{ padding: 2 }}>
-            {tabIndex === 1 && (
-              <Box>
-                <Typography>The first tab</Typography>
-              </Box>
-            )}
+          <Box className="settings-tab-wrapper">
+            {tabIndex === 1 && QuestionSettings[currentInput.type]({})}
             {tabIndex === 2 && (
               <Box>
                 <Typography>The second tab</Typography>

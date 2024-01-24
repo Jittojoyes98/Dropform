@@ -10,6 +10,20 @@
   .MuiTabs-flexContainer {
     box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
   }
+  .settings-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    .question-type {
+      padding: 16px 16px 24px;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
+    }
+    .question-type-input {
+      height: 32px;
+      input {
+        padding: 2px;
+      }
+    }
+  }
   // .input-settings-tab {
   //   .MuiTabs-indicator {
   //     display: flex;
