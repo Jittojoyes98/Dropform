@@ -132,7 +132,6 @@ const Editor = () => {
         components.length + 1
       );
       openPropertiesDropping(components.length + 1);
-      // working on delete
     }
     setDragging(false);
   };

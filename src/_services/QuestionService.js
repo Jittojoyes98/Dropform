@@ -10,7 +10,7 @@ export const useQuestions = create((set, get) => ({
     set(() => ({ loading: true }));
 
     try {
-      const { data, error } = await supabase.rpc(
+      const { data, error, status } = await supabase.rpc(
         "create_question_initial_function",
         {
           current_form_id: formid,
@@ -19,6 +19,13 @@ export const useQuestions = create((set, get) => ({
           order_id: orderId,
         }
       );
+      if (data) {
+        // call the settings store , setInitialQuestionProperies
+      }
+      console.log(data);
+      if (status === 400) {
+        console.log(error, "Error on creation of question ", status);
+      }
       // now the whole list is not retured , will add the necessary in the future.
       set(() => ({ loading: false, data: data }));
     } catch (error) {
