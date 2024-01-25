@@ -84,7 +84,7 @@ const InputSettings = ({ currentInput }) => {
 
   console.log(currentInput);
 
-  const QuestionSettings = useSettingsMapper();
+  const QuestionSettings = useSettingsMapper()[currentInput.type];
 
   return (
     <div className="settings-wrapper">
@@ -137,7 +137,7 @@ const InputSettings = ({ currentInput }) => {
           </StyledTabs>
 
           <Box className="settings-tab-wrapper">
-            {tabIndex === 1 && QuestionSettings[currentInput.type]({})}
+            {tabIndex === 1 && QuestionSettings({})}
             {tabIndex === 2 && (
               <Box>
                 <Typography>The second tab</Typography>

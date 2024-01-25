@@ -1,90 +1,32 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
+import InputType from "./InputType";
 import Text from "../../../assets/text-icon.svg";
+import AntSwitch from "../Switch/Switch"
 
-const AntSwitch = styled(Switch)(({ theme }) => ({
-  width: 28,
-  height: 16,
-  padding: 0,
-  display: "flex",
-  "&:active": {
-    "& .MuiSwitch-thumb": {
-      width: 15,
-    },
-    "& .MuiSwitch-switchBase.Mui-checked": {
-      transform: "translateX(9px)",
-    },
-  },
-  "& .MuiSwitch-switchBase": {
-    padding: 2,
-    "&.Mui-checked": {
-      transform: "translateX(12px)",
-      color: "#fff",
-      "& + .MuiSwitch-track": {
-        opacity: 1,
-        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
-      },
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    transition: theme.transitions.create(["width"], {
-      duration: 200,
-    }),
-  },
-  "& .MuiSwitch-track": {
-    borderRadius: 16 / 2,
-    opacity: 1,
-    backgroundColor:
-      theme.palette.mode === "dark"
-        ? "rgba(255,255,255,.35)"
-        : "rgba(0,0,0,.25)",
-    boxSizing: "border-box",
-  },
-}));
-
-const TextSettings = ({ required = false, maxcharacters = "" }) => {
+const TextSettings = ({ required = false, maxcharacters = "" ,type="text"}) => {
   const [checked, setChecked] = React.useState(required);
   const handleChange = (event) => {
+    console.log(event.target);
     setChecked(event.target.checked);
   };
   return (
     <Box>
-      <Box className="question-type">
-        <Stack direction="column" spacing={2} alignItems="flex-start">
-          <Typography>Type</Typography>
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <img src={Text} alt="textIcon" />
-                </InputAdornment>
-              ),
-            }}
-            value={"Text"}
-            size="small"
-            className="input-text-question-field question-type-input"
-            disabled
-          />
-        </Stack>
-      </Box>
-      <Box />
-      <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Off</Typography>
-        <AntSwitch
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ "aria-label": "ant design" }}
-        />
+      <InputType src={Text} type={type}/>
+      <Stack direction="column" spacing={2} alignItems="flex-start" >
+        <Typography className="question-properties-header">Settings</Typography>
+        <Box className="question-properties">
+          <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Typography>Required</Typography>
+            <AntSwitch
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "ant design" }}
+            />
+          </Stack>
+        </Box>
       </Stack>
     </Box>
   );

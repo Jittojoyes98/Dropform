@@ -13,6 +13,9 @@
   .settings-tab-wrapper {
     display: flex;
     flex-direction: column;
+    .MuiStack-root{
+      width: 100%;
+    }
     .question-type {
       padding: 16px 16px 24px;
       box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
@@ -23,6 +26,18 @@
         padding: 2px;
       }
     }
+    .question-properties{
+      padding: 0px 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .question-properties-header{
+      width: 100%;
+      padding: 16px 16px 8px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
   }
   // .input-settings-tab {
   //   .MuiTabs-indicator {
