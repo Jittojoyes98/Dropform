@@ -28,8 +28,9 @@ import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
-import { useQuestions } from "../_services/QuestionService";
+import { useQuestionPropertyServices, useQuestions } from "../_services/QuestionService";
 import { useFormDetails } from "../_services/FormDetailService";
+import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
 
 const Editor = () => {
@@ -38,6 +39,10 @@ const Editor = () => {
   );
   const [formLoading, data, getCurrentFormDetails] = useFormDetails((state) => {
     return [state.loading, state.data, state.getCurrentFormDetails];
+  });
+
+  const [serviceQuestionProperties, getAllQuestionProperties] = useQuestionPropertyServices((state) => {
+    return [state.data, state.getAllQuestionProperties];
   });
 
   const closeProperties = editorStore((state) => state.closeProperties);
@@ -49,6 +54,8 @@ const Editor = () => {
     questions,
     fetchAgain,
     changeOrderId,
+    createdQuestionId,
+    deletedQuestionId
   ] = useQuestions((state) => {
     return [
       state.loading,
@@ -58,7 +65,12 @@ const Editor = () => {
       state.data,
       state.fetchAgain,
       state.changeOrderId,
+      state.createdQuestionId,
+      state.deletedQuestionId,
     ];
+  });
+  const [currentQuestionProperties, setNewQuestionProperies,deleteQuestionProperties] = useQuestionProperties((state) => {
+    return [state.questionProperties, state.setNewQuestionProperies,state.deleteQuestionProperties];
   });
   const { formid } = useParams();
   const divs = useInputIcons();
@@ -85,13 +97,27 @@ const Editor = () => {
   useEffect(() => {
     if (!editorRef.current) {
       getCurrentFormDetails(formid);
+      getAllQuestionProperties(formid);
     }
     getQuestion(formid);
     return () => closeProperties();
   }, [fetchAgain]);
 
   useEffect(() => {
-    setComponents(questions);
+    setComponents((prevComponents)=>{
+      if(!prevComponents || !questions){
+        return questions;
+      }
+      if(prevComponents.length>questions.length){
+        // deleted
+        deleteQuestionProperties(deletedQuestionId)
+      }
+      if(prevComponents.length<questions.length){
+        // created
+        setNewQuestionProperies(createdQuestionId,formid)
+      }
+      return questions;
+    });
     if (Object.keys(questionCache).length === 0) {
       let questionNameCache = questionCache;
       questions?.forEach((question) => {
@@ -103,6 +129,8 @@ const Editor = () => {
       setQuestionCache(questionNameCache);
     }
   }, [questions]);
+
+  // console.log(currentQuestionProperties,"Here you goo :rocket :💘 ",serviceQuestionProperties);
 
   const handleDragStart = (event) => {
     setDragging(true);

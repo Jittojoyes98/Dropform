@@ -4,7 +4,7 @@ export const getDataFromLocalStorage = (key) => {
 export const addToLocalStorage = (object) => {
   localStorage.setItem(object["key"], object["value"]);
 };
-export const initialQuestionProperties = (id) => ({
+export const initialQuestionProperties = (id,formId) => ({
   question_id: id,
   required: false,
   min_num: null,
@@ -12,4 +12,5 @@ export const initialQuestionProperties = (id) => ({
   max_num: null,
   actualQuestion: "...",
   is_max_char: false,
+  question_form_id:formId,
 });

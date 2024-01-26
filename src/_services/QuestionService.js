@@ -6,9 +6,10 @@ export const useQuestions = create((set, get) => ({
   error: null,
   data: null,
   fetchAgain: true,
+  createdQuestionId:null,
+  deletedQuestionId:null,
   createQuestion: async (formid, type, questionNumber, orderId) => {
     set(() => ({ loading: true }));
-
     try {
       const { data, error, status } = await supabase.rpc(
         "create_question_initial_function",
@@ -19,15 +20,13 @@ export const useQuestions = create((set, get) => ({
           order_id: orderId,
         }
       );
-      if (data) {
-        // call the settings store , setInitialQuestionProperies
+      if(error){
+        set(() => ({ loading: false, error:error?.message }));
+        return;
       }
-      console.log(data);
-      if (status === 400) {
-        console.log(error, "Error on creation of question ", status);
-      }
+      const questionsLength=data.length;
       // now the whole list is not retured , will add the necessary in the future.
-      set(() => ({ loading: false, data: data }));
+      set(() => ({ loading: false, data: data ,createdQuestionId: data[questionsLength-1].id}));
     } catch (error) {
       set(() => ({ error: error.message, loading: false }));
     }
@@ -48,20 +47,25 @@ export const useQuestions = create((set, get) => ({
   deleteQuestion: async (question_id, form_id) => {
     set(() => ({ loading: true }));
     try {
-      const { data, errorReorder } = await supabase.rpc(
+      const { data, error:errorReorder } = await supabase.rpc(
         "delete_question_with_order",
         {
           formid: form_id,
           questionid: question_id,
         }
       );
-      const { error } = await supabase
+      const {error} = await supabase
         .from("question")
         .delete()
         .eq("id", question_id);
+      
+      if(errorReorder || error){
+        set(() => ({ loading: false,error: errorReorder?.message || error?.message}));
+        return;
+      }
 
       let currentFetch = get().fetchAgain;
-      set(() => ({ loading: false, fetchAgain: !currentFetch }));
+      set(() => ({ loading: false, fetchAgain: !currentFetch, deletedQuestionId: question_id }));
     } catch (error) {
       set(() => ({ error: error.message, loading: false }));
     }
@@ -104,3 +108,28 @@ export const useQuestions = create((set, get) => ({
     }
   },
 }));
+
+export const useQuestionPropertyServices = create((set, get) => ({
+  loading: true,
+  error: null,
+  data: null,
+  getAllQuestionProperties:async (formid) => {
+    set(() => ({ loading: true }));
+
+    try {
+      const {data , error } = await supabase.rpc("get_current_formquestion_properies", {
+        formid: formid,
+      });
+
+      if(error){
+        // handle error 
+        set(() => ({ loading: false, error: error.message }));
+        return
+      }
+
+      set(() => ({ loading: false, data: data }));
+    } catch (error) {
+      set(() => ({ loading: false , error: error.message }));
+    }
+  },
+}))

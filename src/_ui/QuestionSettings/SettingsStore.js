@@ -2,10 +2,16 @@ import { create } from "zustand";
 import { initialQuestionProperties } from "../../_helpers/utils";
 
 export const useQuestionProperties = create((set, get) => ({
-  questions: [],
-  setInitialQuestionProperies: (id) =>
+  questionProperties: {},
+  setNewQuestionProperies: (id,formId) =>
     set((state) => ({
-      questions: [...state.questions, initialQuestionProperties(id)],
+      questionProperties: {...state.questionProperties,[id]: initialQuestionProperties(id,formId) } ,
     })),
-  setActiveIdOnEnd: () => set((event) => ({ activeId: null })),
+  deleteQuestionProperties: (questionId) => set((state) =>{ 
+    const currentProperties=state.questionProperties;
+    delete currentProperties[questionId]
+    return { questionProperties: currentProperties }
+  }),
+  updateQuestionProperties:(updatedProperies)=>set((state) => ({ questionProperties: {...state.questionProperties, [updatedProperies.id] : updatedProperies }})),
+  setInitialQuestionProperies:(initialProperties)=>set((state)=>({questionProperties: initialProperties }))
 }));
