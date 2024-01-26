@@ -8,9 +8,10 @@ import AntSwitch from "../Switch/Switch";
 
 const TextSettings = ({
   required = false,
-  isMaxcharacters = false,
-  maxcharacters = "",
+  is_max_char = false,
+  max_char = "",
   type = "text",
+  actualQuestion
 }) => {
   const [checked, setChecked] = React.useState(required);
   const handleChange = (event) => {

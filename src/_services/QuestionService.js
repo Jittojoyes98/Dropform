@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { supabase } from "../_supabase/supabaseInitialize";
+import { setInitialQuestionProperies } from "../_ui/QuestionSettings/SettingsStore";
 
 export const useQuestions = create((set, get) => ({
   loading: true,
@@ -126,6 +127,7 @@ export const useQuestionPropertyServices = create((set, get) => ({
         set(() => ({ loading: false, error: error.message }));
         return
       }
+      setInitialQuestionProperies(data)
 
       set(() => ({ loading: false, data: data }));
     } catch (error) {

@@ -10,6 +10,7 @@ import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useQuestions } from "../_services/QuestionService";
 import { Input, InputAdornment, Stack } from "@mui/material";
 import useSettingsMapper from "../_hooks/useSettingsMapper";
+import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -48,11 +49,11 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 const InputSettings = ({ currentInput }) => {
   // console.log(questionName);
   // issue with selcting the last question on clicking from one question to another.
-  console.log(currentInput, "THE CURRENT QUESTION");
   const [updateQuestionName] = useQuestions((state) => {
     return [state.updateQuestionName];
   });
   const closeSettings = editorStore((state) => state.closeSettings);
+  const questionProperties = useQuestionProperties((state) => state.questionProperties);
 
   const selectedItem = editorStore((state) => state.selectedItem);
   const [tabIndex, setTabIndex] = React.useState(1);
@@ -82,9 +83,11 @@ const InputSettings = ({ currentInput }) => {
     }
   }, [inputName]);
 
-  console.log(currentInput);
-
   const QuestionSettings = useSettingsMapper()[currentInput.type];
+
+  // console.log("Here you goo :🚀  ",questionProperties);
+
+  const currentQuestionProperties=questionProperties[currentInput.id]
 
   return (
     <div className="settings-wrapper">
@@ -137,7 +140,7 @@ const InputSettings = ({ currentInput }) => {
           </StyledTabs>
 
           <Box className="settings-tab-wrapper">
-            {tabIndex === 1 && QuestionSettings({})}
+            {tabIndex === 1 && QuestionSettings(currentQuestionProperties)}
             {tabIndex === 2 && (
               <Box>
                 <Typography>The second tab</Typography>

@@ -82,7 +82,7 @@ const Playground = ({
                 return (
                   <Input
                     handleQuestionDelete={handleDelete}
-                    key={index}
+                    key={component.id}
                     questionNumber={index + 1}
                     inputRef={inputRef}
                     component={component}

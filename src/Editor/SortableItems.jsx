@@ -32,12 +32,10 @@ const SortableItems = ({ id, selectedItem, index }) => {
     cursor: "grabbing",
     minHeight: "56px",
   };
-  // console.log(index);
+
+  console.log("Here you goo :🚀 debugging this  ",id,"----");
   return (
     <div
-      onClick={() => {
-        console.log("hii");
-      }}
       className={
         selectedItem && id.order_id == selectedItem
           ? "sortable change"

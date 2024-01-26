@@ -167,7 +167,6 @@ const Editor = () => {
 
   const handleDragSortableEnd = (event) => {
     const { active, over } = event;
-    console.log(active.id, over.id);
     if (active.id !== over.id) {
       setComponents((inpt) => {
         const activeIndex = inpt.indexOf(active.id);
@@ -240,7 +239,6 @@ const Editor = () => {
           />
           <div className="editor-sidebar">
             <div className="widget-wrapper">
-              {console.log(selectedItem, "Selected item")}
               {itemSelected && components[selectedItem - 1] ? (
                 <InputSettings currentInput={components[selectedItem - 1]} />
               ) : (
