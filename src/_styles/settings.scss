@@ -10,6 +10,39 @@
   .MuiTabs-flexContainer {
     box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
   }
+  .settings-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    .MuiStack-root {
+      width: 100%;
+    }
+    .question-type {
+      padding: 16px 16px 24px;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
+    }
+    .question-type-input {
+      height: 32px;
+      input {
+        padding: 2px;
+      }
+    }
+    .question-properties-wrapper {
+      padding-bottom: 16px;
+      box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
+    }
+    .question-properties {
+      padding: 16px 16px 8px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 0;
+    }
+    .question-properties-header {
+      width: 100%;
+      padding: 16px 16px 8px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
   // .input-settings-tab {
   //   .MuiTabs-indicator {
   //     display: flex;

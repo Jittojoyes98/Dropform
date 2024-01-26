@@ -8,6 +8,9 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useQuestions } from "../_services/QuestionService";
+import { Input, InputAdornment, Stack } from "@mui/material";
+import useSettingsMapper from "../_hooks/useSettingsMapper";
+import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -46,40 +49,45 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 const InputSettings = ({ currentInput }) => {
   // console.log(questionName);
   // issue with selcting the last question on clicking from one question to another.
-  console.log(currentInput, "THE CURRENT QUESTION");
   const [updateQuestionName] = useQuestions((state) => {
     return [state.updateQuestionName];
   });
   const closeSettings = editorStore((state) => state.closeSettings);
+  const questionProperties = useQuestionProperties((state) => state.questionProperties);
 
   const selectedItem = editorStore((state) => state.selectedItem);
   const [tabIndex, setTabIndex] = React.useState(1);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = React.useCallback((event, newValue) => {
     setTabIndex(newValue);
-  };
+  }, []);
   let currentInputName = currentInput?.question_name;
   const [inputName, setInputName] = useState(currentInput?.question_name);
   const inputRef = React.useRef(currentInput?.question_name);
 
-  const handleNameChange = (e) => {
+  const handleNameChange = React.useCallback((e) => {
     setInputName(e.target.value);
     inputRef.current = e.target.value;
-  };
+  }, []);
+
   React.useEffect(() => {
     setInputName(currentInput?.question_name);
     inputRef.current = currentInput?.question_name;
   }, [currentInput]);
 
   const handleClickAway = React.useCallback(() => {
-    console.log("Input Changed");
     if (inputName && inputName != currentInputName) {
-      console.log("Calling API", inputName, "-----", currentInputName);
       updateQuestionName(currentInput.id, inputName);
     } else {
       setInputName(currentInputName);
     }
   }, [inputName]);
+
+  const QuestionSettings = useSettingsMapper()[currentInput.type];
+
+  // console.log("Here you goo :🚀  ",questionProperties);
+
+  const currentQuestionProperties=questionProperties[currentInput.id]
 
   return (
     <div className="settings-wrapper">
@@ -131,12 +139,8 @@ const InputSettings = ({ currentInput }) => {
             <StyledTab value={3} label="three" />
           </StyledTabs>
 
-          <Box sx={{ padding: 2 }}>
-            {tabIndex === 1 && (
-              <Box>
-                <Typography>The first tab</Typography>
-              </Box>
-            )}
+          <Box className="settings-tab-wrapper">
+            {tabIndex === 1 && QuestionSettings(currentQuestionProperties)}
             {tabIndex === 2 && (
               <Box>
                 <Typography>The second tab</Typography>

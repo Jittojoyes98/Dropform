@@ -181,7 +181,7 @@
   }
   .input-text-question-field-wr {
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 0px;
   }
   .input-text-question-field {
     width: 100%;
@@ -198,6 +198,7 @@
       font-size: 20px;
       padding: 6px 5px;
       height: 30px;
+      background-color: white;
     }
     input::-webkit-input-placeholder {
       color: $body-text-color;

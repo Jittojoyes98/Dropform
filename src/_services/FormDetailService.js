@@ -6,7 +6,6 @@ export const useFormDetails = create((set, get) => ({
   error: null,
   data: null,
   currentFormDetails: (formData) => {
-    console.log(formData);
     set(() => ({ data: formData }));
   },
   getCurrentFormDetails: async (formid) => {
