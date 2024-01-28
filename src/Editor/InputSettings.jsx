@@ -85,9 +85,7 @@ const InputSettings = ({ currentInput }) => {
 
   const QuestionSettings = useSettingsMapper()[currentInput.type];
 
-  // console.log("Here you goo :🚀  ",questionProperties);
-
-  const currentQuestionProperties=questionProperties[currentInput.id]
+  const currentQuestionProperties=questionProperties[currentInput.id];
 
   return (
     <div className="settings-wrapper">

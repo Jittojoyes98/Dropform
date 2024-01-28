@@ -10,7 +10,7 @@ export const initialQuestionProperties = (id,formId) => ({
   min_num: null,
   max_char: null,
   max_num: null,
-  actualQuestion: "...",
+  actual_question: "...",
   is_max_char: false,
   question_form_id:formId,
 });

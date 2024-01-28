@@ -134,4 +134,27 @@ export const useQuestionPropertyServices = create((set, get) => ({
       set(() => ({ loading: false , error: error.message }));
     }
   },
+  updateQuestionPropertiesService:async (payload) => {
+    set(() => ({ loading: true }));
+    
+    try {
+      const {data , error } = await supabase.rpc("update_settings",
+       {payload: [payload]});
+
+      if(error){
+        // handle error 
+        set(() => ({ loading: false, error: error.message }));
+        return
+      }
+
+      if(data){
+        set(() => ({ loading: false, data: data }));
+        return true;
+      }
+
+      
+    } catch (error) {
+      set(() => ({ loading: false , error: error.message }));
+    }
+  },
 }))

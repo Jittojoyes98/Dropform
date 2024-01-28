@@ -5,19 +5,34 @@ import Box from "@mui/material/Box";
 import InputType from "./InputType";
 import Text from "../../../assets/text-icon.svg";
 import AntSwitch from "../Switch/Switch";
+import { useQuestionPropertyServices } from "../../_services/QuestionService";
+import { useQuestionProperties } from "./SettingsStore";
 
-const TextSettings = ({
+const TextSettings = (currentQuestionProperties) => {
+  const {
   required = false,
   is_max_char = false,
   max_char = "",
   type = "text",
-  actualQuestion
-}) => {
-  const [checked, setChecked] = React.useState(required);
-  const handleChange = (event) => {
-    console.log(event.target.id);
-    setChecked(event.target.checked);
+  actual_question
+  } =currentQuestionProperties;
+  
+  const updateQuestionPropertiesService = useQuestionPropertyServices((state) => state.updateQuestionPropertiesService);
+
+  const [updateQuestionProperties] = useQuestionProperties((state) => {
+    return [state.updateQuestionProperties];
+  });
+
+  const handleChange = async(event) => {
+    const updatedProperties={...currentQuestionProperties, [event.target.name]: event.target.checked }
+    updateQuestionProperties(updatedProperties)
+
+    const isUpdated = await updateQuestionPropertiesService(updatedProperties)
+    if(!isUpdated){
+      updateQuestionProperties({...currentQuestionProperties, [event.target.name]: !event.target.checked })
+    }
   };
+  
   return (
     <Box>
       <InputType src={Text} type={type} />
@@ -32,8 +47,8 @@ const TextSettings = ({
           <Stack direction="row" spacing={2} justifyContent="space-between">
             <Typography>Required</Typography>
             <AntSwitch
-              id="required"
-              checked={checked}
+              name="required"
+              checked={currentQuestionProperties.required}
               onChange={handleChange}
               inputProps={{ "aria-label": "text required" }}
             />
@@ -44,9 +59,10 @@ const TextSettings = ({
           <Stack direction="row" spacing={2} justifyContent="space-between">
             <Typography>Max characters</Typography>
             <AntSwitch
-              checked={checked}
+              checked={currentQuestionProperties.is_max_char}
               onChange={handleChange}
-              inputProps={{ "aria-label": "text required" }}
+              name="is_max_char"
+              inputProps={{ "aria-label": "maximum character required" }}
             />
           </Stack>
         </Box>
