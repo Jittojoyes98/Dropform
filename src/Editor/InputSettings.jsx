@@ -85,11 +85,7 @@ const InputSettings = ({ currentInput }) => {
 
   const QuestionSettings = useSettingsMapper()[currentInput.type];
 
-  // console.log("Here you goo :🚀  ",questionProperties);
-
-  const [currentQuestionProperties,setCurrentQuestionProperties]=React.useState(questionProperties[currentInput.id]);
-
-
+  const currentQuestionProperties=questionProperties[currentInput.id];
 
   return (
     <div className="settings-wrapper">
@@ -142,7 +138,7 @@ const InputSettings = ({ currentInput }) => {
           </StyledTabs>
 
           <Box className="settings-tab-wrapper">
-            {tabIndex === 1 && QuestionSettings({setCurrentQuestionProperties,currentQuestionProperties})}
+            {tabIndex === 1 && QuestionSettings(currentQuestionProperties)}
             {tabIndex === 2 && (
               <Box>
                 <Typography>The second tab</Typography>

@@ -134,7 +134,7 @@ export const useQuestionPropertyServices = create((set, get) => ({
       set(() => ({ loading: false , error: error.message }));
     }
   },
-  updateQuestionProperties:async (payload) => {
+  updateQuestionPropertiesService:async (payload) => {
     set(() => ({ loading: true }));
     
     try {
@@ -146,7 +146,7 @@ export const useQuestionPropertyServices = create((set, get) => ({
         set(() => ({ loading: false, error: error.message }));
         return
       }
-      console.log(data);
+
       if(data){
         set(() => ({ loading: false, data: data }));
         return true;

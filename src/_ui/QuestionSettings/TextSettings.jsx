@@ -6,8 +6,9 @@ import InputType from "./InputType";
 import Text from "../../../assets/text-icon.svg";
 import AntSwitch from "../Switch/Switch";
 import { useQuestionPropertyServices } from "../../_services/QuestionService";
+import { useQuestionProperties } from "./SettingsStore";
 
-const TextSettings = ({setCurrentQuestionProperties , currentQuestionProperties}) => {
+const TextSettings = (currentQuestionProperties) => {
   const {
   required = false,
   is_max_char = false,
@@ -16,19 +17,21 @@ const TextSettings = ({setCurrentQuestionProperties , currentQuestionProperties}
   actual_question
   } =currentQuestionProperties;
   
-  const updateQuestionProperties = useQuestionPropertyServices((state) => state.updateQuestionProperties);
+  const updateQuestionPropertiesService = useQuestionPropertyServices((state) => state.updateQuestionPropertiesService);
+
+  const [updateQuestionProperties] = useQuestionProperties((state) => {
+    return [state.updateQuestionProperties];
+  });
 
   const handleChange = async(event) => {
-    console.log(event.target.name);
-    // setChecked(event.target.checked);
+    const updatedProperties={...currentQuestionProperties, [event.target.name]: event.target.checked }
+    updateQuestionProperties(updatedProperties)
 
-    const isUpdated = await updateQuestionProperties({...currentQuestionProperties, [event.target.name]: event.target.checked })
-    if(isUpdated){
-      setCurrentQuestionProperties((currentProperties)=>({...currentProperties, [event.target.name]: event.target.checked }))
+    const isUpdated = await updateQuestionPropertiesService(updatedProperties)
+    if(!isUpdated){
+      updateQuestionProperties({...currentQuestionProperties, [event.target.name]: !event.target.checked })
     }
   };
-
-  console.log(currentQuestionProperties,"Here you go :🚀 ",setCurrentQuestionProperties,"-----");
   
   return (
     <Box>

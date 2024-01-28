@@ -12,7 +12,7 @@ export const useQuestionProperties = create((set, get) => ({
     delete currentProperties[questionId]
     return { questionProperties: currentProperties }
   }),
-  updateQuestionProperties:(updatedProperies)=>set((state) => ({ questionProperties: {...state.questionProperties, [updatedProperies.id] : updatedProperies }})),
+  updateQuestionProperties:(updatedProperies)=>set((state) => ({ questionProperties: {...state.questionProperties, [updatedProperies.question_id] : updatedProperies }})),
 }));
 
 // modular appraoch to updating store without calling hooks , which is way better
