@@ -28,7 +28,10 @@ import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
-import { useQuestionPropertyServices, useQuestions } from "../_services/QuestionService";
+import {
+  useQuestionPropertyServices,
+  useQuestions,
+} from "../_services/QuestionService";
 import { useFormDetails } from "../_services/FormDetailService";
 import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
 // https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
@@ -41,9 +44,10 @@ const Editor = () => {
     return [state.loading, state.data, state.getCurrentFormDetails];
   });
 
-  const [serviceQuestionProperties, getAllQuestionProperties] = useQuestionPropertyServices((state) => {
-    return [state.data, state.getAllQuestionProperties];
-  });
+  const [serviceQuestionProperties, getAllQuestionProperties] =
+    useQuestionPropertyServices((state) => {
+      return [state.data, state.getAllQuestionProperties];
+    });
 
   const closeProperties = editorStore((state) => state.closeProperties);
   const [
@@ -55,7 +59,7 @@ const Editor = () => {
     fetchAgain,
     changeOrderId,
     createdQuestionId,
-    deletedQuestionId
+    deletedQuestionId,
   ] = useQuestions((state) => {
     return [
       state.loading,
@@ -69,8 +73,16 @@ const Editor = () => {
       state.deletedQuestionId,
     ];
   });
-  const [currentQuestionProperties, setNewQuestionProperies,deleteQuestionProperties] = useQuestionProperties((state) => {
-    return [state.questionProperties, state.setNewQuestionProperies,state.deleteQuestionProperties];
+  const [
+    currentQuestionProperties,
+    setNewQuestionProperies,
+    deleteQuestionProperties,
+  ] = useQuestionProperties((state) => {
+    return [
+      state.questionProperties,
+      state.setNewQuestionProperies,
+      state.deleteQuestionProperties,
+    ];
   });
   const { formid } = useParams();
   const divs = useInputIcons();
@@ -80,7 +92,6 @@ const Editor = () => {
   const itemSelected = editorStore((state) => state.itemSelected);
   const [components, setComponents] = useState(null);
   const [dragging, setDragging] = useState(false);
-  const [fetchQuestions, setFetchQuestions] = useState(true);
   const gridSize = 10; // pixels
   const snapToGridModifier = createSnapModifier(gridSize);
   const editorRef = useRef(null);
@@ -104,17 +115,17 @@ const Editor = () => {
   }, [fetchAgain]);
 
   useEffect(() => {
-    setComponents((prevComponents)=>{
-      if(!prevComponents || !questions){
+    setComponents((prevComponents) => {
+      if (!prevComponents || !questions) {
         return questions;
       }
-      if(prevComponents.length>questions.length){
+      if (prevComponents.length > questions.length) {
         // deleted
-        deleteQuestionProperties(deletedQuestionId)
+        deleteQuestionProperties(deletedQuestionId);
       }
-      if(prevComponents.length<questions.length){
+      if (prevComponents.length < questions.length) {
         // created
-        setNewQuestionProperies(createdQuestionId,formid)
+        setNewQuestionProperies(createdQuestionId, formid);
       }
       return questions;
     });
@@ -180,8 +191,8 @@ const Editor = () => {
           currentOverOrderId
         );
         inpt = arrayMove(inpt, activeIndex, overIndex);
-        inpt[activeIndex].order_id = currentOverOrderId;
-        inpt[overIndex].order_id = currentActiveOrderId;
+        inpt[activeIndex].order_id = currentActiveOrderId;
+        inpt[overIndex].order_id = currentOverOrderId;
         return inpt;
       });
     }
@@ -221,7 +232,6 @@ const Editor = () => {
                 <SortableItems
                   key={inpt.id}
                   id={inpt}
-                  index={index + 1}
                   selectedItem={selectedItem}
                 />
               ))}

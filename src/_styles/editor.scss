@@ -228,9 +228,13 @@
       height: 30px;
       cursor: text;
     }
-    .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled {
+    .Mui-disabled {
       -webkit-text-fill-color: $ondrop-element;
       opacity: 1;
+    }
+    .Mui-disabled::before {
+      border-bottom-style: solid;
+      border: 1px solid $ondrop-element;
     }
   }
   .input-text-question-description {

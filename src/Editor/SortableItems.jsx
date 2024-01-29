@@ -21,10 +21,6 @@ const SortableItems = ({ id, selectedItem, index }) => {
       id: id,
     });
 
-  const openPropertiesClicking = editorStore(
-    (state) => state.openPropertiesClicking
-  );
-
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -33,7 +29,6 @@ const SortableItems = ({ id, selectedItem, index }) => {
     minHeight: "56px",
   };
 
-  console.log("Here you goo :🚀 debugging this  ",id,"----");
   return (
     <div
       className={
