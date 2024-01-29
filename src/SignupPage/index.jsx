@@ -1,26 +1,26 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../auth"
+import { useAuthContext } from "../auth";
 
 const SignupPage = () => {
-  const [error,setError]=useState("")
-  const [loading,setLoading]=useState(false)
-  const { signup, currentUser,setCurrentUser, signInWithGoogle } = useAuthContext()
-  const navigate=useNavigate()
-  
-  
-  const handleGoogle=async(e)=>{
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signup, currentUser, setCurrentUser, signInWithGoogle } =
+    useAuthContext();
+  const navigate = useNavigate();
+
+  const handleGoogle = async (e) => {
     try {
-      const {data,error}=await signInWithGoogle()
-      if(!error && data){
+      const { data, error } = await signInWithGoogle();
+      if (!error && data) {
         console.log("Google sign in success");
       }
     } catch (error) {
       console.log("Error occured");
     }
-  }
-  
+  };
+
   return (
     <div className="centre-div auth-height">
       <div className="auth-form-wrapper">
@@ -33,11 +33,18 @@ const SignupPage = () => {
         </span>
         <div className="login-form-wrapper">
           <div className="signup-email-wrapper">
-            <h2 className="login-title align-center">Get better data with conversational forms, surveys, quizzes & more.</h2>
+            <h2 className="login-title align-center">
+              Get better data with conversational forms, surveys, quizzes &
+              more.
+            </h2>
             <div className="centre-div">
               <div className="fix-width ">
                 <div>
-                  <Button className="tertiary-button social-button" variant="outlined" onClick={handleGoogle}>
+                  <Button
+                    className="tertiary-button social-button"
+                    variant="outlined"
+                    onClick={handleGoogle}
+                  >
                     <svg
                       width="32"
                       height="32"
@@ -71,22 +78,46 @@ const SignupPage = () => {
                         fill="#EA4335"
                       ></path>
                     </svg>
-                    Sign up with Google</Button>
+                    Sign up with Google
+                  </Button>
                 </div>
                 <div>
-                  <Button style={{ marginBottom: "5px" }} className="tertiary-button social-button" variant="outlined" onClick={()=>navigate("/login")}>
-                    <svg height="32" width="32" viewBox="0 0 32 32" fit="" className="centre-div" focusable="false">
+                  <Button
+                    style={{ marginBottom: "5px" }}
+                    className="tertiary-button social-button"
+                    variant="outlined"
+                    onClick={() => navigate("/login")}
+                  >
+                    <svg
+                      height="32"
+                      width="32"
+                      viewBox="0 0 32 32"
+                      fit=""
+                      className="centre-div"
+                      focusable="false"
+                    >
                       {/* <rect width="32" height="32" rx="6" fill="white"></rect> */}
-                      <path transform="translate(2, 4)" d="M10 11c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m0-9C7.79 2 6 3.79 6 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10.9c2.97 0 6.1 1.46 6.1 2.1v1.1H3.9V15c0-.64 3.13-2.1 6.1-2.1m0-9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2" fill-opacity=".54" fill-rule="evenodd">
-                      </path></svg>
-                    Log in Anonymously</Button>
+                      <path
+                        transform="translate(2, 4)"
+                        d="M10 11c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m0-9C7.79 2 6 3.79 6 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10.9c2.97 0 6.1 1.46 6.1 2.1v1.1H3.9V15c0-.64 3.13-2.1 6.1-2.1m0-9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2"
+                        fillOpacity=".54"
+                        fill-rule="evenodd"
+                      ></path>
+                    </svg>
+                    Log in Anonymously
+                  </Button>
                 </div>
                 <div className="centre-div margin-fix">
-                  <span className="or-text" >OR</span>
+                  <span className="or-text">OR</span>
                 </div>
-                <Button variant="outlined" className='secondary-button auth-button redirect-button' onClick={() => navigate("email")}>Sign up with email</Button>
+                <Button
+                  variant="outlined"
+                  className="secondary-button auth-button redirect-button"
+                  onClick={() => navigate("email")}
+                >
+                  Sign up with email
+                </Button>
               </div>
-              
             </div>
           </div>
         </div>
@@ -106,7 +137,7 @@ const SignupPage = () => {
         </form> */}
       </div>
     </div>
-  )
+  );
 };
 
 export default SignupPage;

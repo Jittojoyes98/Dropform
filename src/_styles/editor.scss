@@ -95,10 +95,22 @@
         font-size: 14px;
         line-height: 20px;
         box-sizing: border-box;
+        border: none;
       }
       fieldset {
         padding: 0px;
+        border-color: white;
         // border: none;
+      }
+    }
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:hover {
+      fieldset {
+        // border: none;
+        box-shadow: rgb(187, 187, 187) 0px 0px 0px 1px inset;
+        border-radius: 4px;
+      }
+      input {
+        cursor: pointer;
       }
     }
   }

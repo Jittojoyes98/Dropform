@@ -14,60 +14,72 @@ const loginSchema = yup.object({
     .required("Please enter your password"),
 });
 
-
 const LoginPage = () => {
-  const [error, setError] = useState()
+  const [error, setError] = useState();
   // const [loading, setLoading] = useState(false)
-  const { login, currentUser,signInWithEmail,signInWithGoogle, signInOutsider,loading,setLoading} = useAuthContext()
-  const navigate = useNavigate()
-  const handleForm = async (email,password) => {
+  const {
+    login,
+    currentUser,
+    signInWithEmail,
+    signInWithGoogle,
+    signInOutsider,
+    loading,
+    setLoading,
+  } = useAuthContext();
+  const navigate = useNavigate();
+  const handleForm = async (email, password) => {
     try {
-      setError("")
-      setLoading(true)
-      const {data, error}= await signInWithEmail(email, password)
-      if(!error && data){
-        navigate("/dashboard")
+      setError("");
+      setLoading(true);
+      const { data, error } = await signInWithEmail(email, password);
+      if (!error && data) {
+        navigate("/dashboard");
       }
-      if(error){
-        if(error.message=="Invalid login credentials"){
+      if (error) {
+        if (error.message == "Invalid login credentials") {
           setError(
             <>
               Your login info is not right. Try again, or&nbsp;
-              <Link to="password/request" className="forgot-link small-text-light">reset your password</Link>&nbsp;reset your password.
-              if it slipped your mind.
+              <Link
+                to="password/request"
+                className="forgot-link small-text-light"
+              >
+                reset your password
+              </Link>
+              &nbsp;reset your password. if it slipped your mind.
             </>
-          )
-        }else{
-          setError("There was an unsupported response from server.")
+          );
+        } else {
+          setError("There was an unsupported response from server.");
         }
       }
     } catch (error) {
-      setError("There was an unsupported response from server.")
+      setError("There was an unsupported response from server.");
     }
-    setLoading(false)
-  }
-  const handleGoogle =  async() => {
+    setLoading(false);
+  };
+  const handleGoogle = async () => {
     try {
-      const {data , error}= await signInWithGoogle()
-      if(!error && data){
+      const { data, error } = await signInWithGoogle();
+      if (!error && data) {
         console.log("Google sign in success");
       }
-      if(error){
+      if (error) {
         console.log("There was an error");
       }
     } catch (error) {
-      setError("There was an unsupported response from server.")
+      setError("There was an unsupported response from server.");
     }
-  }
-  const handleAnonymous=async()=>{
+  };
+  const handleAnonymous = async () => {
     try {
-      await signInOutsider()
+      await signInOutsider();
       console.log("WE ARE MOVING TO DASHBOARD");
-      navigate("/dashboard")
+      navigate("/dashboard");
     } catch (error) {
       console.log("Error occured");
     }
-  }
+  };
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -76,27 +88,27 @@ const LoginPage = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       console.log(values);
-      handleForm(values.email,values.password)
+      handleForm(values.email, values.password);
     },
   });
-  const HandleFormError=()=>{
-    if(!error){
-      setError("We found some errors. Please review the form and make corrections.")
+  const HandleFormError = () => {
+    if (!error) {
+      setError(
+        "We found some errors. Please review the form and make corrections."
+      );
     }
-    return(
-      <p className="validation-error">{formik.errors.email}</p>
-    )
-  }
-  const handleErrorBox=()=>{
-    return(
+    return <p className="validation-error">{formik.errors.email}</p>;
+  };
+  const handleErrorBox = () => {
+    return (
       <div className="error-box-wrapper">
         <div className="error-span"></div>
         <div className="error-box">
           <p>{error}</p>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="centre-div auth-height">
@@ -113,7 +125,7 @@ const LoginPage = () => {
             <h2 className="login-title align-center">Hello, who’s this?</h2>
             <form onSubmit={formik.handleSubmit}>
               <div className="error-infobox">
-                {error ? handleErrorBox():<></>}
+                {error ? handleErrorBox() : <></>}
               </div>
               <div>
                 <div className="label-wrapper">
@@ -128,7 +140,11 @@ const LoginPage = () => {
                   placeholder="bruce@wayne.com"
                   variant="outlined"
                 />
-                {(formik.touched.email && Boolean(formik.errors.email)) ? HandleFormError():<></>}
+                {formik.touched.email && Boolean(formik.errors.email) ? (
+                  HandleFormError()
+                ) : (
+                  <></>
+                )}
               </div>
               <div>
                 <div className="label-wrapper">
@@ -144,21 +160,41 @@ const LoginPage = () => {
                   placeholder="Atleast 8 characters"
                   variant="outlined"
                 />
-                {(formik.touched.password && Boolean(formik.errors.password)) ? <p className="validation-error">{formik.errors.password}</p> : <></>}
+                {formik.touched.password && Boolean(formik.errors.password) ? (
+                  <p className="validation-error">{formik.errors.password}</p>
+                ) : (
+                  <></>
+                )}
               </div>
 
-              
-              <div style={{marginBottom:"25px",paddingTop:"5px"}}>
-                <Link to="password/request" className="forgot-link small-text-light">Forgot Password?</Link>
+              <div style={{ marginBottom: "25px", paddingTop: "5px" }}>
+                <Link
+                  to="password/request"
+                  className="forgot-link small-text-light"
+                >
+                  Forgot Password?
+                </Link>
               </div>
-              <Button disabled={loading} style={{marginBottom:"25px"}} variant='contained' type="submit" className='secondary-button auth-button'>Log in to Dropform</Button>
+              <Button
+                disabled={loading}
+                style={{ marginBottom: "25px" }}
+                variant="contained"
+                type="submit"
+                className="secondary-button auth-button"
+              >
+                Log in to Dropform
+              </Button>
             </form>
           </div>
           <div className="or-wrapper">
             <span className="or-text">OR</span>
           </div>
           <div>
-            <Button className="tertiary-button social-button" variant="outlined" onClick={handleGoogle}>
+            <Button
+              className="tertiary-button social-button"
+              variant="outlined"
+              onClick={handleGoogle}
+            >
               <svg
                 width="32"
                 height="32"
@@ -191,21 +227,41 @@ const LoginPage = () => {
                   d="M15.9999 9.9765C17.4682 9.9765 18.7866 10.4811 19.823 11.4721L22.6915 8.60362C20.9595 6.9898 18.6956 5.99878 15.9999 5.99878C12.0903 5.99878 8.70814 8.23994 7.0625 11.5085L10.4038 14.0997C11.1902 11.7358 13.395 9.9765 15.9999 9.9765Z"
                   fill="#EA4335"
                 ></path>
-                </svg>
-              Log in with Google</Button>
+              </svg>
+              Log in with Google
+            </Button>
           </div>
           <div>
-            <Button disabled={loading} style={{marginBottom:"5px"}} className="tertiary-button social-button" variant="outlined" onClick={handleAnonymous}>
-              <svg height="32" width="32" viewBox="0 0 32 32" fit="" className="centre-div" focusable="false">
+            <Button
+              disabled={loading}
+              style={{ marginBottom: "5px" }}
+              className="tertiary-button social-button"
+              variant="outlined"
+              onClick={handleAnonymous}
+            >
+              <svg
+                height="32"
+                width="32"
+                viewBox="0 0 32 32"
+                fit=""
+                className="centre-div"
+                focusable="false"
+              >
                 {/* <rect width="32" height="32" rx="6" fill="white"></rect> */}
-                <path transform="translate(2, 4)" d="M10 11c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m0-9C7.79 2 6 3.79 6 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10.9c2.97 0 6.1 1.46 6.1 2.1v1.1H3.9V15c0-.64 3.13-2.1 6.1-2.1m0-9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2" fill-opacity=".54" fill-rule="evenodd">
-                </path></svg>
-              Log in Anonymously</Button>
+                <path
+                  transform="translate(2, 4)"
+                  d="M10 11c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4m0-9C7.79 2 6 3.79 6 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10.9c2.97 0 6.1 1.46 6.1 2.1v1.1H3.9V15c0-.64 3.13-2.1 6.1-2.1m0-9a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2"
+                  fillOpacity=".54"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+              Log in Anonymously
+            </Button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default LoginPage;
