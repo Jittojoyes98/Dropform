@@ -7,6 +7,7 @@ import {
   useSensors,
   useSensor,
   PointerSensor,
+  KeyboardSensor,
 } from "@dnd-kit/core";
 import Playground from "./Playground";
 import Widget from "./Widgets";
@@ -15,6 +16,7 @@ import SortableItems from "./SortableItems";
 import {
   arrayMove,
   SortableContext,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
@@ -207,12 +209,21 @@ const Editor = () => {
   }
 
   // const sensors = useSensors(
+  //   useSensor(PointerSensor),
+  //   useSensor(KeyboardSensor, {
+  //     coordinateGetter: sortableKeyboardCoordinates,
+  //   })
+  // );
+
+  // const sensors = useSensors(
   //   useSensor(PointerSensor, {
   //     activationConstraint: {
   //       distance: 8,
   //     },
   //   })
   // );
+
+  
 
   return (
     <div className="editor-wrapper">
@@ -231,7 +242,8 @@ const Editor = () => {
               {components?.map((inpt, index) => (
                 <SortableItems
                   key={inpt.id}
-                  id={inpt}
+                  id={inpt.id}
+                  item={inpt}
                   selectedItem={selectedItem}
                 />
               ))}

@@ -14,7 +14,7 @@ import { editorStore } from "./EditorStore";
 //   return true;
 // }
 
-const SortableItems = ({ id, selectedItem, index }) => {
+const SortableItems = ({ id, selectedItem, item }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       // animateLayoutChanges,
@@ -31,8 +31,9 @@ const SortableItems = ({ id, selectedItem, index }) => {
 
   return (
     <div
+      onClick={()=>console.log("Hiii")}
       className={
-        selectedItem && id.order_id == selectedItem
+        selectedItem && item.order_id == selectedItem
           ? "sortable change"
           : "sortable"
       }
@@ -41,7 +42,7 @@ const SortableItems = ({ id, selectedItem, index }) => {
       {...attributes}
       {...listeners}
     >
-      <p>{id.question_name}</p>
+      <p>{item.question_name}</p>
     </div>
   );
 };
