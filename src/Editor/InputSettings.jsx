@@ -53,7 +53,9 @@ const InputSettings = ({ currentInput }) => {
     return [state.updateQuestionName];
   });
   const closeSettings = editorStore((state) => state.closeSettings);
-  const questionProperties = useQuestionProperties((state) => state.questionProperties);
+  const questionProperties = useQuestionProperties(
+    (state) => state.questionProperties
+  );
 
   const selectedItem = editorStore((state) => state.selectedItem);
   const [tabIndex, setTabIndex] = React.useState(1);
@@ -85,7 +87,7 @@ const InputSettings = ({ currentInput }) => {
 
   const QuestionSettings = useSettingsMapper()[currentInput.type];
 
-  const currentQuestionProperties=questionProperties[currentInput.id];
+  const currentQuestionProperties = questionProperties[currentInput.id];
 
   return (
     <div className="settings-wrapper">
@@ -112,7 +114,7 @@ const InputSettings = ({ currentInput }) => {
             viewBox="0 0 20 21"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            class="close-svg"
+            className="close-svg"
           >
             <path
               fill-rule="evenodd"

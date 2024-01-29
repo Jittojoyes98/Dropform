@@ -10,10 +10,17 @@
 
   <body>
     <div id="app"></div>
-    <% if (process.env.NODE_ENV === 'production') { %>
-    <script src="https://dropform.vercel.app/bundle.js"></script>
-    <% } else { %>
-    <script src="http://localhost:3030/bundle.js"></script>
-    <% } %>
+    <script>
+      var origin = window.location.origin;
+
+      // Create a script element
+      var scriptElement = document.createElement("script");
+
+      // Set the src attribute with the dynamic value
+      scriptElement.src = origin + "/bundle.js";
+
+      // Append the script element to the HTML document
+      document.head.appendChild(scriptElement);
+    </script>
   </body>
 </html>
