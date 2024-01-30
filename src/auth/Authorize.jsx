@@ -27,14 +27,14 @@ const Authorize = ({ children }) => {
       provider: "google",
       options: {
         queryParams: {
-          redirect_to: `${config.url.API_URL}dashboard`,
+          redirect_to: `${window.location.origin}/dashboard`,
         },
       },
     });
   }
   function forgotPassword(email) {
     return supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${config.url.API_URL}login/password/update`,
+      redirectTo: `${window.location.origin}login/password/update`,
     });
   }
   function signOut() {

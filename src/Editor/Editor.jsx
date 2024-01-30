@@ -7,6 +7,7 @@ import {
   useSensors,
   useSensor,
   PointerSensor,
+  KeyboardSensor,
 } from "@dnd-kit/core";
 import Playground from "./Playground";
 import Widget from "./Widgets";
@@ -15,6 +16,7 @@ import SortableItems from "./SortableItems";
 import {
   arrayMove,
   SortableContext,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
@@ -24,7 +26,6 @@ import {
 } from "@dnd-kit/modifiers";
 import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
-import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
@@ -84,6 +85,9 @@ const Editor = () => {
       state.deleteQuestionProperties,
     ];
   });
+  const openPropertiesClicking = editorStore(
+    (state) => state.openPropertiesClicking
+  );
   const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
@@ -141,8 +145,6 @@ const Editor = () => {
     }
   }, [questions]);
 
-  // console.log(currentQuestionProperties,"Here you goo :rocket :💘 ",serviceQuestionProperties);
-
   const handleDragStart = (event) => {
     setDragging(true);
     setActiveIdOnStart(event.active.id);
@@ -180,10 +182,12 @@ const Editor = () => {
     const { active, over } = event;
     if (active.id !== over.id) {
       setComponents((inpt) => {
-        const activeIndex = inpt.indexOf(active.id);
-        const overIndex = inpt.indexOf(over.id);
+        const mappedIds = inpt.map((x) => x.id);
+        const activeIndex = mappedIds.indexOf(active.id);
+        const overIndex = mappedIds.indexOf(over.id);
         let currentActiveOrderId = inpt[activeIndex].order_id;
         let currentOverOrderId = inpt[overIndex].order_id;
+
         changeOrderId(
           inpt[activeIndex].id,
           inpt[overIndex].id,
@@ -193,10 +197,23 @@ const Editor = () => {
         inpt = arrayMove(inpt, activeIndex, overIndex);
         inpt[activeIndex].order_id = currentActiveOrderId;
         inpt[overIndex].order_id = currentOverOrderId;
+        // open the current over
+        openPropertiesClicking(currentOverOrderId);
         return inpt;
       });
     }
   };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   if (!components) {
     return (
@@ -206,20 +223,12 @@ const Editor = () => {
     );
   }
 
-  // const sensors = useSensors(
-  //   useSensor(PointerSensor, {
-  //     activationConstraint: {
-  //       distance: 8,
-  //     },
-  //   })
-  // );
-
   return (
     <div className="editor-wrapper">
       <div className="editor-main">
         <div className="editor-order">
           <DndContext
-            // sensors={sensors}
+            sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragSortableEnd}
             modifiers={[restrictToParentElement]}
@@ -231,7 +240,8 @@ const Editor = () => {
               {components?.map((inpt, index) => (
                 <SortableItems
                   key={inpt.id}
-                  id={inpt}
+                  id={inpt.id}
+                  item={inpt}
                   selectedItem={selectedItem}
                 />
               ))}
@@ -257,7 +267,7 @@ const Editor = () => {
                   {divs.map((div, index) => {
                     return (
                       <Widget
-                        key={div.heading}
+                        key={div.id}
                         id={div.id}
                         heading={div.type}
                         svgIcon={div.svgIcon}

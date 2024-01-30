@@ -14,25 +14,32 @@ import { editorStore } from "./EditorStore";
 //   return true;
 // }
 
-const SortableItems = ({ id, selectedItem, index }) => {
+const SortableItems = ({ id, selectedItem, item }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       // animateLayoutChanges,
       id: id,
+      data: {
+        item,
+      },
     });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     padding: "10px",
-    cursor: "grabbing",
     minHeight: "56px",
   };
 
+  const openPropertiesClicking = editorStore(
+    (state) => state.openPropertiesClicking
+  );
+
   return (
     <div
+      onClick={() => openPropertiesClicking(item?.order_id)}
       className={
-        selectedItem && id.order_id == selectedItem
+        selectedItem && item?.order_id == selectedItem
           ? "sortable change"
           : "sortable"
       }
@@ -41,7 +48,7 @@ const SortableItems = ({ id, selectedItem, index }) => {
       {...attributes}
       {...listeners}
     >
-      <p>{id.question_name}</p>
+      <p>{item.question_name}</p>
     </div>
   );
 };
