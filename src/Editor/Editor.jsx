@@ -26,7 +26,6 @@ import {
 } from "@dnd-kit/modifiers";
 import { editorStore, useDndStore } from "./EditorStore";
 import InputSettings from "./InputSettings";
-import { useCreateFormStore } from "../_services/CreateFormService";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import useInputIcons from "../_hooks/useInputIcons";
 import { useParams } from "react-router-dom";
@@ -268,7 +267,7 @@ const Editor = () => {
                   {divs.map((div, index) => {
                     return (
                       <Widget
-                        key={div.heading}
+                        key={div.id}
                         id={div.id}
                         heading={div.type}
                         svgIcon={div.svgIcon}
