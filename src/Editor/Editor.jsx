@@ -143,7 +143,6 @@ const Editor = () => {
     }
   }, [questions]);
 
-  // console.log(currentQuestionProperties,"Here you goo :rocket :💘 ",serviceQuestionProperties);
 
   const handleDragStart = (event) => {
     setDragging(true);
@@ -186,6 +185,7 @@ const Editor = () => {
         const overIndex = inpt.indexOf(over.id);
         let currentActiveOrderId = inpt[activeIndex].order_id;
         let currentOverOrderId = inpt[overIndex].order_id;
+        console.log(currentActiveOrderId,currentActiveOrderId,"HERE WE DEBUG :🚀 \n");
         changeOrderId(
           inpt[activeIndex].id,
           inpt[overIndex].id,
@@ -200,6 +200,17 @@ const Editor = () => {
     }
   };
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10
+      }
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates
+    })
+  );
+
   if (!components) {
     return (
       <div className="progress-wrapper">
@@ -208,29 +219,12 @@ const Editor = () => {
     );
   }
 
-  // const sensors = useSensors(
-  //   useSensor(PointerSensor),
-  //   useSensor(KeyboardSensor, {
-  //     coordinateGetter: sortableKeyboardCoordinates,
-  //   })
-  // );
-
-  // const sensors = useSensors(
-  //   useSensor(PointerSensor, {
-  //     activationConstraint: {
-  //       distance: 8,
-  //     },
-  //   })
-  // );
-
-  
-
   return (
     <div className="editor-wrapper">
       <div className="editor-main">
         <div className="editor-order">
           <DndContext
-            // sensors={sensors}
+            sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragSortableEnd}
             modifiers={[restrictToParentElement]}

@@ -29,11 +29,12 @@ const SortableItems = ({ id, selectedItem, item }) => {
     minHeight: "56px",
   };
 
+  console.log("HERE WE GOO :🚀 ",item);
   return (
     <div
       onClick={()=>console.log("Hiii")}
       className={
-        selectedItem && item.order_id == selectedItem
+        selectedItem && item?.order_id == selectedItem
           ? "sortable change"
           : "sortable"
       }
