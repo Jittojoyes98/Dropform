@@ -86,6 +86,9 @@ const Editor = () => {
       state.deleteQuestionProperties,
     ];
   });
+  const openPropertiesClicking = editorStore(
+    (state) => state.openPropertiesClicking
+  );
   const { formid } = useParams();
   const divs = useInputIcons();
   const setActiveIdOnStart = useDndStore((state) => state.setActiveIdOnStart);
@@ -143,7 +146,6 @@ const Editor = () => {
     }
   }, [questions]);
 
-
   const handleDragStart = (event) => {
     setDragging(true);
     setActiveIdOnStart(event.active.id);
@@ -181,11 +183,12 @@ const Editor = () => {
     const { active, over } = event;
     if (active.id !== over.id) {
       setComponents((inpt) => {
-        const activeIndex = inpt.indexOf(active.id);
-        const overIndex = inpt.indexOf(over.id);
+        const mappedIds = inpt.map((x) => x.id);
+        const activeIndex = mappedIds.indexOf(active.id);
+        const overIndex = mappedIds.indexOf(over.id);
         let currentActiveOrderId = inpt[activeIndex].order_id;
         let currentOverOrderId = inpt[overIndex].order_id;
-        console.log(currentActiveOrderId,currentActiveOrderId,"HERE WE DEBUG :🚀 \n");
+
         changeOrderId(
           inpt[activeIndex].id,
           inpt[overIndex].id,
@@ -195,6 +198,8 @@ const Editor = () => {
         inpt = arrayMove(inpt, activeIndex, overIndex);
         inpt[activeIndex].order_id = currentActiveOrderId;
         inpt[overIndex].order_id = currentOverOrderId;
+        // open the current over
+        openPropertiesClicking(currentOverOrderId);
         return inpt;
       });
     }
@@ -203,11 +208,11 @@ const Editor = () => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 10
-      }
+        distance: 10,
+      },
     }),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
+      coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 

@@ -19,20 +19,25 @@ const SortableItems = ({ id, selectedItem, item }) => {
     useSortable({
       // animateLayoutChanges,
       id: id,
+      data: {
+        item,
+      },
     });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     padding: "10px",
-    cursor: "grabbing",
     minHeight: "56px",
   };
 
-  console.log("HERE WE GOO :🚀 ",item);
+  const openPropertiesClicking = editorStore(
+    (state) => state.openPropertiesClicking
+  );
+
   return (
     <div
-      onClick={()=>console.log("Hiii")}
+      onClick={() => openPropertiesClicking(item?.order_id)}
       className={
         selectedItem && item?.order_id == selectedItem
           ? "sortable change"

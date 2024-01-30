@@ -278,4 +278,10 @@
   .change {
     background-color: #f0f0f0;
   }
+  .sortable {
+    cursor: pointer;
+  }
+  .sortable:active {
+    cursor: grabbing;
+  }
 }
