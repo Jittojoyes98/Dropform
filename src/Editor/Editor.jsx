@@ -193,6 +193,7 @@ const Editor = () => {
         changeOrderId(
           inpt[activeIndex].id,
           currentOverOrderId,
+          currentActiveOrderId,
           moveDirection,
           formid
         );

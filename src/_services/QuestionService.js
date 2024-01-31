@@ -99,6 +99,7 @@ export const useQuestions = create((set, get) => ({
   changeOrderId: async (
     question_id_active,
     order_id_over,
+    order_id_active,
     direction,
     formid
   ) => {
@@ -111,6 +112,7 @@ export const useQuestions = create((set, get) => ({
             x: direction,
             formid: formid,
             over_order: order_id_over,
+            active_order: order_id_active,
           }
         );
       } else {
@@ -120,6 +122,7 @@ export const useQuestions = create((set, get) => ({
             x: direction,
             formid: formid,
             over_order: order_id_over,
+            active_order: order_id_active,
           }
         );
       }
