@@ -7,8 +7,8 @@ export const useQuestions = create((set, get) => ({
   error: null,
   data: null,
   fetchAgain: true,
-  createdQuestionId:null,
-  deletedQuestionId:null,
+  createdQuestionId: null,
+  deletedQuestionId: null,
   createQuestion: async (formid, type, questionNumber, orderId) => {
     set(() => ({ loading: true }));
     try {
@@ -21,13 +21,17 @@ export const useQuestions = create((set, get) => ({
           order_id: orderId,
         }
       );
-      if(error){
-        set(() => ({ loading: false, error:error?.message }));
+      if (error) {
+        set(() => ({ loading: false, error: error?.message }));
         return;
       }
-      const questionsLength=data.length;
+      const questionsLength = data.length;
       // now the whole list is not retured , will add the necessary in the future.
-      set(() => ({ loading: false, data: data ,createdQuestionId: data[questionsLength-1].id}));
+      set(() => ({
+        loading: false,
+        data: data,
+        createdQuestionId: data[questionsLength - 1].id,
+      }));
     } catch (error) {
       set(() => ({ error: error.message, loading: false }));
     }
@@ -48,25 +52,32 @@ export const useQuestions = create((set, get) => ({
   deleteQuestion: async (question_id, form_id) => {
     set(() => ({ loading: true }));
     try {
-      const { data, error:errorReorder } = await supabase.rpc(
+      const { data, error: errorReorder } = await supabase.rpc(
         "delete_question_with_order",
         {
           formid: form_id,
           questionid: question_id,
         }
       );
-      const {error} = await supabase
+      const { error } = await supabase
         .from("question")
         .delete()
         .eq("id", question_id);
-      
-      if(errorReorder || error){
-        set(() => ({ loading: false,error: errorReorder?.message || error?.message}));
+
+      if (errorReorder || error) {
+        set(() => ({
+          loading: false,
+          error: errorReorder?.message || error?.message,
+        }));
         return;
       }
 
       let currentFetch = get().fetchAgain;
-      set(() => ({ loading: false, fetchAgain: !currentFetch, deletedQuestionId: question_id }));
+      set(() => ({
+        loading: false,
+        fetchAgain: !currentFetch,
+        deletedQuestionId: question_id,
+      }));
     } catch (error) {
       set(() => ({ error: error.message, loading: false }));
     }
@@ -86,17 +97,32 @@ export const useQuestions = create((set, get) => ({
     }
   },
   changeOrderId: async (
-    question_id_over,
     question_id_active,
     order_id_over,
-    order_id_active
+    direction,
+    formid
   ) => {
     set(() => ({ loading: true }));
     try {
-      const { errorOver } = await supabase
-        .from("question")
-        .update({ order_id: order_id_active })
-        .eq("id", question_id_over);
+      if (direction > 0) {
+        const { data, error: errorReorder } = await supabase.rpc(
+          "change_positive_order",
+          {
+            x: direction,
+            formid: formid,
+            over_order: order_id_over,
+          }
+        );
+      } else {
+        const { data, error: errorReorder } = await supabase.rpc(
+          "change_negative_order",
+          {
+            x: direction,
+            formid: formid,
+            over_order: order_id_over,
+          }
+        );
+      }
       const { errorActive } = await supabase
         .from("question")
         .update({ order_id: order_id_over })
@@ -114,47 +140,49 @@ export const useQuestionPropertyServices = create((set, get) => ({
   loading: true,
   error: null,
   data: null,
-  getAllQuestionProperties:async (formid) => {
+  getAllQuestionProperties: async (formid) => {
     set(() => ({ loading: true }));
 
     try {
-      const {data , error } = await supabase.rpc("get_current_formquestion_properies", {
-        formid: formid,
-      });
+      const { data, error } = await supabase.rpc(
+        "get_current_formquestion_properies",
+        {
+          formid: formid,
+        }
+      );
 
-      if(error){
-        // handle error 
+      if (error) {
+        // handle error
         set(() => ({ loading: false, error: error.message }));
-        return
+        return;
       }
-      setInitialQuestionProperies(data)
+      setInitialQuestionProperies(data);
 
       set(() => ({ loading: false, data: data }));
     } catch (error) {
-      set(() => ({ loading: false , error: error.message }));
+      set(() => ({ loading: false, error: error.message }));
     }
   },
-  updateQuestionPropertiesService:async (payload) => {
+  updateQuestionPropertiesService: async (payload) => {
     set(() => ({ loading: true }));
-    
-    try {
-      const {data , error } = await supabase.rpc("update_settings",
-       {payload: [payload]});
 
-      if(error){
-        // handle error 
+    try {
+      const { data, error } = await supabase.rpc("update_settings", {
+        payload: [payload],
+      });
+
+      if (error) {
+        // handle error
         set(() => ({ loading: false, error: error.message }));
-        return
+        return;
       }
 
-      if(data){
+      if (data) {
         set(() => ({ loading: false, data: data }));
         return true;
       }
-
-      
     } catch (error) {
-      set(() => ({ loading: false , error: error.message }));
+      set(() => ({ loading: false, error: error.message }));
     }
   },
-}))
+}));

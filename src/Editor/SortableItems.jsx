@@ -35,9 +35,11 @@ const SortableItems = ({ id, selectedItem, item }) => {
     (state) => state.openPropertiesClicking
   );
 
+  // console.log("HERE", item?.order_id, "====", selectedItem);
+
   return (
     <div
-      onClick={() => openPropertiesClicking(item?.order_id)}
+      onClick={() => openPropertiesClicking(item.order_id)}
       className={
         selectedItem && item?.order_id == selectedItem
           ? "sortable change"

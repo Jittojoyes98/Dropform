@@ -257,8 +257,10 @@ img {
     color: $common-color;
     text-decoration: underline;
   }
-  .auth-content button:first-child {
-    margin-right: 16px;
+  .auth-content {
+    button:first-child {
+      margin-right: 16px;
+    }
   }
   .common-text-light {
     font-size: 14px;
