@@ -12,12 +12,12 @@ const DashboardCard = ({ formData }) => {
   const currentFormDetails = useFormDetails(
     (state) => state.currentFormDetails
   );
-  const [deleteForms,error] = useCreateFormStore((state) => {
-    return [state.deleteForms,state.error];
+  const [deleteForms, error] = useCreateFormStore((state) => {
+    return [state.deleteForms, state.error];
   });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,7 +33,7 @@ const DashboardCard = ({ formData }) => {
     <Box className="form-card">
       <Link
         className="form-card-link"
-        to={`/editor/${formData.id}`}
+        to={`/${formData.id}/edit`}
         // onClick={() => currentFormDetails(formData)}
       >
         <div className="form-name">

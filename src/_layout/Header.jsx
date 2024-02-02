@@ -135,6 +135,15 @@ const Header = ({ layout }) => {
           </div>
           <div>options</div>
           <div className="auth-content">
+            <div>
+              <div>
+                <Button>Preview</Button>
+              </div>
+              <div>
+                <Button>Publish</Button>
+              </div>
+            </div>
+
             <ProfileIcon />
           </div>
         </div>

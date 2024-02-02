@@ -8,6 +8,7 @@ import {
   useSensor,
   PointerSensor,
   KeyboardSensor,
+  TouchSensor,
 } from "@dnd-kit/core";
 import Playground from "./Playground";
 import Widget from "./Widgets";
@@ -187,18 +188,23 @@ const Editor = () => {
         const overIndex = mappedIds.indexOf(over.id);
         let currentActiveOrderId = inpt[activeIndex].order_id;
         let currentOverOrderId = inpt[overIndex].order_id;
+        const moveDirection = activeIndex > overIndex ? 1 : -1;
 
         changeOrderId(
           inpt[activeIndex].id,
-          inpt[overIndex].id,
+          currentOverOrderId,
           currentActiveOrderId,
-          currentOverOrderId
+          moveDirection,
+          formid
         );
         inpt = arrayMove(inpt, activeIndex, overIndex);
-        inpt[activeIndex].order_id = currentActiveOrderId;
-        inpt[overIndex].order_id = currentOverOrderId;
-        // open the current over
+
+        inpt = inpt.map((x, index) => {
+          x.order_id = index + 1;
+          return x;
+        });
         openPropertiesClicking(currentOverOrderId);
+
         return inpt;
       });
     }
@@ -212,6 +218,12 @@ const Editor = () => {
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 300,
+        tolerance: 5,
+      },
     })
   );
 
