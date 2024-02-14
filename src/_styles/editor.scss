@@ -167,6 +167,13 @@
     .input-text-handle-content-name {
       display: flex;
       align-items: center;
+      max-width: 200px;
+      p {
+        // display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 
