@@ -116,6 +116,12 @@
     min-height: 138px;
     padding: 16px;
     // border-bottom: 1px solid $widget-element-border;
+    p {
+      display: inline-block;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .form-details-wrapper {
     height: fit-content;
