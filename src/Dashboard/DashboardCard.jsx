@@ -37,7 +37,9 @@ const DashboardCard = ({ formData }) => {
         // onClick={() => currentFormDetails(formData)}
       >
         <div className="form-name">
-          <p>{formData.form_name}</p>
+          <p title={formData.form_name} data-toggle="tooltip">
+            {formData.form_name}
+          </p>
         </div>
       </Link>
       <Box className="form-details-wrapper">

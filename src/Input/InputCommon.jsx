@@ -43,7 +43,9 @@ const InputCommon = ({
           spacing={2}
         >
           <Box className="input-text-handle-content-name">
-            <Typography>{questionName}</Typography>
+            <Typography data-toggle="tooltip" title={questionName}>
+              {questionName}
+            </Typography>
           </Box>
           <Box onClick={handleDelete}>
             <img
