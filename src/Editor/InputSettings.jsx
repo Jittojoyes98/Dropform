@@ -47,7 +47,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 const InputSettings = ({ currentInput }) => {
-  // console.log(questionName);
   // issue with selcting the last question on clicking from one question to another.
   const [updateQuestionName] = useQuestions((state) => {
     return [state.updateQuestionName];

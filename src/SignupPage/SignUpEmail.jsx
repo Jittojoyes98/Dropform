@@ -4,10 +4,8 @@ import * as yup from "yup";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
-import eyeLineCross from "../../assets/download-eye.svg"
-import eyeLine from "../../assets/download-eye-text.svg"
-
-
+import eyeLineCross from "../../assets/download-eye.svg";
+import eyeLine from "../../assets/download-eye-text.svg";
 
 const signupSchema = yup.object({
   email: yup
@@ -25,27 +23,33 @@ const signupSchema = yup.object({
 });
 
 const SignUpEmail = () => {
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [show,setShow]=useState(true)
-  const { signup, currentUser, setCurrentUser, signUpWithGoogle,signUpWithEmail } = useAuthContext()
-  const navigate = useNavigate()
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(true);
+  const {
+    signup,
+    currentUser,
+    setCurrentUser,
+    signUpWithGoogle,
+    signUpWithEmail,
+  } = useAuthContext();
+  const navigate = useNavigate();
   const handleForm = async (email, password) => {
     try {
-      setError("")
-      setLoading(true)
-      const { data, error } =await signUpWithEmail(email, password)
-      if(!error && data) {
-        console.log("Registration Successful. Check your email to confirm your account");
-        navigate("/dashboard")
-      }else{
-        setError("Registration denied,Please see if this email already exist") 
+      setError("");
+      setLoading(true);
+      const { data, error } = await signUpWithEmail(email, password);
+      if (!error && data) {
+        // show toast
+        navigate("/dashboard");
+      } else {
+        setError("Registration denied,Please see if this email already exist");
       }
     } catch (error) {
-      setError("Registration denied,Please see if this email already exist")
+      setError("Registration denied,Please see if this email already exist");
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -53,15 +57,12 @@ const SignUpEmail = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      console.log(values);
-      handleForm(values.email, values.password)
+      handleForm(values.email, values.password);
     },
   });
   const HandleFormError = () => {
-    return (
-      <p className="validation-error">{formik.errors.email}</p>
-    )
-  }
+    return <p className="validation-error">{formik.errors.email}</p>;
+  };
   const handleErrorBox = () => {
     return (
       <div className="error-box-wrapper">
@@ -70,11 +71,11 @@ const SignUpEmail = () => {
           <p>{error}</p>
         </div>
       </div>
-    )
-  }
-  const handleHide=()=>{
-    setShow(!show)
-  }
+    );
+  };
+  const handleHide = () => {
+    setShow(!show);
+  };
   return (
     <div className="centre-div auth-height">
       <div>
@@ -86,7 +87,10 @@ const SignUpEmail = () => {
         </span>
         <div className="login-form-wrapper">
           <div className="signup-email-wrapper">
-            <h2 className="login-title align-center">Get better data with conversational forms, surveys, quizzes & more.</h2>
+            <h2 className="login-title align-center">
+              Get better data with conversational forms, surveys, quizzes &
+              more.
+            </h2>
             <div className="centre-div">
               <div className="fix-width ">
                 <form onSubmit={formik.handleSubmit}>
@@ -106,7 +110,11 @@ const SignUpEmail = () => {
                       placeholder="bruce@wayne.com"
                       variant="outlined"
                     />
-                    {(formik.touched.email && Boolean(formik.errors.email)) ? HandleFormError() : <></>}
+                    {formik.touched.email && Boolean(formik.errors.email) ? (
+                      HandleFormError()
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div>
                     <div className="label-wrapper">
@@ -117,11 +125,15 @@ const SignUpEmail = () => {
                         endAdornment: (
                           <InputAdornment position="end">
                             {show ? (
-                              <img src={eyeLine} className="icon-password" onClick={handleHide} />
+                              <img
+                                src={eyeLine}
+                                className="icon-password"
+                                onClick={handleHide}
+                              />
                             ) : (
                               <img
                                 src={eyeLineCross}
-                                  className="icon-password"
+                                className="icon-password"
                                 onClick={handleHide}
                               />
                             )}
@@ -132,19 +144,33 @@ const SignUpEmail = () => {
                       className="credential-field-inactive"
                       value={formik.values.password}
                       onChange={formik.handleChange}
-                      type={show ? "text": "password"}
+                      type={show ? "text" : "password"}
                       name="password"
                       placeholder="Atleast 8 characters"
                       variant="outlined"
                     />
-                    {(formik.touched.password && Boolean(formik.errors.password)) ? <p className="validation-error">{formik.errors.password}</p> : <></>}
+                    {formik.touched.password &&
+                    Boolean(formik.errors.password) ? (
+                      <p className="validation-error">
+                        {formik.errors.password}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </div>
-
 
                   <div style={{ marginBottom: "25px", paddingTop: "5px" }}>
                     {/* <Link to="password/request" className="forgot-link small-text-light">Forgot Password?</Link> */}
                   </div>
-                  <Button disabled={loading}  style={{ marginBottom: "25px" }} variant='contained' type="submit" className='secondary-button auth-button'>Create my free account</Button>
+                  <Button
+                    disabled={loading}
+                    style={{ marginBottom: "25px" }}
+                    variant="contained"
+                    type="submit"
+                    className="secondary-button auth-button"
+                  >
+                    Create my free account
+                  </Button>
                 </form>
               </div>
             </div>
@@ -152,7 +178,7 @@ const SignUpEmail = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default SignUpEmail;

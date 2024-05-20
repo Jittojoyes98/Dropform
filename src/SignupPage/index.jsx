@@ -14,10 +14,10 @@ const SignupPage = () => {
     try {
       const { data, error } = await signInWithGoogle();
       if (!error && data) {
-        console.log("Google sign in success");
+        // show toast
       }
     } catch (error) {
-      console.log("Error occured");
+      // show toast
     }
   };
 

@@ -51,8 +51,6 @@ const Authorize = ({ children }) => {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (_event === "SIGNED_IN") {
         if (currentUser === undefined) {
-          console.log(_event);
-
           setCurrentUser(session.user);
           setSession(session);
         }
@@ -68,7 +66,6 @@ const Authorize = ({ children }) => {
   if (!session) {
     console.log("No supabase user");
   } else {
-    console.log(session, "SESSION");
     console.log("Supabase user exist");
   }
   const value = {

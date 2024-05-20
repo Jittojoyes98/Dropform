@@ -33,10 +33,9 @@ export default function ProfileDropdown({
       await signOut();
       setCurrentUser();
     } catch (error) {
-      console.log("There was an error");
+      // show toast
     }
   };
-  console.log(userDetails);
 
   return (
     <>
