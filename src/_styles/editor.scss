@@ -289,6 +289,11 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    p {
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .form-details-dropdown {
       span {
         transform: rotate(90deg);

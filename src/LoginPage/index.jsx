@@ -62,10 +62,10 @@ const LoginPage = () => {
     try {
       const { data, error } = await signInWithGoogle();
       if (!error && data) {
-        console.log("Google sign in success");
+        // show toast
       }
       if (error) {
-        console.log("There was an error");
+        // show toast
       }
     } catch (error) {
       setError("There was an unsupported response from server.");
@@ -74,10 +74,10 @@ const LoginPage = () => {
   const handleAnonymous = async () => {
     try {
       await signInOutsider();
-      console.log("WE ARE MOVING TO DASHBOARD");
+      // show toast
       navigate("/dashboard");
     } catch (error) {
-      console.log("Error occured");
+      // show toast
     }
   };
   const formik = useFormik({

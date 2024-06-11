@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { supabase } from "../_supabase/supabaseInitialize";
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
 
 export const useCreateFormStore = create((set, get) => ({
   loading: true,
@@ -34,15 +33,17 @@ export const useCreateFormStore = create((set, get) => ({
   deleteForms: async (form_id) => {
     set(() => ({ loading: true }));
     try {
-      console.log("We are callong")
-      const {error,status} = await supabase.from("forms").delete().eq("id", form_id);
-      if(error){
-        if(status==0){
+      const { error, status } = await supabase
+        .from("forms")
+        .delete()
+        .eq("id", form_id);
+      if (error) {
+        if (status == 0) {
           set(() => ({ error: "You’re offline", loading: false }));
-          toast("You’re offline")
-        }else{
+          toast("You’re offline");
+        } else {
           set(() => ({ error: error.message, loading: false }));
-        } 
+        }
         return;
       }
       let currentFetch = get().fetchFormsAgain;
