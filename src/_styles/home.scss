@@ -1,0 +1,18 @@
+.main {
+  .home-hero-section {
+    display: flex;
+  }
+  .big-header {
+    font-size: 80px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .centre-div-horizontal {
+    display: flex;
+    justify-content: center;
+  }
+  .centre-div-vertical {
+    display: flex;
+    align-items: center;
+  }
+}

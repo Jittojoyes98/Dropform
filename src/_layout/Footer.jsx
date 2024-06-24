@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 
 const Footer = ({ layout }) => {
-    if(layout==="login" || layout=="signup"){
-        return <></>
-    }
-    return (
-        <>
-            <div>Footer</div>
-        </>
-    )
-}
+  if (layout === "login" || layout == "signup") {
+    return <></>;
+  }
+  return (
+    <div className="home-footer-wrapper">
+      <div className="home-footer">Footer</div>
+    </div>
+  );
+};
 
-export { Footer }
+export { Footer };
