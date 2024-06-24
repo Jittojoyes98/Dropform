@@ -107,7 +107,7 @@ const SignupPage = () => {
                     Log in Anonymously
                   </Button>
                 </div>
-                <div className="centre-div margin-fix">
+                <div className="centre-div margin-tb-fix">
                   <span className="or-text">OR</span>
                 </div>
                 <Button

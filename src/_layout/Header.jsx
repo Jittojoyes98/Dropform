@@ -10,6 +10,7 @@ import { useAuthContext } from "../auth";
 import { supabase } from "../_supabase/supabaseInitialize";
 import ProfileDropdown from "../_ui/ProfileDropdown/ProfileDropdown";
 import { useFormDetails } from "../_services/FormDetailService";
+import { SvgAssets } from "../_helpers/images";
 //  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down.
 
 const Header = ({ layout }) => {
@@ -178,7 +179,19 @@ const Header = ({ layout }) => {
   };
   const LogoChoose = () => {
     if (layout === "home") {
-      return "Dropform";
+      return (
+        <>
+          <img
+            src={SvgAssets.dropformLogo}
+            alt="Dropform Logo"
+            className="dropform-svg"
+            style={{ width: "30px", height: "30px" }}
+          />
+          <p className="logo-text-light margin-rl-fix full-height centre-div">
+            Dropform
+          </p>
+        </>
+      );
     } else {
       return (
         <div className="logo-button-wrapper">
@@ -246,7 +259,10 @@ const Header = ({ layout }) => {
           "header-content-full": isDashboard,
         })}
       >
-        <div className="logo">{headerType ? "" : LogoChoose()}</div>
+        <div className="centre-div">
+          {/* {SvgAssets[dropformLogo]} */}
+          {headerType ? "" : LogoChoose()}
+        </div>
         {/* <div></div> */}
         <div className="auth-content">{handleHeaderContent()}</div>
       </div>

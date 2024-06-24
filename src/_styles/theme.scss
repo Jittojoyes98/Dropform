@@ -4,6 +4,7 @@
 @import "./editor.scss";
 @import "./widget.scss";
 @import "./settings.scss";
+@import "./home.scss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap");
 
 // Base styles
@@ -95,8 +96,11 @@ img {
     text-align: center;
     width: 100%;
   }
-  .margin-fix {
+  .margin-tb-fix {
     margin: 25px 0px;
+  }
+  .margin-rl-fix {
+    margin: 0px 20px;
   }
   .header-wrapper-fixed {
     position: fixed;
@@ -171,6 +175,7 @@ img {
   }
 
   .primary-button:hover {
+    color: $body-text-color;
     opacity: 0.8;
     border: 1px solid $body-text-color;
     background-color: transparent;
@@ -221,6 +226,12 @@ img {
     background-color: $liner-color;
     height: 1px;
   }
+  .full-height {
+    height: 100%;
+  }
+  .full-width {
+    width: 100%;
+  }
   .fix-width {
     // for flex items the width does not work only min-width works
     // else use these below commented styles
@@ -245,12 +256,21 @@ img {
     font-size: 14px;
     font-weight: 600;
   }
+
   .large-text-light {
     font-size: 16px;
     font-weight: 400;
   }
-  .large-text-light {
+  .large-text-dark {
     font-size: 16px;
+    font-weight: 600;
+  }
+  .logo-text-light {
+    font-size: 26px;
+    font-weight: 400;
+  }
+  .logo-text-dark {
+    font-size: 26px;
     font-weight: 600;
   }
   .forgot-link {
@@ -437,6 +457,7 @@ img {
   }
   .home-wrapper {
     .home-main {
+      padding: 48px 0px;
       width: 80%;
       margin: 0px auto;
       display: flex;
@@ -444,6 +465,14 @@ img {
       justify-content: center;
       align-items: stretch;
     }
+  }
+  .home-footer-wrapper {
+    height: 100%;
+  }
+  .home-footer {
+    text-align: center;
+    width: 50%;
+    margin: auto;
   }
 }
 
