@@ -5,7 +5,7 @@ const HomePage = () => {
     <div className="home-wrapper">
       <div className="home-main">
         <section data-testid="homepage-hero" className="home-hero-section">
-          <img src={`/hero-poster.webp`} alt="hero image" />
+          <img src={`./hero-poster.webp`} alt="hero image" />
           <div className="centre-div-vertical">
             <div>
               <h1 className="big-header">Welcome to dropform</h1>
