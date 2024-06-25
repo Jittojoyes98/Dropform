@@ -20,6 +20,9 @@
 
 **_Screenshots:_**
 
+Home :
+![Screenshot of the Dropform Home](assets/readme/home.png)
+
 Dashboard :
 ![Screenshot of the Dropform Dashboard](assets/readme/dashboard.png)
 
