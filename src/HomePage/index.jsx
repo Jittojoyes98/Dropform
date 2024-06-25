@@ -1,12 +1,12 @@
 import React from "react";
-import { SvgAssets } from "../_helpers/images";
+import { ImageAssets } from "../_helpers/images";
 
 const HomePage = () => {
   return (
     <div className="home-wrapper">
       <div className="home-main">
         <section data-testid="homepage-hero" className="home-hero-section">
-          <img src={"../../public/hero-poster.webp"} alt="hero image" />
+          <img src={ImageAssets.droformImage} alt="hero image" />
           <div className="centre-div-vertical">
             <div>
               <h1 className="big-header">Welcome to dropform</h1>

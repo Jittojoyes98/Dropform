@@ -187,9 +187,12 @@ const Header = ({ layout }) => {
             className="dropform-svg"
             style={{ width: "30px", height: "30px" }}
           />
-          <p className="logo-text-light margin-rl-fix full-height centre-div">
+          <a
+            href="/"
+            className="logo-text-light margin-rl-fix full-height centre-div"
+          >
             Dropform
-          </p>
+          </a>
         </>
       );
     } else {
