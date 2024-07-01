@@ -136,12 +136,12 @@ const Header = ({ layout }) => {
           </div>
           <div>options</div>
           <div className="auth-content">
-            <div>
+            <div className="centre-div ">
               <div>
-                <Button>Preview</Button>
+                <Button className="secondary-button">Preview</Button>
               </div>
               <div>
-                <Button>Publish</Button>
+                <Button className="secondary-button">Publish</Button>
               </div>
             </div>
 

@@ -115,7 +115,7 @@ const LoginPage = () => {
       <div className="auth-form-wrapper">
         {/* add a wrapper div here */}
         <span className="centre-div">
-          <a href="/">
+          <a href="/" className="large-text-light">
             {/* image will be used here now just the Name */}
             Dropform
           </a>
