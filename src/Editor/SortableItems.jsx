@@ -39,13 +39,18 @@ const SortableItems = ({ id, selectedItem, item }) => {
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
+    console.log(event.currentTarget.id);
+    // if (event) {
+    //   event.stopPropagation();
+    // }
     setAnchorEl(event.currentTarget);
   };
   const handleDelete = () => {
     setAnchorEl(null);
     deleteForms(formData.id);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    // event.stopPropagation();
     setAnchorEl(null);
   };
 
