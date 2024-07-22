@@ -56,7 +56,7 @@ const DashboardCard = ({ formData }) => {
             <img src={dropDownSvg} alt="select" />
           </Box>
           <Menu
-            id="basic-menu"
+            id="form-action-menu"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
@@ -64,8 +64,10 @@ const DashboardCard = ({ formData }) => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to={`/${formData.id}/results`}>Results</Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>Rename</MenuItem>
             <MenuItem onClick={handleDelete}>Delete</MenuItem>
           </Menu>
         </Box>

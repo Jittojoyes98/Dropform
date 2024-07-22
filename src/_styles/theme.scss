@@ -84,6 +84,28 @@ img {
   height: 100%;
 }
 
+#form-action-menu {
+  .MuiPaper-root {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px,
+      rgba(0, 0, 0, 0.06) 0px 2px 12px;
+    border-radius: 8px;
+    color: $body-text-color;
+  }
+  .MuiMenuItem-root {
+    font-size: 14px;
+    font-family: $font-family;
+  }
+  .MuiMenuItem-root:first-child {
+    background-color: $white-color;
+  }
+  .MuiMenuItem-root:last-child {
+    color: $delete-color;
+  }
+  .MuiMenuItem-root:hover {
+    background-color: rgb(240, 240, 240);
+  }
+}
+
 // Main styles and reusable classes
 .main {
   height: 100%;

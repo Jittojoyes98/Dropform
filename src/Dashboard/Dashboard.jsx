@@ -8,6 +8,7 @@ import CreateButton from "../_ui/CreateButton/CreateButton";
 import dropDownSvg from "../../assets/empty.svg";
 import { CircularProgressLoader } from "../_ui/Loader/CircularProgress";
 import { addToLocalStorage, getDataFromLocalStorage } from "../_helpers/utils";
+import DashboardStats from "./DashboardStats";
 
 const Dashboard = () => {
   const { currentUser, setCurrentUser, signOut } = useAuthContext();
@@ -50,7 +51,7 @@ const Dashboard = () => {
     <div className="dashboard-wrapper">
       <div className="dashboard-main">
         <div className="left-dashboard-wrapper">
-          <p>Workspaces and Responses</p>
+          <DashboardStats />
         </div>
         <div className="right-dashboard-wrapper">
           <div className="right-dashboard">
