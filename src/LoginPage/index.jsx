@@ -87,7 +87,6 @@ const LoginPage = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log(values);
       handleForm(values.email, values.password);
     },
   });
