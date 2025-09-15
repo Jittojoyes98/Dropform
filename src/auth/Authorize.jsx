@@ -23,6 +23,7 @@ const Authorize = ({ children }) => {
   // sign in anonymous cannot be implemented as of now.
 
   function signInWithGoogle() {
+    console.log(window.location.origin);
     return supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -34,7 +35,7 @@ const Authorize = ({ children }) => {
   }
   function forgotPassword(email) {
     return supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}login/password/update`,
+      redirectTo: `${window.location.origin}/login/password/update`,
     });
   }
   function signOut() {

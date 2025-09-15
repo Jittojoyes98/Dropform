@@ -1,3 +1,5 @@
+@use "./colors.scss" as *;
+@use "./variables.scss" as *;
 .main {
   .editor-wrapper {
     height: 100%;

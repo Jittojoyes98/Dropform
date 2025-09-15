@@ -1,3 +1,5 @@
+@use "./colors.scss" as *;
+@use "./variables.scss" as *;
 .main {
   .logo-button {
     background-color: $logo-background-color;
