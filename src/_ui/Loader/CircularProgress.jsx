@@ -1,12 +1,6 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import CircularProgress, {
-  circularProgressClasses,
-  CircularProgressProps,
-} from "@mui/material/CircularProgress";
-
-// #d2ddec
+import { Box, CircularProgress } from "@mui/material";
+import { circularProgressClasses } from "@mui/material/CircularProgress";
 
 function CircularProgressLoader(props) {
   return (
@@ -31,6 +25,7 @@ function CircularProgressLoader(props) {
           animationDuration: "550ms",
           position: "absolute",
           left: 0,
+          top: 0,
           [`& .${circularProgressClasses.circle}`]: {
             strokeLinecap: "round",
           },
@@ -42,4 +37,5 @@ function CircularProgressLoader(props) {
     </Box>
   );
 }
+
 export { CircularProgressLoader };

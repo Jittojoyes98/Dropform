@@ -8,8 +8,8 @@
 
 **_Usage_**
 
-- To run the server locally, run: `npm run serve`
-- Your server will start at `http://localhost:3030`.
+- To run the server locally, run: `npm run dev`
+- Your server will start at `http://localhost:3000`.
 
 **_What is Dropform?_**
 
