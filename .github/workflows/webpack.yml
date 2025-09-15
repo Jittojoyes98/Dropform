@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: NodeJS with Vite
 
 on:
   push:
@@ -27,9 +27,9 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx webpack
+        run: npm run build
 
       - name: Test build output
         run: |
           ls -la dist/
-          test -f dist/bundle.js || exit 1
+          test -f dist/index.html || exit 1
