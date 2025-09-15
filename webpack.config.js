@@ -16,6 +16,18 @@ module.exports = (env) => {
         systemvars: true,
         path: path.resolve(__dirname, ".env"), // change based on production and development
       }),
+      // Copy static assets like favicon
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, "public"), // source folder
+            to: path.resolve(__dirname, "dist"), // destination folder
+            globOptions: {
+              ignore: ["**/index.html"], // ignore index.html if it exists in public
+            },
+          },
+        ],
+      }),
     ],
     devServer: {
       port: 3030, // you can change the port
