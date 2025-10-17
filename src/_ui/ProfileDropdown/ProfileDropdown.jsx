@@ -1,10 +1,15 @@
-import React from "react";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { useAuthContext } from "../../auth";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
+import React from 'react';
+// import Popover from '@mui/material/Popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/_components/ui/popover';
+// import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+import {useAuthContext} from '../../auth';
+// import Box from '@mui/material/Box';
+// import Stack from '@mui/material/Stack';
 
 export default function ProfileDropdown({
   src,
@@ -14,7 +19,7 @@ export default function ProfileDropdown({
   email,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { currentUser, setCurrentUser, signOut } = useAuthContext();
+  const {currentUser, setCurrentUser, signOut} = useAuthContext();
 
   const handleClick = (event) => {
     handleClose(event);
@@ -26,7 +31,7 @@ export default function ProfileDropdown({
   };
   const open = Boolean(anchorEl);
 
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   const handleLogout = async () => {
     try {
@@ -42,18 +47,18 @@ export default function ProfileDropdown({
       <div className="user-logo" onClick={handleClick} aria-describedby={id}>
         <img src={src} className="user-logo-image" />
       </div>
-      <Popover
+      {/* <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleProfileClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
       >
         <Box className="dropdown-wrapper">
@@ -71,7 +76,7 @@ export default function ProfileDropdown({
             <Button onClick={handleLogout}>Logout</Button>
           </Box>
         </Box>
-      </Popover>
+      </Popover> */}
     </>
   );
 }
