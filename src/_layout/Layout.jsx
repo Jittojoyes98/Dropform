@@ -12,8 +12,7 @@ const Layout = ({ layout }) => {
 
   return (
     <div className="main">
-      {/* <Header layout={layout} /> */}
-      <h1 className="bg-delete">Hii</h1>
+      <Header layout={layout} />
       <div
         className={classNames({
           content: isHome,
