@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const loginSchema = yup.object({
   email: yup
@@ -130,14 +131,12 @@ const LoginPage = () => {
                 <div className="label-wrapper">
                   <label for="email">Email</label>
                 </div>
-                <TextField
-                  size="small"
+                <Input
                   className="credential-field"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   name="email"
                   placeholder="bruce@wayne.com"
-                  variant="outlined"
                 />
                 {formik.touched.email && Boolean(formik.errors.email) ? (
                   HandleFormError()
@@ -149,15 +148,13 @@ const LoginPage = () => {
                 <div className="label-wrapper">
                   <label for="password">Password</label>
                 </div>
-                <TextField
-                  size="small"
+                <Input
                   className="credential-field"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   type="password"
                   name="password"
                   placeholder="Atleast 8 characters"
-                  variant="outlined"
                 />
                 {formik.touched.password && Boolean(formik.errors.password) ? (
                   <p className="validation-error">{formik.errors.password}</p>
@@ -177,7 +174,6 @@ const LoginPage = () => {
               <Button
                 disabled={loading}
                 style={{ marginBottom: "25px" }}
-                variant="contained"
                 type="submit"
                 className="secondary-button auth-button"
               >
@@ -191,7 +187,7 @@ const LoginPage = () => {
           <div>
             <Button
               className="tertiary-button social-button"
-              variant="outlined"
+              variant="outline"
               onClick={handleGoogle}
             >
               <svg
@@ -235,7 +231,7 @@ const LoginPage = () => {
               disabled={loading}
               style={{ marginBottom: "5px" }}
               className="tertiary-button social-button"
-              variant="outlined"
+              variant="outline"
               onClick={handleAnonymous}
             >
               <svg

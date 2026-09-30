@@ -1,53 +1,13 @@
 import React, { useState } from "react";
 import { editorStore } from "./EditorStore";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useQuestions } from "../_services/QuestionService";
-import { Input, InputAdornment, Stack } from "@mui/material";
 import useSettingsMapper from "../_hooks/useSettingsMapper";
 import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
-
-const StyledTabs = styled((props) => (
-  <Tabs
-    {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-  />
-))({
-  "& .MuiTabs-indicator": {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-  },
-  "& .MuiTabs-indicatorSpan": {
-    maxWidth: 40,
-    width: "100%",
-    backgroundColor: "rgb(38, 38, 39)",
-  },
-});
-
-const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: "none",
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(15),
-    marginRight: theme.spacing(1),
-    color: "rgb(137, 137, 137)",
-    "&.Mui-selected": {
-      color: "rgb(38, 38, 39)",
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "rgba(100, 95, 228, 0.32)",
-    },
-  })
-);
+import { useClickAway } from "../_hooks/useClickAway";
 
 const InputSettings = ({ currentInput }) => {
-  // issue with selcting the last question on clicking from one question to another.
   const [updateQuestionName] = useQuestions((state) => {
     return [state.updateQuestionName];
   });
@@ -56,15 +16,12 @@ const InputSettings = ({ currentInput }) => {
     (state) => state.questionProperties
   );
 
-  const selectedItem = editorStore((state) => state.selectedItem);
-  const [tabIndex, setTabIndex] = React.useState(1);
+  const [tabIndex, setTabIndex] = React.useState("1");
 
-  const handleChange = React.useCallback((event, newValue) => {
-    setTabIndex(newValue);
-  }, []);
   let currentInputName = currentInput?.question_name;
   const [inputName, setInputName] = useState(currentInput?.question_name);
   const inputRef = React.useRef(currentInput?.question_name);
+  const nameFieldRef = React.useRef(null);
 
   const handleNameChange = React.useCallback((e) => {
     setInputName(e.target.value);
@@ -82,7 +39,9 @@ const InputSettings = ({ currentInput }) => {
     } else {
       setInputName(currentInputName);
     }
-  }, [inputName]);
+  }, [inputName, currentInputName, currentInput, updateQuestionName]);
+
+  useClickAway(nameFieldRef, handleClickAway);
 
   const QuestionSettings = useSettingsMapper()[currentInput.type];
 
@@ -91,21 +50,14 @@ const InputSettings = ({ currentInput }) => {
   return (
     <div className="settings-wrapper">
       <div className="settings-header">
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <TextField
-            value={inputRef.current}
+        <div ref={nameFieldRef}>
+          <Input
+            value={inputRef.current ?? ""}
             id="filled-hidden-label-small"
-            variant="outlined"
-            size="small"
-            className="input-text-question-field"
-            sx={{ marginRight: "10px" }}
-            // InputProps={{
-            //   disableUnderline: true,
-            // }}
+            className="input-text-question-field mr-2.5"
             onChange={handleNameChange}
           />
-        </ClickAwayListener>
-        {/* <p>{questionName}</p> */}
+        </div>
         <div onClick={closeSettings} className="settings-close">
           <svg
             width="20"
@@ -116,8 +68,8 @@ const InputSettings = ({ currentInput }) => {
             className="close-svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M9.99931 10.9751L15.0242 16.0014L16 15.027L10.9737 10.0007L16 4.97577L15.0256 4L9.99931 9.0263L4.97439 4L4 4.97577L9.02492 10.0007L4 15.0256L4.97439 16.0014L9.99931 10.9751Z"
               fill="#8092AC"
             ></path>
@@ -126,32 +78,53 @@ const InputSettings = ({ currentInput }) => {
       </div>
 
       <div>
-        <Box sx={{ width: "100%" }}>
-          <StyledTabs
+        <div className="w-full">
+          <Tabs
             value={tabIndex}
-            onChange={handleChange}
-            aria-label="settings-tab"
+            onValueChange={setTabIndex}
             className="input-settings-tab"
           >
-            <StyledTab value={1} label="Question" />
-            <StyledTab value={2} label="Styles" />
-            <StyledTab value={3} label="three" />
-          </StyledTabs>
+            <TabsList
+              variant="line"
+              className="w-full justify-start rounded-none bg-transparent"
+            >
+              <TabsTrigger
+                value="1"
+                className="text-[15px] font-normal text-[rgb(137,137,137)] data-[state=active]:text-[rgb(38,38,39)]"
+              >
+                Question
+              </TabsTrigger>
+              <TabsTrigger
+                value="2"
+                className="text-[15px] font-normal text-[rgb(137,137,137)] data-[state=active]:text-[rgb(38,38,39)]"
+              >
+                Styles
+              </TabsTrigger>
+              <TabsTrigger
+                value="3"
+                className="text-[15px] font-normal text-[rgb(137,137,137)] data-[state=active]:text-[rgb(38,38,39)]"
+              >
+                three
+              </TabsTrigger>
+            </TabsList>
 
-          <Box className="settings-tab-wrapper">
-            {tabIndex === 1 && QuestionSettings(currentQuestionProperties)}
-            {tabIndex === 2 && (
-              <Box>
-                <Typography>The second tab</Typography>
-              </Box>
-            )}
-            {tabIndex === 3 && (
-              <Box>
-                <Typography>The third tab</Typography>
-              </Box>
-            )}
-          </Box>
-        </Box>
+            <div className="settings-tab-wrapper">
+              <TabsContent value="1">
+                {QuestionSettings(currentQuestionProperties)}
+              </TabsContent>
+              <TabsContent value="2">
+                <div>
+                  <p>The second tab</p>
+                </div>
+              </TabsContent>
+              <TabsContent value="3">
+                <div>
+                  <p>The third tab</p>
+                </div>
+              </TabsContent>
+            </div>
+          </Tabs>
+        </div>
       </div>
     </div>
   );

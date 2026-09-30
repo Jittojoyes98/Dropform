@@ -1,11 +1,10 @@
-import Box from "@mui/material/Box";
 import React from "react";
 
 const DashboardStats = () => {
   return (
-    <Box>
+    <div>
       <p>Workspaces and Responses</p>
-    </Box>
+    </div>
   );
 };
 

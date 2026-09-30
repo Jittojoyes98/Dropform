@@ -1,21 +1,20 @@
-import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import classNames from "classnames";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
-import { supabase } from "../_supabase/supabaseInitialize";
 import ProfileDropdown from "../_ui/ProfileDropdown/ProfileDropdown";
 import { useFormDetails } from "../_services/FormDetailService";
 import { SvgAssets } from "../_helpers/images";
-//  in material ui import the correct class name via the @mui/material/Button way or else it will slow things down.
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Header = ({ layout }) => {
   const { currentUser } = useAuthContext();
-  //  we will take data from the walk through and store it somewhere.
   const navigate = useNavigate();
   const [dropName, setDropName] = useState("My Dropform");
   const data = useFormDetails((state) => state.data);
@@ -33,14 +32,6 @@ const Header = ({ layout }) => {
   const handleDropName = (e) => {
     setDropName(e.target.value);
   };
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
   const headerType = layout === "login" || layout === "signup";
   const isDashboard = layout === "dashboard";
@@ -74,44 +65,29 @@ const Header = ({ layout }) => {
       "Anonymous Anonymous".toUpperCase();
 
     return (
-      <Tooltip
-        open={open && openDrop}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        disableFocusListener={true}
-        title={
-          currentUser ? (
+      <Tooltip open={open && openDrop} onOpenChange={setOpen}>
+        <TooltipTrigger asChild>
+          <div className="user-menu">
+            <ProfileDropdown
+              userDetails={userDetails}
+              src={src}
+              email={currentUser?.email}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
+          </div>
+        </TooltipTrigger>
+        {currentUser ? (
+          <TooltipContent
+            side="bottom"
+            className="bg-black px-[11px] py-[11px] text-sm text-white"
+          >
             <div className="tooltip-title">
               <p className="tooltip-name">{userDetails}</p>
               <p className="tooltip-email">{currentUser?.email}</p>
             </div>
-          ) : (
-            <></>
-          )
-        }
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: "common.black",
-              "& .MuiTooltip-arrow": {
-                color: "common.black",
-              },
-              padding: "11px",
-              fontSize: "14px",
-            },
-          },
-        }}
-        arrow
-      >
-        <div className="user-menu">
-          <ProfileDropdown
-            userDetails={userDetails}
-            src={src}
-            email={currentUser?.email}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          />
-        </div>
+          </TooltipContent>
+        ) : null}
       </Tooltip>
     );
   };
@@ -124,12 +100,9 @@ const Header = ({ layout }) => {
             <span className="editor-links">
               <Link to={"/dashboard"}>My workspace</Link>
               {"/"}
-              {/* <input type='text' value="My Drpform"/> */}
-              <TextField
-                variant="outlined"
-                size="small"
+              <Input
                 value={dropName}
-                className="dropform-name-input"
+                className="dropform-name-input h-8 w-auto"
                 onChange={handleDropName}
               />
             </span>
@@ -161,7 +134,7 @@ const Header = ({ layout }) => {
             : "Already have an Account?"}
         </span>
         <Button
-          variant="outlined"
+          variant="outline"
           className="tertiary-button"
           onClick={() => handlePath(selectPath)}
         >
@@ -220,14 +193,13 @@ const Header = ({ layout }) => {
     return (
       <>
         <Button
-          variant="outlined"
+          variant="outline"
           className="primary-button"
           onClick={() => handlePath("login")}
         >
           Log in
         </Button>
         <Button
-          variant="contained"
           className="secondary-button redirect-button"
           onClick={() => handlePath("signup")}
         >
@@ -262,11 +234,7 @@ const Header = ({ layout }) => {
           "header-content-full": isDashboard,
         })}
       >
-        <div className="centre-div">
-          {/* {SvgAssets[dropformLogo]} */}
-          {headerType ? "" : LogoChoose()}
-        </div>
-        {/* <div></div> */}
+        <div className="centre-div">{headerType ? "" : LogoChoose()}</div>
         <div className="auth-content">{handleHeaderContent()}</div>
       </div>
     </div>

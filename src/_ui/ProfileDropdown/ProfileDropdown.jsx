@@ -1,10 +1,11 @@
 import React from "react";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { useAuthContext } from "../../auth";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 
 export default function ProfileDropdown({
   src,
@@ -13,20 +14,17 @@ export default function ProfileDropdown({
   userDetails,
   email,
 }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { currentUser, setCurrentUser, signOut } = useAuthContext();
+  const [open, setOpen] = React.useState(false);
+  const { setCurrentUser, signOut } = useAuthContext();
 
-  const handleClick = (event) => {
-    handleClose(event);
-    setAnchorEl(event.currentTarget);
+  const handleOpenChange = (nextOpen) => {
+    setOpen(nextOpen);
+    if (nextOpen) {
+      handleClose?.({ type: "click" });
+    } else {
+      handleOpen?.({ type: "click" });
+    }
   };
-  const handleProfileClose = (event) => {
-    handleOpen(event);
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
-
-  const id = open ? "simple-popover" : undefined;
 
   const handleLogout = async () => {
     try {
@@ -38,40 +36,30 @@ export default function ProfileDropdown({
   };
 
   return (
-    <>
-      <div className="user-logo" onClick={handleClick} aria-describedby={id}>
-        <img src={src} className="user-logo-image" />
-      </div>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleProfileClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <Box className="dropdown-wrapper">
-          <Box>
+    <Popover open={open} onOpenChange={handleOpenChange}>
+      <PopoverTrigger asChild>
+        <div className="user-logo" aria-describedby={open ? "simple-popover" : undefined}>
+          <img src={src} className="user-logo-image" alt="User avatar" />
+        </div>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-auto p-0">
+        <div className="dropdown-wrapper">
+          <div>
             <div className="popover-user-logo">
-              <img src={src} className="user-logo-image" />
-              <Box className="user-details">
+              <img src={src} className="user-logo-image" alt="User avatar" />
+              <div className="user-details">
                 <p>{userDetails}</p>
                 <p>{email}</p>
-              </Box>
+              </div>
             </div>
-          </Box>
-          <Box></Box>
-          <Box>
-            <Button onClick={handleLogout}>Logout</Button>
-          </Box>
-        </Box>
-      </Popover>
-    </>
+          </div>
+          <div>
+            <Button variant="ghost" onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
