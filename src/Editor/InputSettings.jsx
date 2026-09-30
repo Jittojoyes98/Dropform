@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useQuestions } from "../_services/QuestionService";
 import useSettingsMapper from "../_hooks/useSettingsMapper";
 import { useQuestionProperties } from "../_ui/QuestionSettings/SettingsStore";
-import { useClickAway } from "../_hooks/useClickAway";
 
 const InputSettings = ({ currentInput }) => {
   const [updateQuestionName] = useQuestions((state) => {
@@ -41,7 +40,18 @@ const InputSettings = ({ currentInput }) => {
     }
   }, [inputName, currentInputName, currentInput, updateQuestionName]);
 
-  useClickAway(nameFieldRef, handleClickAway);
+  React.useEffect(() => {
+    const onPointerDown = (event) => {
+      if (
+        nameFieldRef.current &&
+        !nameFieldRef.current.contains(event.target)
+      ) {
+        handleClickAway();
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [handleClickAway]);
 
   const QuestionSettings = useSettingsMapper()[currentInput.type];
 
