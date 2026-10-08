@@ -1,10 +1,6 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import deleteSVG from "../../assets/delete.svg";
 
 const InputCommon = ({
@@ -14,49 +10,41 @@ const InputCommon = ({
   isActive,
 }) => {
   return (
-    <Box className="input-text-question">
-      <Container className="input-text-question-num">
-        <Typography>{`${questionNumber} ->`}</Typography>
-      </Container>
-      <Container className="input-text-question-field-wr">
-        <TextField
+    <div className="input-text-question">
+      <div className="input-text-question-num">
+        <p>{`${questionNumber} ->`}</p>
+      </div>
+      <div className="input-text-question-field-wr">
+        <Input
           placeholder="Type your question here..."
           id="filled-hidden-label-small"
-          variant="filled"
-          className="input-text-question-field"
-          InputProps={{
-            disableUnderline: true,
-          }}
+          className="input-text-question-field border-0 bg-[#ededf5] shadow-none"
         />
-      </Container>
-      {/* reusable part */}
-      <Container
+      </div>
+      <div
         className={`input-text-handle-content ${
           isActive
             ? "dispaly-input-text-handle-content"
             : "hide-input-text-handle-content"
         }`}
       >
-        <Stack
-          direction="row"
-          divider={<Divider orientation="vertical" flexItem />}
-          spacing={2}
-        >
-          <Box className="input-text-handle-content-name">
-            <Typography data-toggle="tooltip" title={questionName}>
+        <div className="flex flex-row items-center gap-2">
+          <div className="input-text-handle-content-name">
+            <p data-toggle="tooltip" title={questionName}>
               {questionName}
-            </Typography>
-          </Box>
-          <Box onClick={handleDelete}>
+            </p>
+          </div>
+          <Separator orientation="vertical" className="h-4" />
+          <div onClick={handleDelete}>
             <img
               src={deleteSVG}
               alt="delete"
               className="input-text-handle-delete"
             />
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

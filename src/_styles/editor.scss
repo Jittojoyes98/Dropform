@@ -76,44 +76,23 @@
     width: 100%;
   }
   .dropform-name-input {
-    .MuiInputBase-root {
-      border-radius: 4px;
-      height: 32px;
-      outline: none;
-      min-width: 64px;
-      max-width: 100%;
-      font-size: 14px;
-      line-height: 20px;
+    border-radius: 4px;
+    height: 32px;
+    outline: none;
+    min-width: 64px;
+    max-width: 100%;
+    width: 100px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 11px;
+    box-sizing: border-box;
+    border-color: white;
+    cursor: text;
 
-      input {
-        cursor: text;
-        padding: 6px 11px;
-        outline: none;
-        height: 100%;
-        width: 100px;
-        min-width: 88px;
-        max-width: 100%;
-        // max-width: 100%;
-        font-size: 14px;
-        line-height: 20px;
-        box-sizing: border-box;
-        border: none;
-      }
-      fieldset {
-        padding: 0px;
-        border-color: white;
-        // border: none;
-      }
-    }
-    .MuiInputBase-root:hover {
-      fieldset {
-        // border: none;
-        box-shadow: rgb(187, 187, 187) 0px 0px 0px 1px inset;
-        border-radius: 4px;
-      }
-      input {
-        cursor: pointer;
-      }
+    &:hover {
+      box-shadow: rgb(187, 187, 187) 0px 0px 0px 1px inset;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
   .editor-links {
@@ -156,14 +135,15 @@
     right: 0;
     top: 1px;
     color: white;
-    .MuiStack-root {
+    > div {
       background-color: $handle-content-light;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
       padding: 0px 4px;
     }
-    .css-1tk1bks-MuiDivider-root {
+    [data-slot="separator"] {
       border-color: white;
+      background-color: white;
       padding-top: 2px;
     }
     .input-text-handle-content-name {
@@ -206,26 +186,21 @@
   }
   .input-text-question-field {
     width: 100%;
-    .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root {
-      border: 0px;
-      // give the required color.
+    border: 0;
+    background-color: white;
+    font-family: $font-family;
+    font-size: 20px;
+    padding: 6px 5px;
+    height: 30px;
+
+    &:hover {
       background-color: white;
     }
-    .css-1pw81iq-MuiInputBase-root-MuiFilledInput-root:hover {
-      background-color: white;
-    }
-    input {
-      font-family: $font-family;
-      font-size: 20px;
-      padding: 6px 5px;
-      height: 30px;
-      background-color: white;
-    }
-    input::-webkit-input-placeholder {
+    &::placeholder {
       color: $body-text-color;
       opacity: 1;
     }
-    input:focus::-webkit-input-placeholder {
+    &:focus::placeholder {
       color: $body-text-color;
       opacity: 0.7;
     }
@@ -234,34 +209,32 @@
     padding-left: 35px;
     padding-right: 10px;
     width: 100%;
-    .css-q0jhri-MuiInputBase-root-MuiInput-root.Mui-disabled:before {
-      border-bottom: 1px solid $ondrop-element;
-    }
   }
   .input-text-answer-field {
     width: 100%;
     background-color: white;
+    font-family: $font-family;
+    font-size: 24px;
+    padding: 0px 5px;
+    height: 30px;
+    cursor: text;
+    border: 0;
+    border-bottom: 1px solid $ondrop-element;
+    border-radius: 0;
+    color: $ondrop-element;
+    opacity: 1;
+    -webkit-text-fill-color: $ondrop-element;
 
-    input {
-      font-family: $font-family;
-      font-size: 24px;
-      padding: 0px 5px;
-      height: 30px;
-      cursor: text;
-    }
-    .Mui-disabled {
-      -webkit-text-fill-color: $ondrop-element;
+    &:disabled {
       opacity: 1;
-    }
-    .Mui-disabled::before {
-      border-bottom-style: solid;
-      border: 1px solid $ondrop-element;
+      cursor: text;
+      color: $ondrop-element;
+      -webkit-text-fill-color: $ondrop-element;
+      border-bottom: 1px solid $ondrop-element;
     }
   }
   .input-text-question-description {
-    .MuiFilledInput-root {
-      margin-left: 15px;
-    }
+    margin-left: 15px;
   }
   .input-text-handle-delete {
     height: 24px;

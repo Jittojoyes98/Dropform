@@ -15,12 +15,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@/_styles/theme.scss";
 import Result from "../Results/Result";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const App = () => {
   return (
     <BrowserRouter basename="/">
       <Suspense>
         <ToastContainer />
+        <TooltipProvider>
         <Authorize>
           <Routes>
             {/* add routes here */}
@@ -56,6 +58,7 @@ const App = () => {
             </Route>
           </Routes>
         </Authorize>
+        </TooltipProvider>
       </Suspense>
     </BrowserRouter>
   );

@@ -85,23 +85,26 @@ img {
 }
 
 #form-action-menu {
-  .MuiPaper-root {
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px,
-      rgba(0, 0, 0, 0.06) 0px 2px 12px;
-    border-radius: 8px;
-    color: $body-text-color;
-  }
-  .MuiMenuItem-root {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px,
+    rgba(0, 0, 0, 0.06) 0px 2px 12px;
+  border-radius: 8px;
+  color: $body-text-color;
+
+  [data-slot="dropdown-menu-item"],
+  [role="menuitem"] {
     font-size: 14px;
     font-family: $font-family;
   }
-  .MuiMenuItem-root:first-child {
+  [data-slot="dropdown-menu-item"]:first-child,
+  [role="menuitem"]:first-child {
     background-color: $white-color;
   }
-  .MuiMenuItem-root:last-child {
+  [data-slot="dropdown-menu-item"]:last-child,
+  [role="menuitem"]:last-child {
     color: $delete-color;
   }
-  .MuiMenuItem-root:hover {
+  [data-slot="dropdown-menu-item"]:hover,
+  [role="menuitem"]:hover {
     background-color: rgb(240, 240, 240);
   }
 }
@@ -349,7 +352,8 @@ img {
     padding-left: 72px;
     padding-right: 72px;
     padding-top: 20px;
-    .Mui-disabled {
+    button:disabled,
+    .auth-button:disabled {
       color: white;
       background-color: $border-light;
     }
@@ -386,8 +390,8 @@ img {
     input[type="text"]:focus {
       box-shadow: 0 0 8px $border-color-focus;
     }
-    .Mui-focused .MuiOutlinedInput-notchedOutline {
-      border: 1px solid $field-text-color;
+    &:focus-visible {
+      border-color: $field-text-color;
     }
   }
   .credential-field:hover {
@@ -408,23 +412,10 @@ img {
     font-weight: 400;
     color: $field-text-color;
     border-radius: 4px;
+    padding-right: 4px;
 
-    // input {
-    //     padding: 6px 14px;
-    //     border: 1px solid $common-color;
-    //     border-radius: 4px;
-    // }
-
-    // input[type="text"]:focus {
-    //     box-shadow: 0 0 8px $border-color-focus;
-    // }
-
-    .MuiInputBase-adornedEnd {
-      padding: 0px 4px;
-    }
-
-    .Mui-focused .MuiOutlinedInput-notchedOutline {
-      border: 1px solid $field-text-color;
+    &:focus-visible {
+      border-color: $field-text-color;
     }
   }
   .credential-field-inactive:hover {
@@ -433,11 +424,6 @@ img {
     font-size: 16px;
     border-radius: 4px;
     font-weight: 400;
-    border-radius: 4px;
-
-    .MuiInputBase-adornedEnd {
-      padding: 0px 4px;
-    }
   }
   .validation-error {
     color: $error-text-validation;

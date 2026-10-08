@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
@@ -42,7 +42,7 @@ const SignupPage = () => {
                 <div>
                   <Button
                     className="tertiary-button social-button"
-                    variant="outlined"
+                    variant="outline"
                     onClick={handleGoogle}
                   >
                     <svg
@@ -85,7 +85,7 @@ const SignupPage = () => {
                   <Button
                     style={{ marginBottom: "5px" }}
                     className="tertiary-button social-button"
-                    variant="outlined"
+                    variant="outline"
                     onClick={() => navigate("/login")}
                   >
                     <svg
@@ -111,7 +111,7 @@ const SignupPage = () => {
                   <span className="or-text">OR</span>
                 </div>
                 <Button
-                  variant="outlined"
+                  variant="outline"
                   className="secondary-button auth-button redirect-button"
                   onClick={() => navigate("email")}
                 >

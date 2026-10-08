@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth";
 import eyeLineCross from "../../assets/download-eye.svg";
@@ -40,7 +41,6 @@ const SignUpEmail = () => {
       setLoading(true);
       const { data, error } = await signUpWithEmail(email, password);
       if (!error && data) {
-        // show toast
         navigate("/dashboard");
       } else {
         setError("Registration denied,Please see if this email already exist");
@@ -80,10 +80,7 @@ const SignUpEmail = () => {
     <div className="centre-div auth-height">
       <div>
         <span className="centre-div">
-          <a href="/">
-            {/* image will be used here now just the Name */}
-            Dropform
-          </a>
+          <a href="/">Dropform</a>
         </span>
         <div className="login-form-wrapper">
           <div className="signup-email-wrapper">
@@ -92,23 +89,21 @@ const SignUpEmail = () => {
               more.
             </h2>
             <div className="centre-div">
-              <div className="fix-width ">
+              <div className="form-width ">
                 <form onSubmit={formik.handleSubmit}>
                   <div className="error-infobox">
                     {error ? handleErrorBox() : <></>}
                   </div>
                   <div>
                     <div className="label-wrapper">
-                      <label for="email">Email</label>
+                      <label htmlFor="email">Email</label>
                     </div>
-                    <TextField
-                      size="small"
+                    <Input
                       className="credential-field-inactive"
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       name="email"
                       placeholder="bruce@wayne.com"
-                      variant="outlined"
                     />
                     {formik.touched.email && Boolean(formik.errors.email) ? (
                       HandleFormError()
@@ -118,37 +113,37 @@ const SignUpEmail = () => {
                   </div>
                   <div>
                     <div className="label-wrapper">
-                      <label for="password">Password</label>
+                      <label htmlFor="password">Password</label>
                     </div>
-                    <TextField
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {show ? (
-                              <img
-                                src={eyeLine}
-                                className="icon-password"
-                                onClick={handleHide}
-                              />
-                            ) : (
-                              <img
-                                src={eyeLineCross}
-                                className="icon-password"
-                                onClick={handleHide}
-                              />
-                            )}
-                          </InputAdornment>
-                        ),
-                      }}
-                      size="small"
-                      className="credential-field-inactive"
-                      value={formik.values.password}
-                      onChange={formik.handleChange}
-                      type={show ? "text" : "password"}
-                      name="password"
-                      placeholder="Atleast 8 characters"
-                      variant="outlined"
-                    />
+                    <div className="relative">
+                      <Input
+                        className="credential-field-inactive pr-10"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        type={show ? "text" : "password"}
+                        name="password"
+                        placeholder="Atleast 8 characters"
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 border-0 bg-transparent p-0"
+                        onClick={handleHide}
+                      >
+                        {show ? (
+                          <img
+                            src={eyeLine}
+                            className="icon-password"
+                            alt="Hide password"
+                          />
+                        ) : (
+                          <img
+                            src={eyeLineCross}
+                            className="icon-password"
+                            alt="Show password"
+                          />
+                        )}
+                      </button>
+                    </div>
                     {formik.touched.password &&
                     Boolean(formik.errors.password) ? (
                       <p className="validation-error">
@@ -159,13 +154,10 @@ const SignUpEmail = () => {
                     )}
                   </div>
 
-                  <div style={{ marginBottom: "25px", paddingTop: "5px" }}>
-                    {/* <Link to="password/request" className="forgot-link small-text-light">Forgot Password?</Link> */}
-                  </div>
+                  <div style={{ marginBottom: "25px", paddingTop: "5px" }} />
                   <Button
                     disabled={loading}
                     style={{ marginBottom: "25px" }}
-                    variant="contained"
                     type="submit"
                     className="secondary-button auth-button"
                   >

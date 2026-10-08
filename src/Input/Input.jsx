@@ -1,12 +1,10 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import classNames from "classnames";
 import { useIconMapper } from "../_hooks/useIconMapper";
 import InputCommon from "./InputCommon";
 import { useQuestions } from "../_services/QuestionService";
 
 const Input = ({
-  heading,
   select,
   handleClick,
   inputRef,
@@ -24,7 +22,7 @@ const Input = ({
   }, []);
   const iconComponents = useIconMapper({ isActive: select || hover });
 
-  const [deleteQuestion, reorderQuestion] = useQuestions((state) => {
+  const [deleteQuestion] = useQuestions((state) => {
     return [state.deleteQuestion, state.reorderQuestion];
   });
 
@@ -35,7 +33,7 @@ const Input = ({
   };
 
   return (
-    <Box
+    <div
       ref={inputRef}
       onClick={handleClick}
       className={classNames(
@@ -61,7 +59,7 @@ const Input = ({
           questionId: component.id,
         })}
       </>
-    </Box>
+    </div>
   );
 };
 

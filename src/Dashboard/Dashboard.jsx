@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAuthContext } from "../auth";
-import Box from "@mui/material/Box";
 import DashboardCard from "./DashboardCard";
 import CreateForm from "../_ui/CreateFormModal/CreateForm";
 import { useCreateFormStore } from "../_services/CreateFormService";
@@ -11,17 +10,13 @@ import { addToLocalStorage, getDataFromLocalStorage } from "../_helpers/utils";
 import DashboardStats from "./DashboardStats";
 
 const Dashboard = () => {
-  const { currentUser, setCurrentUser, signOut } = useAuthContext();
-  const { fetchForms, data, loading, error } = useCreateFormStore();
-  const [pending, setPending] = React.useState(false);
+  const { currentUser } = useAuthContext();
+  const { fetchForms, data, loading } = useCreateFormStore();
   const firstRender = React.useRef(true);
   const [open, setOpen] = React.useState(false);
   const [fetchFormsAgain] = useCreateFormStore((state) => {
     return [state.fetchFormsAgain];
   });
-
-  // if there is no current user put on loading state
-  let formAgain;
 
   React.useEffect(() => {
     if (currentUser?.id && firstRender.current) {
@@ -80,7 +75,6 @@ const Dashboard = () => {
                 <div>date created</div>
               </div>
             </div>
-            {/* use the loader here and then render accordingly */}
 
             {loading && !data ? (
               <div className="progress-wrapper">
@@ -89,7 +83,6 @@ const Dashboard = () => {
             ) : data?.length > 0 ? (
               <div className="dashboard-card-wrapper ">
                 <div className="form-cards">
-                  {/* show all cards here */}
                   {data?.map((form, id) => {
                     return <DashboardCard key={id} formData={form} />;
                   })}
@@ -97,13 +90,13 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="dashboard-card-wrapper dashboard-card">
-                <Box className="form-empty">
+                <div className="form-empty">
                   <img src={dropDownSvg} alt="dog" />
                   <p className="form-empty-text">
                     Come on in, {currentUser?.email?.split("@")[0]}
                   </p>
                   <CreateButton handleOpenCreate={handleOpenCreate} />
-                </Box>
+                </div>
               </div>
             )}
           </div>
