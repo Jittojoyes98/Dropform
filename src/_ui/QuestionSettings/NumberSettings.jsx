@@ -1,18 +1,12 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import InputType from "./InputType";
 import Number from "../../../assets/number-icon.svg";
 
-const NumberSettings = ({
-  required = false,
-  maxnumber,
-  minnumber,
-  type = "number",
-}) => {
+const NumberSettings = ({ type = "number" }) => {
   return (
-    <Box>
+    <div>
       <InputType src={Number} type={type} />
-    </Box>
+    </div>
   );
 };
 

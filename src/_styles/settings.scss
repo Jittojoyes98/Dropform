@@ -7,13 +7,13 @@
     display: flex;
     justify-content: space-between;
   }
-  .MuiTabs-flexContainer {
+  .input-settings-tab [data-slot="tabs-list"] {
     box-shadow: rgba(0, 0, 0, 0.07) 0px -1px inset;
   }
   .settings-tab-wrapper {
     display: flex;
     flex-direction: column;
-    .MuiStack-root {
+    .question-properties-wrapper {
       width: 100%;
     }
     .question-type {
@@ -22,9 +22,7 @@
     }
     .question-type-input {
       height: 32px;
-      input {
-        padding: 2px;
-      }
+      padding: 2px;
     }
     .question-properties-wrapper {
       padding-bottom: 16px;
@@ -43,14 +41,4 @@
       font-weight: 500;
     }
   }
-  // .input-settings-tab {
-  //   .MuiTabs-indicator {
-  //     display: flex;
-  //     justify-content: center;
-  //     background-color: transparent;
-  //     max-width: 40px;
-  //     width: 100%;
-  //     background-color: #635ee7;
-  //   }
-  // }
 }
